@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://serviciosWeb/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://serviciosWeb/">
+
+<xs:element name="IOException" type="tns:IOException"/>
+
+<xs:element name="Receta" type="tns:receta"/>
+
+<xs:element name="Recetario" type="tns:recetario"/>
+
+<xs:element name="addReceta" type="tns:addReceta"/>
+
+<xs:element name="addRecetaResponse" type="tns:addRecetaResponse"/>
+
+<xs:element name="crearRecetario" type="tns:crearRecetario"/>
+
+<xs:element name="crearRecetarioResponse" type="tns:crearRecetarioResponse"/>
+
+<xs:element name="exportarReceta" type="tns:exportarReceta"/>
+
+<xs:element name="exportarRecetaResponse" type="tns:exportarRecetaResponse"/>
+
+<xs:element name="exportarRecetario" type="tns:exportarRecetario"/>
+
+<xs:element name="exportarRecetarioResponse" type="tns:exportarRecetarioResponse"/>
+
+<xs:element name="importarReceta" type="tns:importarReceta"/>
+
+<xs:element name="importarRecetaResponse" type="tns:importarRecetaResponse"/>
+
+<xs:element name="importarRecetario" type="tns:importarRecetario"/>
+
+<xs:element name="importarRecetarioResponse" type="tns:importarRecetarioResponse"/>
+
+<xs:element name="obtenerReceta" type="tns:obtenerReceta"/>
+
+<xs:element name="obtenerRecetaResponse" type="tns:obtenerRecetaResponse"/>
+
+<xs:element name="obtenerRecetario" type="tns:obtenerRecetario"/>
+
+<xs:element name="obtenerRecetarioResponse" type="tns:obtenerRecetarioResponse"/>
+
+<xs:element name="rmvReceta" type="tns:rmvReceta"/>
+
+<xs:element name="rmvRecetaResponse" type="tns:rmvRecetaResponse"/>
+
+<xs:element name="start" type="tns:start"/>
+
+<xs:element name="startResponse" type="tns:startResponse"/>
+
+<xs:element name="validarXSD" type="tns:validarXSD"/>
+
+<xs:element name="validarXSDResponse" type="tns:validarXSDResponse"/>
+
+<xs:complexType name="addReceta">
+<xs:sequence>
+<xs:element name="receta" type="tns:receta" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="receta">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="ingrediente" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="ingrediente" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="precio" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+<xs:attribute name="dificultad" type="xs:string"/>
+</xs:complexType>
+
+<xs:complexType name="addRecetaResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="importarRecetario">
+<xs:sequence>
+<xs:element name="bytes" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="importarRecetarioResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="rmvReceta">
+<xs:sequence>
+<xs:element name="nombreReceta" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="rmvRecetaResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="start">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="startResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="obtenerRecetario">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="obtenerRecetarioResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:recetario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="recetario">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="recetas" minOccurs="0">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="recetas" type="tns:receta" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="precio" type="xs:double" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearRecetario">
+<xs:sequence>
+<xs:element name="recetario" type="tns:recetario" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="crearRecetarioResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="validarXSD">
+<xs:sequence>
+<xs:element name="bytes" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="validarXSDResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="importarReceta">
+<xs:sequence>
+<xs:element name="bytes" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="importarRecetaResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="exportarRecetario">
+<xs:sequence>
+<xs:element name="nombreFichero" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="exportarRecetarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="IOException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="exportarReceta">
+<xs:sequence>
+<xs:element name="nombreFichero" type="xs:string" minOccurs="0"/>
+<xs:element name="nombreReceta" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="exportarRecetaResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:base64Binary" nillable="true" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerReceta">
+<xs:sequence>
+<xs:element name="nombreReceta" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerRecetaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:receta" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
