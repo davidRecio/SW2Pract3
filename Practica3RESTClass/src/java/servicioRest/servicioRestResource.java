@@ -18,6 +18,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 
 /**
  * REST Web Service
@@ -45,14 +46,15 @@ private String ruta = carpeta.getPath();
 
     /**
      * Retrieves representation of an instance of servicioRest.servicioRestResource
-     * @param recetario
+     * @param recetarioNombre
+     * @param recetarioPrecio
      * @return an instance of java.lang.String
      */
     @GET
     @Path("crearRecetario")
-    @Produces("application/xml")
+    @Produces(MediaType.TEXT_PLAIN)
     public void crearRecetario(@QueryParam("recetario") Recetario recetario) {    
-       this.recetario=recetario;
+      this.recetario=recetario;
     }
     @GET
     @Path("addReceta")
@@ -82,7 +84,7 @@ private String ruta = carpeta.getPath();
         return resultado;
 
     }
-     @GET
+    @GET
     @Path("obtenerRecetario")
     @Produces("application/xml")
     public Recetario obtenerRecetario() {    
@@ -97,4 +99,6 @@ private String ruta = carpeta.getPath();
     @Consumes("application/xml")
     public void putXml(String content) {
     }
+
+  
 }
