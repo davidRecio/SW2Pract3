@@ -27,7 +27,7 @@ import javax.ws.rs.client.WebTarget;
 public class Cliente {
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "http://localhost:8080/PracticaRestClase/webresources";
+    private static final String BASE_URI = "http://localhost:8080/Practica3RestClase/webresources";
 
     public Cliente() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
