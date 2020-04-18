@@ -37,14 +37,17 @@ public class Cliente {
     public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("obtenerReceta");
-        resource = resource.queryParam("nombreReceta", nombreReceta);
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Receta.class);
     }
 
-    public Recetario obtenerRecetario() throws ClientErrorException {
+      public Recetario obtenerRecetario() throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("obtenerRecetario");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Recetario.class);
+    }
+
+    public void rmvReceta(Object requestEntity) throws ClientErrorException {
+        webTarget.path("rmvReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
     public void crearRecetario(Object requestEntity) throws ClientErrorException {

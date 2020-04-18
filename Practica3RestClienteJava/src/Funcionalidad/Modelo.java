@@ -32,4 +32,8 @@ public class Modelo {
        
     return cli.obtenerReceta(nombreReceta);
     }
+      public void rmvReceta(String nombreReceta){
+      cli.rmvReceta(nombreReceta);
+      
+      }
 }

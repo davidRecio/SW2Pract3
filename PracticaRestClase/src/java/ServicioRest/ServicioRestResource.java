@@ -94,4 +94,11 @@ private String ruta = carpeta.getPath();
         recetario.setRecetas(recetas);
 
     }
+    @PUT
+    @Path("rmvReceta")
+    @Consumes("application/xml")
+     public void rmvReceta(String nombreReceta) {
+      recetario.getRecetas().remove(obtenerReceta(nombreReceta));
+
+    }
 }

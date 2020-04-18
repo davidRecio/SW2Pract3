@@ -28,19 +28,26 @@ public class Practica3RestClienteJava {
        recetario.setPrecio(10.2);
        
        Receta receta = new Receta();
-       receta.setNombre("papa");
+       receta.setNombre("pap2a");
        receta.setDificultad("Facil");
        receta.setPrecio(10.2);
         ArrayList<String> ingredientes = new ArrayList();
         ingredientes.add("papa");
         receta.setIngrediente(ingredientes);
        
-       modelo.crearRectario(recetario);
+       //modelo.crearRectario(recetario);
+         modelo.crearRecta(receta);
+     // modelo.rmvReceta("pap2a");
        //sleep(1500);
-        System.err.println(modelo.obtenerRecetario().getNombre());
+       System.err.println(modelo.obtenerRecetario().getNombre());
+        for (Receta recetas : modelo.obtenerRecetario().getRecetas()) {
+            System.out.println(recetas.getNombre());
+            
+        }
         
-        modelo.crearRecta(receta);
-        System.err.println(modelo.obtenerReceta("papa").getNombre());
+        
+     
+       // System.err.println(modelo.obtenerReceta("papa").getNombre());
         
     }
     
