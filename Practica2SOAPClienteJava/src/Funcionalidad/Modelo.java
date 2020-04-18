@@ -112,14 +112,13 @@ public class Modelo {
        
  
         FileInputStream fis = new FileInputStream(file);
-        //System.out.println(file.exists() + "!!");
-        //InputStream in = resource.openStream();
+    
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         byte[] buf = new byte[1024];
         try {
             for (int readNum; (readNum = fis.read(buf)) != -1;) {
-                bos.write(buf, 0, readNum); //no doubt here is 0
-                //Writes len bytes from the specified byte array starting at offset off to this byte array output stream.
+                bos.write(buf, 0, readNum); 
+                
                 System.out.println("read " + readNum + " bytes,");
             }
         } catch (IOException ex) {
@@ -131,12 +130,7 @@ public class Modelo {
          File fileAux=new File(file.getPath().substring(0, file.getPath().length()-4));
          fileAux.delete();
         return bytes;
-        //below is the different part
-//        File someFile = new File("java2.pdf");
-//        FileOutputStream fos = new FileOutputStream(someFile);
-//        fos.write(bytes);
-//        fos.flush();
-//        fos.close();
+
     }
  protected void leerBytes(byte[] exportarRecetario,String nombreFichero){
         FileOutputStream fos = null;

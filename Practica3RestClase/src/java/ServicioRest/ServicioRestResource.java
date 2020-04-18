@@ -5,6 +5,8 @@
  */
 package ServicioRest;
 
+import Funcionalidad.Marsalling;
+import Funcionalidad.ValidarXSD;
 import Recursos.Receta;
 import Recursos.Recetario;
 import java.io.BufferedWriter;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Singleton;
+import javax.jws.WebParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -43,6 +46,8 @@ private ArrayList<Receta> recetas = new ArrayList();
 private String sCarpAct = System.getProperty("user.dir");
 private File carpeta = new File(sCarpAct);
 private String ruta = carpeta.getPath();
+private Marsalling mrs = new Marsalling();
+private ValidarXSD vXSD = new ValidarXSD();
 
     @Context
     private UriInfo context;
@@ -111,6 +116,26 @@ private String ruta = carpeta.getPath();
       recetario.getRecetas().remove(obtenerReceta(nombreReceta));
 
     }
+     //exportar e importar
+      @GET
+    @Path("exportarRecetario")
+    @Produces("application/xml")
+     public  byte[]  exportarRecetario(@QueryParam("nombreFichero")String nombreFichero) throws IOException {
+        mrs.crearXMLRecetario(nombreFichero+".xml", recetario, ruta);
+         File file = new File(ruta+"/files/xml/"+ nombreFichero+".xml");
+         return converterByte(file);
+    }
+     @PUT
+    @Path("importarRecetario")
+    @Consumes("application/xml")
+      public void importarRecetario( byte[] bytes) {
+       File file= new File( leerBytes(bytes).getPath());
+        recetario = mrs.importarRecetario(file);
+        recetas=recetario.getRecetas();
+        file.delete();
+
+    }
+     
 
        //crea ficheros necesarios
 
