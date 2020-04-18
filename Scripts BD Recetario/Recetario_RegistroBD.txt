@@ -1,0 +1,7 @@
+create table recetario_registro(
+	recetario_id integer not null,
+	usuario_id integer not null,
+	foreign key (recetario_id) references recetario (recetario_id),
+	foreign key (usuario_id) references ususario (usuario_id),
+	primary key (recetario_id, usuario_id);
+);

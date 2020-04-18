@@ -1,0 +1,6 @@
+create table registro(
+	usuario_id integer primary key auto_increment not null,
+	nombre varchar (20),
+	contaseña varchar (20),
+	email varchar (20),
+);

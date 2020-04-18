@@ -1,0 +1,5 @@
+create table recetario( 
+	recetario_id integer primary key auto_increment not null,
+	nombre varchar (20) ,
+	precio double not null
+	);
