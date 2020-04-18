@@ -35,7 +35,7 @@ public class Practica3RestClienteJava {
         ingredientes.add("papa");
         receta.setIngrediente(ingredientes);
        
-       //modelo.crearRectario(recetario);
+       modelo.crearRectario(recetario);
          modelo.crearRecta(receta);
      // modelo.rmvReceta("pap2a");
        //sleep(1500);
