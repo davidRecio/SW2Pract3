@@ -7,6 +7,7 @@ package ServicioRest;
 
 import Funcionalidad.Marsalling;
 import Funcionalidad.ValidarXSD;
+
 import Recursos.Receta;
 import Recursos.Recetario;
 import java.io.BufferedWriter;
@@ -21,10 +22,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Singleton;
-import javax.jws.WebParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
@@ -48,6 +47,7 @@ private File carpeta = new File(sCarpAct);
 private String ruta = carpeta.getPath();
 private Marsalling mrs = new Marsalling();
 private ValidarXSD vXSD = new ValidarXSD();
+private byte[] cadenaBytes;
 
     @Context
     private UriInfo context;
@@ -153,6 +153,28 @@ private ValidarXSD vXSD = new ValidarXSD();
         addReceta(receta);
          file.delete();
         }
+        
+        //validar fichero
+           @PUT
+    @Path("validarFicheroPut")
+    @Consumes("application/xml")
+        public void validarFicheroPut(byte[] bytes) {
+        cadenaBytes = bytes;
+        }
+     @GET
+    @Path("validarFicheroGet")
+    @Produces("application/xml")
+       public String validarFichero(){
+           
+           File file= new File( leerBytes(cadenaBytes).getPath());
+         cadenaBytes=null;
+        return "¿Es valido el xml con su xsd? " + vXSD.validarXSD(ruta + "/files/xsd/recetario.xsd",file );
+    }
+//         public String validarXSD(@QueryParam( "bytes") byte[] bytes){
+//         File file= new File( leerBytes(bytes).getPath());
+//        return "¿Es valido el xml con su xsd? " + vXSD.validarXSD(ruta + "/files/xsd/recetario.xsd",file );
+//    }
+
        //crea ficheros necesarios
 
     private void crearEntorno() {
