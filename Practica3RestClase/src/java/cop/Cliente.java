@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente;
+package cop;
 
 import Recursos.Receta;
 import Recursos.Recetario;
@@ -34,19 +34,7 @@ public class Cliente {
         webTarget = client.target(BASE_URI).path("servicioRest");
     }
 
-    public byte[] exportarReceta( String nombreFichero, String nombreReceta) throws ClientErrorException {
-        WebTarget resource = webTarget;  
-        resource = resource.queryParam("nombreFichero", nombreFichero);
-        resource = resource.queryParam("nombreReceta", nombreReceta);
-        resource = resource.path("exportarReceta");
-        
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(byte[].class);
-    }
 
-
-    public void importarReceta(byte[] bytes)  throws ClientErrorException {
-        webTarget.path("importarReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(bytes, javax.ws.rs.core.MediaType.APPLICATION_XML));
-    }
 
     public byte[] exportarRecetario(String nombreFichero) throws ClientErrorException {
         WebTarget resource = webTarget;
@@ -89,6 +77,5 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
     public void close() {
         client.close();
     }
-    
     
 }

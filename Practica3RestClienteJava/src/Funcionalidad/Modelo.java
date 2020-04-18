@@ -26,26 +26,26 @@ public class Modelo {
     Cliente cli = new Cliente();
     
     
-    public void crearRecetario(Recetario recetario){
+    protected void crearRecetario(Recetario recetario){
     cli.crearRecetario(recetario);
     }
     
-    public Recetario obtenerRecetario(){
+    protected Recetario obtenerRecetario(){
        
     return cli.obtenerRecetario();
     }
-    public void addReceta(Receta receta){
+    protected void addReceta(Receta receta){
     cli.addReceta(receta);
     }
-      public Receta obtenerReceta(String nombreReceta){
+      protected Receta obtenerReceta(String nombreReceta){
        
     return cli.obtenerReceta(nombreReceta);
     }
-      public void rmvReceta(String nombreReceta){
+      protected void rmvReceta(String nombreReceta){
       cli.rmvReceta(nombreReceta);
       
       }
-      public byte[] exportarRecetario(String nombreFichero){
+      protected byte[] exportarRecetario(String nombreFichero)throws IOException{
         return  cli.exportarRecetario(nombreFichero);
       
       }
@@ -53,6 +53,13 @@ public class Modelo {
        protected  void  importarRecetario(File fichero) throws IOException {
            cli.importarRecetario(converterByte(fichero));
    
+    }
+      protected   byte[] exportarReceta(String nombreFichero, String nombreReceta)throws IOException {
+        return cli.exportarReceta(nombreFichero, nombreReceta);
+    }
+
+    protected void importarReceta(File fichero) throws IOException {
+        cli.importarReceta(converterByte(fichero));
     }
       
         //crea los objetos segun sus estructuras
@@ -120,13 +127,7 @@ public class Modelo {
         }
     }
 
-    byte[] exportarReceta(String string, String respuesta) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    void importarReceta(File file) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 
     boolean validarXSD(File file) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

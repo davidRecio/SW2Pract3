@@ -135,8 +135,24 @@ private ValidarXSD vXSD = new ValidarXSD();
         file.delete();
 
     }
-     
-
+        @GET
+    @Path("exportarReceta")
+    @Produces("application/xml")
+       public byte[]  exportarReceta(@QueryParam("nombreFichero") String nombreFichero,
+            @QueryParam("nombreReceta") String nombreReceta) throws IOException {
+        mrs.crearXMLReceta(nombreFichero, obtenerReceta(nombreReceta), ruta);
+         File file = new File(ruta+"/files/xml/"+ nombreFichero);
+         return converterByte(file);
+    }
+        @PUT
+    @Path("importarReceta")
+    @Consumes("application/xml")
+        public void importarReceta(byte[] bytes) {
+         File file= new File( leerBytes(bytes).getPath());
+         Receta receta=mrs.importarReceta(file);
+        addReceta(receta);
+         file.delete();
+        }
        //crea ficheros necesarios
 
     private void crearEntorno() {
