@@ -33,22 +33,45 @@ public class Cliente {
         webTarget = client.target(BASE_URI).path("servicioRest");
     }
 
-    public <T> T obtenerRecetario(Class<T> responseType) throws ClientErrorException {
+    public <T> T obtenerReceta(Class<T> responseType, String nombreReceta) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path("obtenerRecetario");
+        if (nombreReceta != null) {
+            resource = resource.queryParam("nombreReceta", nombreReceta);
+        }
+        resource = resource.path("obtenerReceta");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public String crearRecetario(String nombreRecetario,String precioRecetario) throws ClientErrorException {
+    public Recetario  obtenerRecetario() throws ClientErrorException {
         WebTarget resource = webTarget;
-         resource = resource.queryParam("nombreRecetario", nombreRecetario);
-         resource = resource.queryParam("precioRecetario", precioRecetario);
-        resource = resource.path("crearRecetario");
-        return resource.request(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
+        resource= resource.path("obtenerRecetario");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Recetario.class);
     }
 
-    public void putXml(Object requestEntity) throws ClientErrorException {
-        webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+    public <T> T rmvReceta(Class<T> responseType, String nombreReceta) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        if (nombreReceta != null) {
+            resource = resource.queryParam("nombreReceta", nombreReceta);
+        }
+        resource = resource.path("rmvReceta");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    }
+
+   public void crearRecetario(Object requestEntity) throws ClientErrorException {
+      WebTarget resource = webTarget;
+      resource= resource.path("crearRecetario");
+       resource = resource.queryParam("recetario", requestEntity);
+      resource.request().put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+        //webTarget.path("crearRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+    }
+
+    public <T> T addReceta(Class<T> responseType, String receta) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        if (receta != null) {
+            resource = resource.queryParam("receta", receta);
+        }
+        resource = resource.path("addReceta");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
     public void close() {

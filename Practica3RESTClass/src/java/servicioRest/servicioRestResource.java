@@ -15,10 +15,13 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import static javax.ws.rs.HttpMethod.POST;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import org.json.JSONObject;
 
 /**
  * REST Web Service
@@ -46,15 +49,17 @@ private String ruta = carpeta.getPath();
 
     /**
      * Retrieves representation of an instance of servicioRest.servicioRestResource
+     * @param recetario
      * @param recetarioNombre
      * @param recetarioPrecio
      * @return an instance of java.lang.String
      */
-    @GET
+    @PUT
     @Path("crearRecetario")
-    @Produces(MediaType.TEXT_PLAIN)
-    public void crearRecetario(@QueryParam("recetario") Recetario recetario) {    
-      this.recetario=recetario;
+    @Produces(MediaType.APPLICATION_XML)
+    public void crearRecetario(@QueryParam("recetario") Recetario recetario) {  
+       this.recetario=recetario;
+        System.err.println(recetario.getNombre());
     }
     @GET
     @Path("addReceta")
@@ -86,7 +91,7 @@ private String ruta = carpeta.getPath();
     }
     @GET
     @Path("obtenerRecetario")
-    @Produces("application/xml")
+    @Produces(MediaType.APPLICATION_XML)
     public Recetario obtenerRecetario() {    
          return recetario;
     }
@@ -95,10 +100,7 @@ private String ruta = carpeta.getPath();
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */
-    @PUT
-    @Consumes("application/xml")
-    public void putXml(String content) {
-    }
+   
 
   
 }

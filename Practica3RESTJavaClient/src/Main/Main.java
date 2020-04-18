@@ -7,6 +7,8 @@ package Main;
 
 import Recursos.Recetario;
 import funcionalidad.Modelo;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -17,7 +19,7 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JSONException {
         // TODO code application logic here
         
        Modelo modelo = new Modelo();
@@ -26,9 +28,12 @@ public class Main {
        recetario.setNombre("libro1");
        recetario.setPrecio(10.2);
        
+//      JSONObject jS =modelo.parsearRecetarioJSON(recetario);
+//        System.err.println( jS.get("nombre"));
+       
        modelo.crearRecetario(recetario);
-      Recetario rece= modelo.obtenerRecetario();
-      System.out.println(rece.getNombre());
+//       Recetario rece= modelo.obtenerRecetario();
+//       System.out.println(rece.getNombre());
     }
     
 }
