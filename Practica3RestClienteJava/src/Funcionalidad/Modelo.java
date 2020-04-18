@@ -6,6 +6,7 @@
 package Funcionalidad;
 
 import Cliente.Cliente;
+import Recursos.Receta;
 import Recursos.Recetario;
 
 /**
@@ -23,5 +24,12 @@ public class Modelo {
     public Recetario obtenerRecetario(){
        
     return cli.obtenerRecetario();
+    }
+    public void crearRecta(Receta receta){
+    cli.addReceta(receta);
+    }
+      public Receta obtenerReceta(String nombreReceta){
+       
+    return cli.obtenerReceta(nombreReceta);
     }
 }

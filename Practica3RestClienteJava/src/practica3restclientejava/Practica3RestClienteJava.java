@@ -6,8 +6,10 @@
 package practica3restclientejava;
 
 import Funcionalidad.Modelo;
+import Recursos.Receta;
 import Recursos.Recetario;
 import static java.lang.Thread.sleep;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,9 +27,21 @@ public class Practica3RestClienteJava {
        recetario.setNombre("libro1");
        recetario.setPrecio(10.2);
        
+       Receta receta = new Receta();
+       receta.setNombre("papa");
+       receta.setDificultad("Facil");
+       receta.setPrecio(10.2);
+        ArrayList<String> ingredientes = new ArrayList();
+        ingredientes.add("papa");
+        receta.setIngrediente(ingredientes);
+       
        modelo.crearRectario(recetario);
-       sleep(1500);
+       //sleep(1500);
         System.err.println(modelo.obtenerRecetario().getNombre());
+        
+        modelo.crearRecta(receta);
+        System.err.println(modelo.obtenerReceta("papa").getNombre());
+        
     }
     
 }

@@ -18,6 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.QueryParam;
 
 /**
  * REST Web Service
@@ -43,10 +44,7 @@ private String ruta = carpeta.getPath();
     public ServicioRestResource() {
         
     }
-    private void bjkjb(){
-        //recetario.setNombre("mierda");
-      
-    }
+   
     /**
      * Retrieves representation of an instance of ServicioRest.ServicioRestResource
      * @return an instance of java.lang.String
@@ -59,6 +57,21 @@ private String ruta = carpeta.getPath();
        return recetario;
       
     }
+     @GET
+    @Path("obtenerReceta")
+    @Produces("application/xml")
+    public Receta obtenerReceta(@QueryParam("nombreReceta")String nombreReceta) {
+        Receta resultado = null;
+        for (Receta ele : recetario.getRecetas()) {
+
+            if (ele.getNombre().equals(nombreReceta)) {
+                resultado = ele;
+            }
+
+        }
+        return resultado;
+
+    }
 
     /**
      * PUT method for updating or creating an instance of ServicioRestResource
@@ -70,6 +83,15 @@ private String ruta = carpeta.getPath();
     @Consumes("application/xml")
     public void crearRecetario(Recetario e) {
         recetario= e;
+
+    }
+     @PUT
+    @Path("addReceta")
+    @Consumes("application/xml")
+     public void addReceta(Receta receta) {
+      
+       recetas.add(receta);
+        recetario.setRecetas(recetas);
 
     }
 }

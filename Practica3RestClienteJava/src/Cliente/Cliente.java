@@ -5,6 +5,7 @@
  */
 package Cliente;
 
+import Recursos.Receta;
 import Recursos.Recetario;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
@@ -33,6 +34,13 @@ public class Cliente {
         webTarget = client.target(BASE_URI).path("servicioRest");
     }
 
+    public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("obtenerReceta");
+        resource = resource.queryParam("nombreReceta", nombreReceta);
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Receta.class);
+    }
+
     public Recetario obtenerRecetario() throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("obtenerRecetario");
@@ -41,6 +49,10 @@ public class Cliente {
 
     public void crearRecetario(Object requestEntity) throws ClientErrorException {
         webTarget.path("crearRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+    }
+
+    public void addReceta(Object requestEntity) throws ClientErrorException {
+        webTarget.path("addReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
     public void close() {
