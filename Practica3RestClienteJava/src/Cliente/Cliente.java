@@ -34,7 +34,20 @@ public class Cliente {
         webTarget = client.target(BASE_URI).path("servicioRest");
     }
 
-    public byte[] exportarReceta( String nombreFichero, String nombreReceta) throws ClientErrorException {
+   
+    public void validarFicheroPut(Object requestEntity) throws ClientErrorException {
+        webTarget.path("validarFicheroPut").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+    }
+
+   
+    public String validarFichero() throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("validarFicheroGet");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
+    }
+
+
+ public byte[] exportarReceta( String nombreFichero, String nombreReceta) throws ClientErrorException {
         WebTarget resource = webTarget;  
         resource = resource.queryParam("nombreFichero", nombreFichero);
         resource = resource.queryParam("nombreReceta", nombreReceta);
@@ -89,6 +102,4 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
     public void close() {
         client.close();
     }
-    
-    
 }

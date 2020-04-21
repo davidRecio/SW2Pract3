@@ -5,6 +5,7 @@
  */
 package Funcionalidad;
 
+
 import Cliente.Cliente;
 import Recursos.Receta;
 import Recursos.Recetario;
@@ -61,7 +62,11 @@ public class Modelo {
     protected void importarReceta(File fichero) throws IOException {
         cli.importarReceta(converterByte(fichero));
     }
-      
+    //validar fichero
+       protected  String validarXSD(File fichero) throws IOException {
+               cli.validarFicheroPut(converterByte(fichero));
+         return cli.validarFichero();
+    }
         //crea los objetos segun sus estructuras
    protected Recetario crearRecetarioEsructura(String nombreRecetario, Double precio) {
         Recetario recetario = new Recetario();
@@ -129,8 +134,6 @@ public class Modelo {
 
   
 
-    boolean validarXSD(File file) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+ 
 
 }
