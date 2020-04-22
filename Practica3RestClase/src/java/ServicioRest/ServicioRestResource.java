@@ -93,14 +93,14 @@ private byte[] cadenaBytes;
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */
-    @PUT
+    @PUT//post
     @Path("crearRecetario")
     @Consumes("application/xml")
     public void crearRecetario(Recetario e) {
         recetario= e;
 
     }
-     @PUT
+     @PUT//post
     @Path("addReceta")
     @Consumes("application/xml")
      public void addReceta(Receta receta) {
@@ -109,7 +109,7 @@ private byte[] cadenaBytes;
         recetario.setRecetas(recetas);
 
     }
-    @PUT
+    @PUT//delete
     @Path("rmvReceta")
     @Consumes("application/xml")
      public void rmvReceta(String nombreReceta) {
@@ -155,13 +155,13 @@ private byte[] cadenaBytes;
         }
         
         //validar fichero
-           @PUT
+           @PUT//post
     @Path("validarFicheroPut")
     @Consumes("application/xml")
         public void validarFicheroPut(byte[] bytes) {
         cadenaBytes = bytes;
         }
-     @GET
+     @GET//con el post los uno en uno
     @Path("validarFicheroGet")
     @Produces("application/xml")
        public String validarFichero(){
