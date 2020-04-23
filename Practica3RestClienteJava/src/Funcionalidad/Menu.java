@@ -27,19 +27,13 @@ public class Menu {
 
         while (opcion != 0) {
 
-            System.out.println("-------------------------------------------------------------------Menú--------------------------------------------------------------------------------");
+            System.out.println("---------------------------Menú------------------------------------");
+            System.out.println("1-Menú Recetario ");
+            System.out.println("2-Menú Receta ");
+            System.out.println("3-Validación con XSD");
+            System.out.println("0-Salir");
             System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println("Para acceder al Menú Recetario introduzca 1");
-            System.out.println();
-            System.out.println("Para acceder al Menú Receta introduzca 2");
-            System.out.println();
-            System.out.println("Para validar un fichero XSD introduzca 3");
-            System.out.println();
-            System.out.println("Para salir del Menú  introduzca 0");
-            System.out.println();
-            System.out.print("respuesta: ");
+            System.out.print("Introducca una opción: ");
 
             opcion = Integer.parseInt(scanner.nextLine());
             switch (opcion) {
@@ -53,17 +47,13 @@ public class Menu {
 
                         try {
                             System.out.println("-----------------------Menú Recetario-------------------------------");
-                            System.out.println("Para crear el recetario introduzca 1");
+                            System.out.println("1-Crear");
+                            System.out.println("2-Leer");
+                            System.out.println("3-Importar");
+                            System.out.println("4-Exportar");
+                            System.out.println("0-Volver al Menu principal");
                             System.out.println();
-                            System.out.println("Para leer el recetario introduzca 2");
-                            System.out.println();
-                            System.out.println("Para importar el recetario introduzca 3");
-                            System.out.println();
-                            System.out.println("Para exportar el recetario introduzca 4");
-                            System.out.println();
-                            System.out.println("Para salir del Menú Recetario introduzca 0");
-                            System.out.println();
-                            System.out.print("respuesta: ");
+                            System.out.print("Introducca una opción: ");
                             opcion = Integer.parseInt(scanner.nextLine());
                             switch (opcion) {
                                 case 1:
@@ -111,22 +101,15 @@ public class Menu {
                     while (opcion != 0) {
 
                         try {
-                            System.out.println("-----------------------Menú Receta-------------------------------");
+                            System.out.println("-----------------------Menú Receta-------------------------------");        
+                            System.out.println("1-Crear");
+                            System.out.println("2-Leer");
+                            System.out.println("3-Borrar");
+                            System.out.println("4-Importar");
+                            System.out.println("5-Exportar");
+                            System.out.println("0-Volver al Menu principal");
                             System.out.println();
-                            System.out.println();
-                            System.out.println("Para crear la receta introduzca 1");
-
-                            System.out.println("Para leer la receta introduzca 2");
-
-                            System.out.println("Para borrar la receta introduzca 3");
-
-                            System.out.println("Para importar la receta introduzca 4");
-
-                            System.out.println("Para exportar la receta introduzca 5");
-
-                            System.out.println("Para salir del Menú Receta introduzca 0");
-                            System.out.println();
-                            System.out.print("respuesta: ");
+                            System.out.print("Introducca una opción: ");
                             opcion = Integer.parseInt(scanner.nextLine());
                             switch (opcion) {
                                 case 1:
