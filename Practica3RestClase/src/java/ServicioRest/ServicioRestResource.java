@@ -157,25 +157,13 @@ private byte[] cadenaBytes;
         }
         
         //validar fichero
-           @PUT//post
-    @Path("validarFicheroPut")
+           @POST//post
+    @Path("validarFichero")
     @Consumes("application/xml")
-        public void validarFicheroPut(byte[] bytes) {
-        cadenaBytes = bytes;
+        public String validarFichero(byte[] bytes) {
+         File file= new File( leerBytes(bytes).getPath());
+          return "¿Es valido el xml con su xsd? " + vXSD.validarXSD(ruta + "/files/xsd/recetario.xsd",file );
         }
-     @GET//con el post los uno en uno
-    @Path("validarFicheroGet")
-    @Produces("application/xml")
-       public String validarFichero(){
-           
-           File file= new File( leerBytes(cadenaBytes).getPath());
-         cadenaBytes=null;
-        return "¿Es valido el xml con su xsd? " + vXSD.validarXSD(ruta + "/files/xsd/recetario.xsd",file );
-    }
-//         public String validarXSD(@QueryParam( "bytes") byte[] bytes){
-//         File file= new File( leerBytes(bytes).getPath());
-//        return "¿Es valido el xml con su xsd? " + vXSD.validarXSD(ruta + "/files/xsd/recetario.xsd",file );
-//    }
 
        //crea ficheros necesarios
 

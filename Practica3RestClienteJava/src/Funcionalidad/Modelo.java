@@ -64,8 +64,8 @@ public class Modelo {
     }
     //validar fichero
        protected  String validarXSD(File fichero) throws IOException {
-               cli.validarFicheroPut(converterByte(fichero));
-         return cli.validarFichero();
+              
+         return cli.validarFichero(converterByte(fichero));
     }
         //crea los objetos segun sus estructuras
    protected Recetario crearRecetarioEsructura(String nombreRecetario, Double precio) {
