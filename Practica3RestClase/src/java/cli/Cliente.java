@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente;
+package cli;
 
 import Recursos.Receta;
 import Recursos.Recetario;
@@ -86,19 +86,16 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Recetario.class);
     }
 
-    public void rmvReceta(String requestEntity) throws ClientErrorException {
-          WebTarget resource = webTarget;
-        resource = resource.path("rmvReceta");
-         resource = resource.queryParam("nombreReceta", requestEntity);
-        resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).delete(String.class);
+    public void rmvReceta(Object requestEntity) throws ClientErrorException {
+        webTarget.path("rmvReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
     public void crearRecetario(Object requestEntity) throws ClientErrorException {
-        webTarget.path("crearRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+        webTarget.path("crearRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
     public void addReceta(Object requestEntity) throws ClientErrorException {
-        webTarget.path("addReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+        webTarget.path("addReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
  
