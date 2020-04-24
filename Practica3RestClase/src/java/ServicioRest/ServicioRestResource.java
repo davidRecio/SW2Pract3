@@ -25,8 +25,10 @@ import javax.inject.Singleton;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.QueryParam;
@@ -93,14 +95,14 @@ private byte[] cadenaBytes;
      * @param content representation for the resource
      * @return an HTTP response with content of the updated or created resource.
      */
-    @PUT//post
+    @POST
     @Path("crearRecetario")
     @Consumes("application/xml")
     public void crearRecetario(Recetario e) {
         recetario= e;
 
     }
-     @PUT//post
+     @POST
     @Path("addReceta")
     @Consumes("application/xml")
      public void addReceta(Receta receta) {
@@ -109,10 +111,10 @@ private byte[] cadenaBytes;
         recetario.setRecetas(recetas);
 
     }
-    @PUT//delete
+    @DELETE
     @Path("rmvReceta")
     @Consumes("application/xml")
-     public void rmvReceta(String nombreReceta) {
+     public void rmvReceta(@QueryParam("nombreReceta")String nombreReceta) {
       recetario.getRecetas().remove(obtenerReceta(nombreReceta));
 
     }
