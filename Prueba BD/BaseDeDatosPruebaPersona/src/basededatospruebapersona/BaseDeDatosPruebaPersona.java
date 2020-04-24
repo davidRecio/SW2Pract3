@@ -53,13 +53,11 @@ try {
     System.out.println(ex);
 }
 
-
 try {
     Class.forName("com.mysql.jdbc.Driver").newInstance();
 } catch (Exception ex) {
     System.out.println("Error, no se ha podido cargar MySQL JDBC Driver");
 }
-
 
     }
     
