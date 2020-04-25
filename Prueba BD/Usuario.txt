@@ -14,3 +14,5 @@ insert into usuario value(2, 'David Recio', '4239874z');
 insert into usuario value(3, 'Selena Gomez', '6497221v');
 insert into usuario value(4, 'Pablo Andrade', '5438511y');
 insert into usuario value(5, 'Victor Valdes', '9247239u');
+
+delete from ususario where usuario = 'Victor Valdes';
