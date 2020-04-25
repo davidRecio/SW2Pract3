@@ -5,11 +5,13 @@
  */
 package ServicioRest;
 
+import Funcionalidad.AccesoBBDD;
 import Funcionalidad.Marsalling;
 import Funcionalidad.ValidarXSD;
 
 import Recursos.Receta;
 import Recursos.Recetario;
+import Recursos.Usuario;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -49,7 +51,8 @@ private File carpeta = new File(sCarpAct);
 private String ruta = carpeta.getPath();
 private Marsalling mrs = new Marsalling();
 private ValidarXSD vXSD = new ValidarXSD();
-private byte[] cadenaBytes;
+private AccesoBBDD ABD = new AccesoBBDD();
+
 
     @Context
     private UriInfo context;
@@ -164,6 +167,29 @@ private byte[] cadenaBytes;
          File file= new File( leerBytes(bytes).getPath());
           return "¿Es valido el xml con su xsd? " + vXSD.validarXSD(ruta + "/files/xsd/recetario.xsd",file );
         }
+        
+    @POST
+    @Path("crearUsuarios")
+    @Consumes("application/xml")
+    public void crearUsuarios(Usuario user) {
+        ABD.conexionBBDDCrearUsuarios(user.getNombre(), user.getPassword());
+
+    }  
+     @DELETE
+    @Path("rmvUsuario")
+    @Consumes("application/xml")
+     public void rmvUsuario(@QueryParam("nombreUsuario")String nombreUsuario) {
+      ABD.conexionBBDDBorrarUsuarios(nombreUsuario);
+
+    }    
+    @GET
+    @Path("obtenerUsuario")
+    @Produces("application/xml")
+    public Usuario obtenerUsuario() {
+
+       return ABD.conexionBBDDListarUsuarios().get(2);
+    }    
+        
 
        //crea ficheros necesarios
 

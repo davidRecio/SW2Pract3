@@ -3,12 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente;
+package cliente;
 
 import Recursos.Receta;
 import Recursos.Recetario;
-import Recursos.Usuario;
-import java.util.ArrayList;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
@@ -37,27 +35,6 @@ public class Cliente {
     }
 
    
-
-  
-    public Usuario obtenerUsuario() throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path("obtenerUsuario");
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Usuario.class);
-    }
-
-    public void rmvUsuario(String requestEntity) throws ClientErrorException {
-           WebTarget resource = webTarget;
-        resource = resource.path("rmvUsuario");
-         resource = resource.queryParam("nombreUsuario", requestEntity);
-        resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).delete(String.class);
-        }
-
-  
-
-    public void crearUsuarios(Object requestEntity) throws ClientErrorException {
-        webTarget.path("crearUsuarios").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
-    }
- 
     public String validarFichero(Object requestEntity) throws ClientErrorException {
          WebTarget resource = webTarget;  
         resource = resource.path("validarFichero");
@@ -132,5 +109,4 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
     public void close() {
         client.close();
     }
-    
 }

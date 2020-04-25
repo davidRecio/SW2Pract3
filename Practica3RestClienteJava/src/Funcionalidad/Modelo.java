@@ -9,6 +9,7 @@ package Funcionalidad;
 import Cliente.Cliente;
 import Recursos.Receta;
 import Recursos.Recetario;
+import Recursos.Usuario;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -86,6 +87,18 @@ public class Modelo {
         return receta;
 
     }
+    //ListarUsuario
+    public Usuario leerUsuarios(){
+    
+    
+    return cli.obtenerUsuario();
+    } 
+      public void crearUusario(Usuario user){
+    
+    
+    cli.crearUsuarios(user);
+    } 
+    
     //creacion de fichero a byte y al reves
      private  byte[] converterByte( File file ) throws FileNotFoundException, IOException {
        

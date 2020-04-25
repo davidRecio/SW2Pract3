@@ -9,6 +9,7 @@ import Funcionalidad.Menu;
 import Funcionalidad.Modelo;
 import Recursos.Receta;
 import Recursos.Recetario;
+import Recursos.Usuario;
 import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 
@@ -43,9 +44,16 @@ public class Practica3RestClienteJava {
 //       System.err.println(modelo.obtenerRecetario().getNombre());
 //        for (Receta recetas : modelo.obtenerRecetario().getRecetas()) {
 //            System.out.println(recetas.getNombre());
-        Menu menu = new Menu();
-        menu.menu();
-            
+        
+        Modelo mod = new Modelo();
+        System.out.println(mod.leerUsuarios().getNombre());
+        Usuario user = new Usuario();
+        user.setNombre("a");
+        user.setPassword("2");
+        mod.crearUusario(user);
+//        Menu menu = new Menu();
+//        menu.menu();
+//            
         
         
         
