@@ -160,9 +160,9 @@ public class conexionBBDD extends HttpServlet {
             statement = connection.createStatement();
             statement.executeUpdate(query);
 
-            request.setAttribute("nextPage", this.getServletContext().getContextPath() + "/PoolDatabase"); //CAMBIAR SEGURAMENTE SEA //conexionBBDD
+            request.setAttribute("nextPage", this.getServletContext().getContextPath() + "/conexionBBDD"); //CAMBIAR SEGURAMENTE SEA //conexionBBDD antes era /PoolDatabase
             RequestDispatcher paginaAltas
-                    = contexto.getRequestDispatcher("/servlets/amigoInsertado.jsp"); // CAMBIAR
+                    = contexto.getRequestDispatcher("/servlets/amigoInsertado.jsp"); // CAMBIAR SI QUEREMOS METER ESA JSP
             paginaAltas.forward(request, response);
         } catch (SQLException ex) {
             gestionarErrorEnConsultaSQL(ex, request, response);
