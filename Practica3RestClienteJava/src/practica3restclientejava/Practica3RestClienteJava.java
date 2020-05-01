@@ -45,15 +45,15 @@ public class Practica3RestClienteJava {
 //        for (Receta recetas : modelo.obtenerRecetario().getRecetas()) {
 //            System.out.println(recetas.getNombre());
         
-        Modelo mod = new Modelo();
-        System.out.println(mod.leerUsuarios().getNombre());
-        Usuario user = new Usuario();
-        user.setNombre("a");
-        user.setPassword("2");
-        mod.crearUusario(user);
-//        Menu menu = new Menu();
-//        menu.menu();
-//            
+//        Modelo mod = new Modelo();
+//        System.out.println(mod.leerUsuarios().getNombre());
+//        Usuario user = new Usuario();
+//        user.setNombre("a");
+//        user.setPassword("2");
+//        mod.crearUusario(user);
+        Menu menu = new Menu();
+        menu.menu();
+            
         
         
         

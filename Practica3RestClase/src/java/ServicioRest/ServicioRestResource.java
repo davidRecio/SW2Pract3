@@ -63,6 +63,9 @@ private AccesoBBDD ABD = new AccesoBBDD();
     public ServicioRestResource() {
         System.err.println(ruta);
         crearEntorno();
+     System.out.println("hhhhhh");
+        ABD.init();
+        
     }
    
     /**
@@ -168,28 +171,28 @@ private AccesoBBDD ABD = new AccesoBBDD();
           return "¿Es valido el xml con su xsd? " + vXSD.validarXSD(ruta + "/files/xsd/recetario.xsd",file );
         }
         
-    @POST
-    @Path("crearUsuarios")
-    @Consumes("application/xml")
-    public void crearUsuarios(Usuario user) {
-        ABD.conexionBBDDCrearUsuarios(user.getNombre(), user.getPassword());
-
-    }  
-     @DELETE
-    @Path("rmvUsuario")
-    @Consumes("application/xml")
-     public void rmvUsuario(@QueryParam("nombreUsuario")String nombreUsuario) {
-      ABD.conexionBBDDBorrarUsuarios(nombreUsuario);
-
-    }    
-    @GET
-    @Path("obtenerUsuario")
-    @Produces("application/xml")
-    public Usuario obtenerUsuario() {
-
-       return ABD.conexionBBDDListarUsuarios().get(2);
-    }    
-        
+//    @POST
+//    @Path("crearUsuarios")
+//    @Consumes("application/xml")
+//    public void crearUsuarios(Usuario user) {
+//        ABD.conexionBBDDCrearUsuarios(user.getNombre(), user.getPassword());
+//
+//    }  
+//     @DELETE
+//    @Path("rmvUsuario")
+//    @Consumes("application/xml")
+//     public void rmvUsuario(@QueryParam("nombreUsuario")String nombreUsuario) {
+//      ABD.conexionBBDDBorrarUsuarios(nombreUsuario);
+//
+//    }    
+//    @GET
+//    @Path("obtenerUsuario")
+//    @Produces("application/xml")
+//    public Usuario obtenerUsuario() {
+//
+//       return ABD.conexionBBDDListarUsuarios().get(2);
+//    }    
+//        
 
        //crea ficheros necesarios
 
