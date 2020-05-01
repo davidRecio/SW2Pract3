@@ -1,0 +1,5 @@
+create table recetario( 
+	conjunto_id integer primary key auto_increment not null,
+	usuario_id integer not null,
+	foreign key (usuario_id) references usuario(usuario_id));
+	);
