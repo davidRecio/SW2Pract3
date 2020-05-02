@@ -1,7 +1,9 @@
-drop database if exists pruebaUsuario;
-create database pruebaUsuario;
+drop database if exists pruebaRecetario;
 
-use pruebaUsuario;
+create database pruebaRecetario;
+
+use pruebaRecetario;
+
 
 create table receta( 
 	receta_id integer primary key auto_increment not null,
