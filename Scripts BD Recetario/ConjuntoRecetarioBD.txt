@@ -3,6 +3,6 @@ create table conjunto_recetario(
 	nombre_recetario varchar (20),
 	usuario_id integer not null,
 	foreign key (nombre) references recetario(nombre),
-	foreign key (usuario_id) references usuario(usuario_id));
+	foreign key (usuario_id) references usuario(usuario_id)
 );
 
