@@ -3,5 +3,5 @@ create table recetario_receta(
 	receta_id integer not null,
 	foreign key (recetario_id) references recetario (recetario_id),
 	foreign key (receta_id) references receta (receta_id),
-	primary key (recetario_id, receta_id);
+	primary key (recetario_id, receta_id)
 );

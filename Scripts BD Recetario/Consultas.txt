@@ -1,0 +1,3 @@
+select nombre_receta from receta where receta_id = 3; 
+
+select recetario_id from recetario where precio <= 10.0; 

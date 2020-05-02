@@ -7,12 +7,12 @@ use pruebaRecetario;
 
 create table receta( 
 	receta_id integer primary key auto_increment not null,
-	nombre_receta varchar (20)
+	nombre_receta varchar (50)
 );
 
 create table recetario( 
 	recetario_id integer primary key auto_increment,
-	nombre_receta varchar (20) ,
+	nombre_recetario varchar (50),
 	precio double,
 	nombre_conjunto varchar (20),
 	foreign key (nombre_conjunto) references conjunto_recetario (nombre_conjunto)
@@ -23,12 +23,12 @@ create table recetario_receta(
 	receta_id integer not null,
 	foreign key (recetario_id) references recetario (recetario_id),
 	foreign key (receta_id) references receta (receta_id),
-	primary key (recetario_id, receta_id);
+	primary key (recetario_id, receta_id)
 );
 
 create table ingrediente(
 	ingrediente_id integer primary key auto_increment not null,
-	nombre_ingrediente varchar (20)
+	nombre_ingrediente varchar (100)
 );
 
 create table receta_ingrediente(
@@ -36,21 +36,20 @@ create table receta_ingrediente(
 	ingrediente_id integer not null,
 	foreign key (receta_id) references receta (receta_id),
 	foreign key (ingrediente_id) references ingrediente (ingrediente_id),
-	primary key (receta_id, ingrediente_id);
+	primary key (receta_id, ingrediente_id)
 );
 
 create table usuario(
 	usuario_id integer primary key auto_increment not null,
-	nombre_usuario varchar (20),
-	contaseña varchar (20),
-	email varchar (20),
+	nombre_usuario varchar (30),
+	contaseña varchar (8)
 );
 
-create table conjunto_recetario( 
-	nombre_conjunto varchar (20) primary key not null,
-	nombre_recetario varchar (20),
-	usuario_id integer not null,
-	foreign key (nombre_recetario) references recetario (nombre_recetario),
-	foreign key (usuario_id) references usuario (usuario_id)
+create table conjunto_recetario(
+	conjunto_id integer primary key not null, 
+	nombre_conjunto varchar (20),
+	usuario_id integer,
+	foreign key (usuario_id) references usuario (usuario_id),
+	foreign key (nombre_recetario) references recetario (nombre_recetario)
 );
 

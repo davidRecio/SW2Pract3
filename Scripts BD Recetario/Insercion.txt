@@ -5,3 +5,26 @@ insert into usuario value(4, 'Pablo Andrade', '5438511y');
 insert into usuario value(5, 'Victor Valdes', '9247239u');
 
 delete from ususario where usuario = 'Victor Valdes';
+
+insert into receta value(1, 'Lasanna');
+insert into receta value(2, 'Bocadillo');
+insert into receta value(3, 'Huevo frito');
+insert into receta value(4, 'Ensaladilla rusa');
+insert into receta value(5, 'Macarrones');
+
+
+insert into recetario value(1, 'Recetario 1', 15.0,'Conjunto 1');
+insert into recetario value(2, 'Recetario 2', 12.18,'Conjunto 2');
+insert into recetario value(3, 'Recetario 3', 8.50, 'Conjunto 3');
+insert into recetario value(4, 'Recetario 4', 17.42, 'Conjunto 4');
+insert into recetario value(5, 'Recetario Master Chef', 40.0, 'Conjunto 5');
+
+
+insert into recetario_receta value(1,2);
+insert into recetario_receta value(2,5);
+insert into recetario_receta value(3,3);
+
+
+insert into receta_ingrediente value(2,2);
+insert into receta_ingrediente value(1,5);
+insert into receta_ingrediente value(3,4);
