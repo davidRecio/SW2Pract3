@@ -7,7 +7,9 @@ use pruebaRecetario;
 
 create table receta( 
 	receta_id integer primary key auto_increment not null,
-	nombre_receta varchar (50)
+	nombre_receta varchar (50),
+	dificultad_receta varchar (20),
+	precio double
 );
 
 create table recetario( 

@@ -1,3 +1,25 @@
+Consultas:
+
+obtener id receta y te pasa el nombre receta
+select receta_id from receta where nombre_receta = "Lasanna"; 
+
+obtener id receta array (todos los id) y te pasan el el array
+select receta_id, nombre_receta from receta order by nombre_receta; //mirar
+
+obtener receta array y te pasan un id
+select nombre_receta from receta where receta_id >= 1 group by receta_id; 
+ 
+obtener id ingrediente con las recetas
+select ingrediente_id from receta_ingrediente where receta_id >= 1 group by receta_id;
+
+obtener id recetario y te pasan el nombre recetario
+select recetario_id from recetario where nombre_recetario = "recetario MasterChef";
+
+obtener el id receta y te pasa el id de la recetario
+select recetario_id from recetario_receta where receta_id >=1 group by recetario_id;
+
+consultas de prueba:
+
 select nombre_receta from receta where receta_id = 3; 
 
 select recetario_id from recetario where precio <= 10.0; 
