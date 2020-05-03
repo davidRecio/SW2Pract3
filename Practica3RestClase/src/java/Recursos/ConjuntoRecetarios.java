@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class ConjuntoRecetarios {
    private int idUsuario;
+   private String nombreConjRecetarios;
    private ArrayList <Recetario> arrayRecetarios= new ArrayList();
 
     public int getIdUsuario() {
@@ -29,6 +30,14 @@ public class ConjuntoRecetarios {
 
     public void setArrayRecetarios(ArrayList <Recetario> arrayRecetarios) {
         this.arrayRecetarios = arrayRecetarios;
+    }
+
+    public String getNombreConjRecetarios() {
+        return nombreConjRecetarios;
+    }
+
+    public void setNombreConjRecetarios(String nombreConjRecetarios) {
+        this.nombreConjRecetarios = nombreConjRecetarios;
     }
     
     

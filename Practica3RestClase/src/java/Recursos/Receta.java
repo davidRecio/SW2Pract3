@@ -66,6 +66,14 @@ public class Receta implements Serializable {
     public void setDificultad(String dificultad) {
         this.dificultad = dificultad;
     }
-
+    @Override
+    public String toString(){
+    String ing="";
+        for (String ingrediente1 : ingrediente) {
+            ing=ing +", "+ ingrediente1;
+        }
+        ing= ing.substring(2);
+    return ing;
+    }
  
 }
