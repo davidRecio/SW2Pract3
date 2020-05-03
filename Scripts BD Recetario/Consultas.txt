@@ -35,6 +35,16 @@ obtener los recetarios disponible los usuario
 obtener los ids de todas las recetas asociadas a un recetario (id recetario)
 select * from recetario_receta where recetario_id = 5; //mirar es igual que el de arriba
 
+obtener todos los conjunto_recetario
+select * from conjunto_recetario;
+
+obtenter los ids de recetarios asociados a un usuario
+select recetario_id from conjunto_recetario where usuario_id = 1;
+
+obtener el conjunto_recetario (el id recetario) asociado a un id usuario en concreto
+select * from conjunto_recetario where usuario_id = 3;
+
+
 consultas de prueba:
 
 select nombre_receta from receta where receta_id = 3; 
