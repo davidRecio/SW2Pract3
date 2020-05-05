@@ -85,13 +85,14 @@ private AccesoBBDD ABD = new AccesoBBDD();
     @Produces("application/xml")
     public Receta obtenerReceta(@QueryParam("nombreReceta")String nombreReceta) {
         Receta resultado = null;
-        for (Receta ele : recetario.getRecetas()) {
-
-            if (ele.getNombre().equals(nombreReceta)) {
-                resultado = ele;
-            }
-
-        }
+        resultado=ABD.leerReceta(nombreReceta);
+//        for (Receta ele : recetario.getRecetas()) {
+//
+//            if (ele.getNombre().equals(nombreReceta)) {
+//                resultado = ele;
+//            }
+//
+//        }
         return resultado;
 
     }

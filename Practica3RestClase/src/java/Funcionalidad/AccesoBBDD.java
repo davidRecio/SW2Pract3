@@ -42,11 +42,11 @@ public class AccesoBBDD {
     
     }
 
-       public void crearRecetario(Recetario recetario) {//añadir a conjRece
+       public void crearRecetario(Recetario recetario, String userName) {//añadir a conjRece
         ArrayList<String> queryBBDD = new ArrayList<>();
         queryBBDD.add("insert into recetario value('" + recetario.getNombre() + "', '" + recetario.getPrecio() + "');");
         conexionBBDD(queryBBDD);
-    
+        addRelacionConjRecetarioRecetario(userName,obtenerIdRecetario(recetario.getNombre()));
     
     }
       public void crearReceta(Receta receta, String nombreRecetario) {
@@ -54,11 +54,12 @@ public class AccesoBBDD {
         ArrayList<String> queryBBDD = new ArrayList<>();
          
           queryBBDD.add("insert into receta value('" + receta.getNombre() + "', '" + receta.getDificultad()  + 
-                       "', '" + receta.getPrecio()+ "');");     
+                       "', '" + receta.getPrecio()+ "');");  
+           conexionBBDD(queryBBDD);
           addIngrediente(receta.getIngrediente()); 
           addRelacionRecetaIng(receta);
           addRelacionRecetarioReceta(receta, nombreRecetario );
-        conexionBBDD(queryBBDD);
+       
     
     
     }
@@ -120,33 +121,78 @@ public class AccesoBBDD {
         }
         return recetario;
     }
-         public Receta leerReceta(String recetaNombre) {
+      
+           public Receta leerReceta(String recetaNombre) {
                 Receta receta= new Receta();
         try {
             String queryBBDD = "";
          
-            queryBBDD="select * from receta where nombre_receta = '"+recetaNombre+"';";
-            ResultSet rS=conexionBBDDConResulset(queryBBDD);
-            receta.setNombre(rS.getString("nombre_receta"));
-            receta.setDificultad(rS.getString("dificultad_receta"));
-            receta.setPrecio(Double.parseDouble(rS.getString("precio_receta")));
-            
-            
-            ArrayList<String> idIngrediente =obtenerIdIngrediente(obtenerIdReceta(recetaNombre));
-            ArrayList<String> ingrediente = new ArrayList();
-            for (String id : idIngrediente) {
-                queryBBDD="select * from ingrediente where ingrediente_id= '"+id+"';";
-                rS=conexionBBDDConResulset(queryBBDD);
-                ingrediente.add(rS.getString("nobre_ingrediente"));
-                
+            queryBBDD="select * from receta where nombre_receta = '"+recetaNombre+"';";            
+              InitialContext initialContext = new InitialContext();
+            datasource = (DataSource) initialContext.lookup("jdbc/myDatasource");
+            Connection connection = datasource.getConnection();
+            Statement createStatement = connection.createStatement();
+           ResultSet resultSet = createStatement.executeQuery(queryBBDD);
+            if (resultSet.next()) {
+            receta.setNombre(resultSet.getString("nombre_receta"));
+            receta.setDificultad(resultSet.getString("dificultad_receta"));
+            receta.setPrecio(Double.parseDouble(resultSet.getString("precio")));
             }
-            receta.setIngrediente(ingrediente);
+            createStatement.close();
+            connection.close();
+        
+            
+            
+//            
+//            ArrayList<String> idIngrediente =obtenerIdIngrediente(obtenerIdReceta(recetaNombre));
+//            ArrayList<String> ingrediente = new ArrayList();
+//            for (String id : idIngrediente) {
+//                queryBBDD="select * from ingrediente where ingrediente_id= '"+id+"';";
+//                
+//           
+//             connection = datasource.getConnection();
+//           createStatement = connection.createStatement();
+//           resultSet = createStatement.executeQuery(queryBBDD);
+//                ingrediente.add(resultSet.getString("nobre_ingrediente"));
+//                 createStatement.close();
+//            connection.close();
+//            }
+//            receta.setIngrediente(ingrediente);
         } catch (SQLException ex) {
+            Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NamingException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
         return receta;
     }
         
+//         public Receta leerReceta(String recetaNombre) {
+//                Receta receta= new Receta();
+//        try {
+//            String queryBBDD = "";
+//         
+//            queryBBDD="select * from receta where nombre_receta = '"+recetaNombre+"';";
+//            ResultSet rS=conexionBBDDConResulset(queryBBDD);
+//            receta.setNombre(rS.getString("nombre_receta"));
+//            receta.setDificultad(rS.getString("dificultad_receta"));
+//            receta.setPrecio(Double.parseDouble(rS.getString("precio")));
+//            
+//            
+//            ArrayList<String> idIngrediente =obtenerIdIngrediente(obtenerIdReceta(recetaNombre));
+//            ArrayList<String> ingrediente = new ArrayList();
+//            for (String id : idIngrediente) {
+//                queryBBDD="select * from ingrediente where ingrediente_id= '"+id+"';";
+//                rS=conexionBBDDConResulset(queryBBDD);
+//                ingrediente.add(rS.getString("nobre_ingrediente"));
+//                
+//            }
+//            receta.setIngrediente(ingrediente);
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return receta;
+//    }
+//        
         
     //para autentificacion
           public ArrayList<String> ObtenerRecetarioConjRecetarios(String idUsuario) {
@@ -196,7 +242,7 @@ public class AccesoBBDD {
     private void conexionBBDD(ArrayList<String> queryBBDD) {
         try {
             InitialContext initialContext = new InitialContext();
-            datasource = (DataSource) initialContext.lookup("jdbc/DatasourcePrueba");
+            datasource = (DataSource) initialContext.lookup("jdbc/myDatasource");
             Connection connection = datasource.getConnection();
             Statement createStatement = connection.createStatement();
             
@@ -224,7 +270,7 @@ public class AccesoBBDD {
         //Ej Persona persona = Resulset;
         try {
             InitialContext initialContext = new InitialContext();
-            datasource = (DataSource) initialContext.lookup("jdbc/DatasourcePrueba");
+            datasource = (DataSource) initialContext.lookup("jdbc/myDatasource");
             Connection connection = datasource.getConnection();
             Statement createStatement = connection.createStatement();
 
@@ -282,6 +328,21 @@ public class AccesoBBDD {
       
         conexionBBDD(queryBBDD);
     }
+   private void addRelacionConjRecetarioRecetario(String userName, String obtenerIdRecetario) {
+        ArrayList<String> queryBBDD = new ArrayList<>();
+          int i = 0;
+          String idUser =obtenerIdUser(userName);
+         String nombreConj="conj5";
+         
+          
+              queryBBDD.add("insert into conjunto_recetario value('" + nombreConj + "', '"+ idUser + "', '" + obtenerIdRecetario + "');");
+               
+        
+          
+      
+        conexionBBDD(queryBBDD);
+        
+    }
    //rmvRelaciones
     private void rmvRelacionRecetarioReceta(String recetaNombre) {
          ArrayList<String> queryBBDD = new ArrayList<>();
@@ -297,7 +358,7 @@ public class AccesoBBDD {
     private String obtenerIdReceta(String recetaNombre) {
         String respuesta="";
         try {
-            String queryBBDD = "select receta_id from receta where nombre_receta = '"+recetaNombre +"';";
+            String queryBBDD = "select receta_id from receta where receta_nombre = '"+recetaNombre +"';";
             
             ResultSet rS=conexionBBDDConResulset(queryBBDD);
             
@@ -344,7 +405,7 @@ public class AccesoBBDD {
     private String obtenerIdRecetario(String nombreRecetario) {
           String respuesta="";
         try {
-            String queryBBDD = "select recetario_id from recetario where nombre_recetario = '"+ nombreRecetario+"';";
+            String queryBBDD = "select recetario_id from recetario where recetario_nombre = '"+ nombreRecetario+"';";
             
             ResultSet rS=conexionBBDDConResulset(queryBBDD);
             
@@ -386,5 +447,27 @@ public class AccesoBBDD {
        
         return respuesta;
     }
+
+    private String obtenerIdUser(String userName) {
+      String respuesta="";
+        try {
+            String queryBBDD = "select usuario_id from usuario where usuario_nombre = '"+ userName+"';";
+            
+            ResultSet rS=conexionBBDDConResulset(queryBBDD);
+            
+            
+            
+                respuesta=rS.getString("usuario_id");
+                
+            
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
+    }
+
+    
 
 }
