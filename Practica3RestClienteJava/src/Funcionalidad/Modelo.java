@@ -32,9 +32,9 @@ public class Modelo {
     cli.crearRecetario(recetario);
     }
     
-    protected Recetario obtenerRecetario(){
+    protected Recetario obtenerRecetario(String nombreRecetario){
        
-    return cli.obtenerRecetario();
+    return cli.obtenerRecetario(nombreRecetario);
     }
     protected void addReceta(Receta receta){
     cli.addReceta(receta);

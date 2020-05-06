@@ -107,9 +107,10 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Receta.class);
     }
 
-      public Recetario obtenerRecetario() throws ClientErrorException {
+      public Recetario obtenerRecetario(String nombreRecetario) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("obtenerRecetario");
+        resource = resource.queryParam("nombreRecetario", nombreRecetario);
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Recetario.class);
     }
 

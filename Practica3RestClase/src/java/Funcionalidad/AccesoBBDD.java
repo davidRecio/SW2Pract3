@@ -104,27 +104,29 @@ public class AccesoBBDD {
         try {
             String queryBBDD = "";
 
-            queryBBDD = "select * from receta where nombre_recetario = '" + recetarioNombre + "';";
+            queryBBDD = "select * from recetario where nombre_recetario = '" + recetarioNombre + "';";
             abrirConexion();
             rS = createStatement.executeQuery(queryBBDD);
             if (rS.next()) {
                 recetario.setNombre(rS.getString("nombre_recetario"));
+                recetario.setPrecio(Double.parseDouble(rS.getString("precio")));
             }
             cerrarConexion();
-            recetario.setPrecio(Double.parseDouble(rS.getString("precio_receta")));
+            
 
             ArrayList<String> idReceta = obtenerIdRecetaArray(obtenerIdRecetario(recetarioNombre));
-           
+            ArrayList<Receta> receta = new ArrayList<>();
             for (String id : idReceta) {
-                queryBBDD = "select nobre_receta from receta where receta_id= '" + id + "';";
+                  
+                 queryBBDD = "select nombre_receta from receta where receta_id = '" + id + "';";
                 abrirConexion();
+                rS = createStatement.executeQuery(queryBBDD);
                 if (rS.next()) {
-                    rS = createStatement.executeQuery(queryBBDD);
-
-                    idReceta.add(rS.getString("nobre_receta"));
+                    receta.add(leerReceta((rS.getString("nombre_receta"))));
                 }
                 cerrarConexion();
-            }
+           }
+            recetario.setRecetas(receta);
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -326,7 +328,7 @@ public class AccesoBBDD {
     private String obtenerIdRecetario(String nombreRecetario) {
         String respuesta = "";
         try {
-            String queryBBDD = "select recetario_id from recetario where recetario_nombre = '" + nombreRecetario + "';";
+            String queryBBDD = "select recetario_id from recetario where nombre_recetario = '" + nombreRecetario + "';";
             abrirConexion();
             rS = createStatement.executeQuery(queryBBDD);
 
@@ -352,7 +354,7 @@ public class AccesoBBDD {
             rS = createStatement.executeQuery(queryBBDD);
 
             while (rS.next()) {
-                respuesta.add(rS.getString("ingrediente_id"));
+                respuesta.add(rS.getString("receta_id"));
             }
             cerrarConexion();
 

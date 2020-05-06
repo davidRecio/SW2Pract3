@@ -75,9 +75,12 @@ private AccesoBBDD ABD = new AccesoBBDD();
     @GET
     @Path("obtenerRecetario")
     @Produces("application/xml")
-    public Recetario obtenerRecetario() {
+    public Recetario obtenerRecetario(@QueryParam("nombreRecetario")String nombreRecetario) {
+        Recetario resultado = null;
+        resultado=ABD.leerRecetario(nombreRecetario);
 
-       return recetario;
+        return resultado;
+      
       
     }
      @GET
@@ -86,22 +89,12 @@ private AccesoBBDD ABD = new AccesoBBDD();
     public Receta obtenerReceta(@QueryParam("nombreReceta")String nombreReceta) {
         Receta resultado = null;
         resultado=ABD.leerReceta(nombreReceta);
-//        for (Receta ele : recetario.getRecetas()) {
-//
-//            if (ele.getNombre().equals(nombreReceta)) {
-//                resultado = ele;
-//            }
-//
-//        }
+
         return resultado;
 
     }
 
-    /**
-     * PUT method for updating or creating an instance of ServicioRestResource
-     * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
-     */
+
     @POST
     @Path("crearRecetario")
     @Consumes("application/xml")

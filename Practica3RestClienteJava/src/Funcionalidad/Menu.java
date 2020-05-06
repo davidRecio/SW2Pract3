@@ -68,8 +68,10 @@ public class Menu {
                                     break;
 
                                 case 2:
-                                    //leer recetario
-                                    listarRecetario(modelo.obtenerRecetario());
+                                    //leer recetario                          
+                                    System.out.println("Introduce el nombre del recetario");
+                                    respuesta = scanner.nextLine();
+                                    listarRecetario(modelo.obtenerRecetario(respuesta));
                                     break;
                                 case 3:
                                     // Importar recetario
