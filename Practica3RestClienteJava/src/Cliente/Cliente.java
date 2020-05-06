@@ -6,12 +6,14 @@
 package Cliente;
 
 import Recursos.Receta;
+import Recursos.RecetaRecetario;
 import Recursos.Recetario;
 import Recursos.Usuario;
 import java.util.ArrayList;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Jersey REST client generated for REST resource:ServicioRestResource
@@ -125,10 +127,14 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         webTarget.path("crearRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
-    public void addReceta(Object requestEntity) throws ClientErrorException {
+    public void crearReceta(Object requestEntity) throws ClientErrorException {
+        
+        webTarget.path("crearReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+        
+        }
+     public void addReceta(Object requestEntity) throws ClientErrorException {
         webTarget.path("addReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
-
  
     public void close() {
         client.close();

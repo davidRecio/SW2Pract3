@@ -10,6 +10,7 @@ import Funcionalidad.Marsalling;
 import Funcionalidad.ValidarXSD;
 
 import Recursos.Receta;
+import Recursos.RecetaRecetario;
 import Recursos.Recetario;
 import Recursos.Usuario;
 import java.io.BufferedWriter;
@@ -103,12 +104,16 @@ private AccesoBBDD ABD = new AccesoBBDD();
 
     }
      @POST
+    @Path("crearReceta")
+    @Consumes("application/xml")
+     public void crearReceta(Receta receta) {
+      ABD.crearReceta(receta);
+    }
+      @POST
     @Path("addReceta")
     @Consumes("application/xml")
-     public void addReceta(Receta receta) {
-      
-       recetas.add(receta);
-        recetario.setRecetas(recetas);
+      public void addReceta(RecetaRecetario recetaRecetario) {
+       ABD.addReceta(recetaRecetario.getNombreRecetario(), recetaRecetario.getNombreReceta());
 
     }
     @DELETE
@@ -152,7 +157,7 @@ private AccesoBBDD ABD = new AccesoBBDD();
         public void importarReceta(byte[] bytes) {
          File file= new File( leerBytes(bytes).getPath());
          Receta receta=mrs.importarReceta(file);
-        addReceta(receta);
+       // addReceta(receta);
          file.delete();
         }
         

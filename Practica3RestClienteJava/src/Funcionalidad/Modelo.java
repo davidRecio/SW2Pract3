@@ -8,6 +8,7 @@ package Funcionalidad;
 
 import Cliente.Cliente;
 import Recursos.Receta;
+import Recursos.RecetaRecetario;
 import Recursos.Recetario;
 import Recursos.Usuario;
 import java.io.ByteArrayOutputStream;
@@ -36,8 +37,14 @@ public class Modelo {
        
     return cli.obtenerRecetario(nombreRecetario);
     }
-    protected void addReceta(Receta receta){
-    cli.addReceta(receta);
+    protected void crearReceta(Receta receta){
+    cli.crearReceta(receta);
+    }
+      protected  void addReceta(String nombreRecetario, String nombreReceta) {
+          RecetaRecetario rR= new RecetaRecetario();
+          rR.setNombreRecetario(nombreRecetario);
+          rR.setNombreReceta(nombreReceta);
+        cli.addReceta(rR);
     }
       protected Receta obtenerReceta(String nombreReceta){
        
@@ -144,6 +151,8 @@ public class Modelo {
             }
         }
     }
+
+
 
   
 

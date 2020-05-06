@@ -18,7 +18,7 @@ public class Menu {
     private Scanner scanner = new Scanner(System.in);
     private Integer opcion = -1;
     private Modelo modelo = new Modelo();
-    private String respuesta, respuesta2, respuesta4;
+    private String respuesta, respuesta2, respuesta3, respuesta4;
     private String sCarpAct = System.getProperty("user.dir");
     private File carpeta = new File(sCarpAct);
     private String ruta = carpeta.getPath();
@@ -49,8 +49,9 @@ public class Menu {
                             System.out.println("-----------------------Menú Recetario-------------------------------");
                             System.out.println("1-Crear");
                             System.out.println("2-Leer");
-                            System.out.println("3-Importar");
-                            System.out.println("4-Exportar");
+                            System.out.println("3-Añadir Recetas");
+                            System.out.println("4-Importar");
+                            System.out.println("5-Exportar");
                             System.out.println("0-Volver al Menu principal");
                             System.out.println();
                             System.out.print("Introducca una opción: ");
@@ -73,13 +74,22 @@ public class Menu {
                                     respuesta = scanner.nextLine();
                                     listarRecetario(modelo.obtenerRecetario(respuesta));
                                     break;
-                                case 3:
+                                 case 3:
+                                    // Añade la receta escogida
+                                    System.out.println("Introduce el nombre del recetario");
+                                    respuesta = scanner.nextLine();
+                                    System.out.println("Introduce el nombre de la receta");
+                                    respuesta2 = scanner.nextLine();
+                                    modelo.addReceta(respuesta,respuesta2);
+                                    limpiarTerminal(10);
+                                    break;
+                                case 4:
                                     // Importar recetario
                                     System.out.println("Introduce el nombre del fichero sin la extensión del recetario");
                                     respuesta = scanner.nextLine();
                                     modelo.importarRecetario(new File(ruta + "/files/xml/" + respuesta + ".xml"));
                                     break;
-                                case 4:
+                                case 5:
                                     //Exportar recetario
                                     System.out.println("Introduce el nombre del fichero sin la extensión del recetario");
                                     respuesta = scanner.nextLine();
@@ -116,13 +126,15 @@ public class Menu {
                             switch (opcion) {
                                 case 1:
                                     //crear recetas
+//                                    System.out.println("Introduce el nombre del recetario donde estará la receta");
+//                                    respuesta3 = scanner.nextLine();
                                     System.out.println("Introduce el nombre de la receta");
                                     respuesta = scanner.nextLine();
                                     System.out.println("Introduce la dificultad de la receta");
                                     respuesta2 = scanner.nextLine();
                                     System.out.println("Introduce el precio de la receta");
                                     respuesta4 = scanner.nextLine();
-                                    modelo.addReceta(modelo.crearRecetaEsructura(respuesta, respuesta2, Double.parseDouble(respuesta4), pedirIngredientes()));
+                                    modelo.crearReceta(modelo.crearRecetaEsructura(respuesta, respuesta2, Double.parseDouble(respuesta4), pedirIngredientes()));
                                     limpiarTerminal(10);
                                     break;
 
