@@ -238,11 +238,11 @@ public class Menu {
             System.out.println("La dificultad es: " + receta.getDificultad());
 
             String ing = " ";
-//            for (String ele : receta.getIngrediente()) {
-//                ing = ing + ele + ", ";
-//            }
-//            System.out.println("tiene los siguientes ingredientes:" + ing);
-//            System.out.println("Su precio es: " + receta.getPrecio());
+            for (String ele : receta.getIngrediente()) {
+                ing = ing + ele + ", ";
+            }
+            System.out.println("tiene los siguientes ingredientes:" + ing);
+            System.out.println("Su precio es: " + receta.getPrecio());
             return true;
         }
 
