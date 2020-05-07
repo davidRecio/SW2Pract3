@@ -1,5 +1,4 @@
 INTRODUCIR USUARIOS
-
 insert into usuario value(1, 'Carlos Ambrosio', '1542396a');
 insert into usuario value(2, 'David Recio', '4239874z');
 insert into usuario value(3, 'Selena Gomez', '6497221v');
