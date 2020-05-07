@@ -6,14 +6,21 @@
 package Recursos;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author david
  */
-public class ConjuntoRecetarios {
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "ConjuntoRecetario")
+public class ConjuntoRecetario {
+      @XmlElement
    private int idUsuario;
-   private String nombreConjRecetarios;
+  @XmlElement
    private ArrayList <Recetario> arrayRecetarios= new ArrayList();
 
     public int getIdUsuario() {
@@ -32,13 +39,6 @@ public class ConjuntoRecetarios {
         this.arrayRecetarios = arrayRecetarios;
     }
 
-    public String getNombreConjRecetarios() {
-        return nombreConjRecetarios;
-    }
-
-    public void setNombreConjRecetarios(String nombreConjRecetarios) {
-        this.nombreConjRecetarios = nombreConjRecetarios;
-    }
     
     
 }

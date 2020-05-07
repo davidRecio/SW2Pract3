@@ -2,6 +2,7 @@ package Funcionalidad;
 
 import Recursos.Receta;
 import Recursos.Recetario;
+import Recursos.Usuario;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,15 +23,41 @@ public class Menu {
     private String sCarpAct = System.getProperty("user.dir");
     private File carpeta = new File(sCarpAct);
     private String ruta = carpeta.getPath();
+    private int idUser=-1;//-1 si no tiene y -21 si no existe
+    
+    
+    public void menu(){
+      System.out.println("---------------------------Login------------------------------------");
+           
+            System.out.println("Usuario:");
+            respuesta = scanner.nextLine();
+            System.out.println("Contraseña:");
+            respuesta2 = scanner.nextLine();
+            Usuario user = new Usuario();
+            user.setNombre(respuesta);
+            user.setPassword(respuesta2);
+            idUser=modelo.validarUsuario(user);
+            if(idUser<0){
+                System.err.println("Usuario invalido");
+            
+            }else{
+            menuInterno();
+            
+            }
 
-    public void menu() {
+    
+   
+    }
+    
+    private void menuInterno() {
 
         while (opcion != 0) {
 
             System.out.println("---------------------------Menú------------------------------------");
-            System.out.println("1-Menú Recetario ");
-            System.out.println("2-Menú Receta ");
-            System.out.println("3-Validación con XSD");
+            System.out.println("1-Mostrar Recetarios disponibles ");
+            System.out.println("2-Menú Recetario ");
+            System.out.println("3-Menú Receta ");
+            System.out.println("4-Validación con XSD");
             System.out.println("0-Salir");
             System.out.println();
             System.out.print("Introducca una opción: ");
@@ -40,8 +67,13 @@ public class Menu {
                 case 0:
                     System.out.println("Saliendo del programa");
                     break;
-
                 case 1:
+                    System.out.println("Estos son los recetarios disponibles");
+                    for (String recetarios :  modelo.obtenerRecetarios(idUser)) {
+                        System.out.println(recetarios);
+                    }
+                    break;
+                case 2:
                     limpiarTerminal(20);
                     while (opcion != 0) {
 
@@ -50,8 +82,9 @@ public class Menu {
                             System.out.println("1-Crear");
                             System.out.println("2-Leer");
                             System.out.println("3-Añadir Recetas");
-                            System.out.println("4-Importar");
-                            System.out.println("5-Exportar");
+                            System.out.println("4-Borrar");
+                            System.out.println("5-Importar");
+                            System.out.println("6-Exportar");
                             System.out.println("0-Volver al Menu principal");
                             System.out.println();
                             System.out.print("Introducca una opción: ");
@@ -83,13 +116,20 @@ public class Menu {
                                     modelo.addReceta(respuesta,respuesta2);
                                     limpiarTerminal(10);
                                     break;
-                                case 4:
+                                 case 4:
+                                    // Borrar recetario
+                                    System.out.println("Introduce el nombre del recetario");
+                                    respuesta = scanner.nextLine();                                   
+                                    modelo.rmvRecetario(idUser, respuesta);
+                                    limpiarTerminal(10);
+                                    break;
+                                case 5:
                                     // Importar recetario
                                     System.out.println("Introduce el nombre del fichero sin la extensión del recetario");
                                     respuesta = scanner.nextLine();
                                     modelo.importarRecetario(new File(ruta + "/files/xml/" + respuesta + ".xml"));
                                     break;
-                                case 5:
+                                case 6:
                                     //Exportar recetario
                                      System.out.println("Introduce el nombre del recetario");
                                     respuesta2 = scanner.nextLine();
@@ -110,7 +150,7 @@ public class Menu {
                     opcion = -1;
                     limpiarTerminal(20);
                     break;
-                case 2:
+                case 3:
                     limpiarTerminal(10);
                     while (opcion != 0) {
 
@@ -182,7 +222,7 @@ public class Menu {
                     opcion = -1;
                     limpiarTerminal(20);
                     break;
-                case 3:
+                case 4:
                     limpiarTerminal(20);
                     System.out.println("-----------------------Menú Validar XML-------------------------------");
                     System.out.println();

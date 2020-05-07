@@ -41,25 +41,11 @@ public class Cliente {
    
 
   
-    public Usuario obtenerUsuario() throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path("obtenerUsuario");
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Usuario.class);
-    }
+   
 
-    public void rmvUsuario(String requestEntity) throws ClientErrorException {
-           WebTarget resource = webTarget;
-        resource = resource.path("rmvUsuario");
-         resource = resource.queryParam("nombreUsuario", requestEntity);
-        resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).delete(String.class);
-        }
 
-  
+  //validar fichero
 
-    public void crearUsuarios(Object requestEntity) throws ClientErrorException {
-        webTarget.path("crearUsuarios").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
-    }
- 
     public String validarFichero(Object requestEntity) throws ClientErrorException {
          WebTarget resource = webTarget;  
         resource = resource.path("validarFichero");
@@ -68,13 +54,7 @@ public class Cliente {
     
     }
 
-   
-    public String validarFichero() throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path("validarFicheroGet");
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(String.class);
-    }
-
+  //importar y exportar
 
  public byte[] exportarReceta( String nombreFichero, String nombreReceta) throws ClientErrorException {
         WebTarget resource = webTarget;  
@@ -103,6 +83,22 @@ public class Cliente {
     public void importarRecetario(byte[] bytes) throws ClientErrorException {
         webTarget.path("importarRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(bytes, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
+    
+    
+    //usuario login
+     public Integer validarUsuario(Usuario usuario) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("validarUsuario");
+        resource = resource.queryParam("usuario", usuario);
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Integer.class);
+    }
+    public  ArrayList<String>  obtenerRecetarios(Integer idUser) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("obtenerRecetarios");
+        resource = resource.queryParam("idUser", idUser);
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get( ArrayList.class);
+    }
+  //obtener  
 public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("obtenerReceta");
@@ -116,7 +112,7 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         resource = resource.queryParam("nombreRecetario", nombreRecetario);
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Recetario.class);
     }
-
+//borrar
     public void rmvReceta(String nombreReceta, String nombreRecetario) throws ClientErrorException {
           WebTarget resource = webTarget;
         resource = resource.path("rmvReceta");
@@ -124,7 +120,14 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
          resource = resource.queryParam("nombreRecetario", nombreRecetario);
         resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).delete(String.class);
     }
-
+     public void rmvRecetario(String idUser, String nombreRecetario) throws ClientErrorException {
+          WebTarget resource = webTarget;
+        resource = resource.path("rmvRecetario");
+         resource = resource.queryParam("idUser", idUser);
+         resource = resource.queryParam("nombreRecetario", nombreRecetario);
+        resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).delete(String.class);
+    }
+    //crear
     public void crearRecetario(Object requestEntity) throws ClientErrorException {
         webTarget.path("crearRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
@@ -134,6 +137,7 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         webTarget.path("crearReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
         
         }
+    //añadir
      public void addReceta(Object requestEntity) throws ClientErrorException {
         webTarget.path("addReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }

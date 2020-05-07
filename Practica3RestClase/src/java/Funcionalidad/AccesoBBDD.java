@@ -27,13 +27,11 @@ public class AccesoBBDD {
 
     //refactor para q sea unica
     //import y export son a partir de leer o crear , falta el init
-    DataSource datasource;
-    Connection connection;
-    Statement createStatement;
-    InitialContext initialContext;
-    ResultSet rS;
-    //For this example you need to create the Mysql Database and the table
-    //CREATE TABLE PERSONAS (         NOMBRE VARCHAR(100),          EDAD INT); 
+    private DataSource datasource;
+    private Connection connection;
+    private Statement createStatement;
+    private InitialContext initialContext;
+    private ResultSet rS;
 
     public void init() {
         ArrayList<String> queryBBDD = new ArrayList<>();
@@ -42,83 +40,75 @@ public class AccesoBBDD {
 
     }
 
-   
-    public void crearRecetario(Recetario recetario, String userName) {//añadir a conjRece
+    public void crearRecetario(Recetario recetario, int idUser) {//añadir a conjRece
         ArrayList<String> queryBBDD = new ArrayList<>();
         queryBBDD.add("insert into recetario value('" + recetario.getNombre() + "', '" + recetario.getPrecio() + "');");
         conexionBBDD(queryBBDD);
-        addRelacionConjRecetarioRecetario(userName, obtenerIdRecetario(recetario.getNombre()));
+        addRelacionConjRecetarioRecetario(idUser, obtenerIdRecetario(recetario.getNombre()));
 
     }
 
     public void crearReceta(Receta receta) {
         //crea una receta por cada ing
         ArrayList<String> queryBBDD = new ArrayList<>();
-        int idReceta=obtenerIdRecetaNueva();
-         ArrayList<Integer> idIng = new ArrayList<>();
-        queryBBDD.add("insert into receta value("+idReceta+ ", '"+ receta.getNombre() + "', '" + receta.getDificultad()
+        int idReceta = obtenerIdRecetaNueva();
+        ArrayList<Integer> idIng = new ArrayList<>();
+        queryBBDD.add("insert into receta value(" + idReceta + ", '" + receta.getNombre() + "', '" + receta.getDificultad()
                 + "', " + receta.getPrecio() + ");");
         conexionBBDD(queryBBDD);
-       idIng= addIngrediente(receta.getIngrediente());
-        addRelacionRecetaIng(idReceta,idIng);
-      
+        idIng = addIngrediente(receta.getIngrediente());
+        addRelacionRecetaIng(idReceta, idIng);
 
     }
-    public void addReceta(String nombreRecetario,String nombreReceta){
-      addRelacionRecetarioReceta(obtenerIdReceta(nombreReceta), nombreRecetario);
-    
+
+    public void addReceta(String nombreRecetario, String nombreReceta) {
+        addRelacionRecetarioReceta(obtenerIdReceta(nombreReceta), nombreRecetario);
+
     }
 
     //borrar
-
-    public void borrarRecetario(String nombreRecetario) {//falta revisarlo
+    public void borrarRecetario(Integer idUser, String nombreRecetario) {//falta revisarlo
         ArrayList<String> queryBBDD = new ArrayList<>();
-        queryBBDD.add("delete from recetario where usuario = '" + nombreRecetario + "';");
-        queryBBDD.add("delete conjunto_recetario where nombre_rectario = '" + nombreRecetario + "';");
-        ArrayList<String> idReceta = obtenerIdRecetaArray(obtenerIdRecetario(nombreRecetario));
-        conexionBBDD(queryBBDD);
+        rmvRelacionConjRecetario(idUser, nombreRecetario);
+        if (recetarioTieneUser(nombreRecetario).isEmpty()) {
 
-        for (int i = 0; i < idReceta.size(); i++) {
-            try {
-                String queryBBDD2 = "select nombre_receta from receta where id_receta = '" + idReceta.get(i) + "';";
-                abrirConexion();
-                rS = createStatement.executeQuery(queryBBDD2);
-                if (rS.next()) {
-                    borrarReceta(rS.getString("nombre_receta"),nombreRecetario);
-                }
-                cerrarConexion();
-            } catch (SQLException ex) {
-                Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            for (String nombre : obtenerNombreRecetaArray(obtenerIdRecetaArray(obtenerIdRecetario(nombreRecetario)))) {
+
+                borrarReceta(nombre, nombreRecetario);
             }
-        }
 
+            queryBBDD.add("delete from recetario where nombre_recetario = '" + nombreRecetario + "';");
+
+            conexionBBDD(queryBBDD);
+        }
     }
 
     public void borrarReceta(String recetaNombre, String recetarioNombre) {
         ArrayList<String> queryBBDD = new ArrayList<>();
-         rmvRelacionRecetarioReceta(recetaNombre, recetarioNombre);
-         if(recetaTieneRecetario(recetaNombre).isEmpty()){//si esa receta no tiene ningun recetario
-           ArrayList<String> idIng=  obtenerIdIngrediente(obtenerIdReceta(recetaNombre));
-             rmvRelacionRecetaIngrediente(recetaNombre);
-             queryBBDD.add("delete from receta where nombre_receta = '" + recetaNombre + "';");
-             conexionBBDD(queryBBDD);
-             for (String id : idIng) {
-                if(ingredienteTieneReceta(id).isEmpty()){
-                borrarIngrediente(id);
-             } 
-             }
-             
-         }
+        rmvRelacionRecetarioReceta(recetaNombre, recetarioNombre);
+        if (recetaTieneRecetario(recetaNombre).isEmpty()) {//si esa receta no tiene ningun recetario
+            ArrayList<String> idIng = obtenerIdIngrediente(obtenerIdReceta(recetaNombre));
+            rmvRelacionRecetaIngrediente(recetaNombre);
+            queryBBDD.add("delete from receta where nombre_receta = '" + recetaNombre + "';");
+            conexionBBDD(queryBBDD);
+            for (String id : idIng) {
+                if (ingredienteTieneReceta(id).isEmpty()) {
+                    borrarIngrediente(id);
+                }
+            }
+
+        }
     }
-      private void borrarIngrediente(String idIng) {
-          
-      {
-              ArrayList<String> queryBBDD = new ArrayList<>();
-              queryBBDD.add("delete from ingrediente where ingrediente_id = " + Integer.parseInt(idIng) + ";");
-             conexionBBDD(queryBBDD);
-          
+
+    private void borrarIngrediente(String idIng) {//falta limpieza de ing
+
+        {
+            ArrayList<String> queryBBDD = new ArrayList<>();
+            queryBBDD.add("delete from ingrediente where ingrediente_id = " + Integer.parseInt(idIng) + ";");
+            conexionBBDD(queryBBDD);
+
+        }
     }
-      }
     //leer      
 
     public Recetario leerRecetario(String recetarioNombre) {
@@ -134,20 +124,19 @@ public class AccesoBBDD {
                 recetario.setPrecio(Double.parseDouble(rS.getString("precio")));
             }
             cerrarConexion();
-            
 
             ArrayList<String> idReceta = obtenerIdRecetaArray(obtenerIdRecetario(recetarioNombre));
             ArrayList<Receta> receta = new ArrayList<>();
             for (String id : idReceta) {
-                  
-                 queryBBDD = "select nombre_receta from receta where receta_id = '" + id + "';";
+
+                queryBBDD = "select nombre_receta from receta where receta_id = '" + id + "';";
                 abrirConexion();
                 rS = createStatement.executeQuery(queryBBDD);
                 if (rS.next()) {
                     receta.add(leerReceta((rS.getString("nombre_receta"))));
                 }
                 cerrarConexion();
-           }
+            }
             recetario.setRecetas(receta);
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,20 +160,18 @@ public class AccesoBBDD {
 
             cerrarConexion();
 
-            
-            ArrayList<String> idIngrediente =obtenerIdIngrediente(obtenerIdReceta(recetaNombre));
+            ArrayList<String> idIngrediente = obtenerIdIngrediente(obtenerIdReceta(recetaNombre));
             ArrayList<String> ingrediente = new ArrayList();
             for (String id : idIngrediente) {
-                
-                queryBBDD="select * from ingrediente where ingrediente_id= '"+id+"';";
-                  abrirConexion();
-           
-             
-           rS = createStatement.executeQuery(queryBBDD);
-            if (rS.next()) {
-                ingrediente.add(rS.getString("nombre_ingrediente"));
-            }
-         cerrarConexion();
+
+                queryBBDD = "select * from ingrediente where ingrediente_id= '" + id + "';";
+                abrirConexion();
+
+                rS = createStatement.executeQuery(queryBBDD);
+                if (rS.next()) {
+                    ingrediente.add(rS.getString("nombre_ingrediente"));
+                }
+                cerrarConexion();
             }
             receta.setIngrediente(ingrediente);
         } catch (SQLException ex) {
@@ -193,9 +180,18 @@ public class AccesoBBDD {
         return receta;
     }
 
-
     //para autentificacion
-    public ArrayList<String> ObtenerRecetarioConjRecetarios(String idUsuario) {
+        public Integer validarUSer(Usuario usuario) {
+         int result=-21;
+            for (Usuario user : leerUsuarios()) {
+                if((user.getNombre().equals(usuario.getNombre()))&&(user.getPassword().equals(usuario.getPassword()))){
+                
+                    result=Integer.parseInt(obtenerIdUser(user.getNombre()));
+                }
+            }
+            return result;
+    }
+    public ArrayList<String> ObtenerRecetarioConjRecetarios(Integer idUsuario) {
         ArrayList<String> recetarios = new ArrayList();
         ArrayList<String> idRecetario = new ArrayList();
         try {
@@ -225,7 +221,7 @@ public class AccesoBBDD {
         return recetarios;
     }
 
-    public ArrayList<Usuario> leerUsuarios() {
+    private ArrayList<Usuario> leerUsuarios() {
         ArrayList<Usuario> usuario = new ArrayList();
         Usuario user = new Usuario();
         try {
@@ -246,78 +242,96 @@ public class AccesoBBDD {
         return usuario;
     }
 
-//accesos necesarios     
-    private  ArrayList<Integer> addIngrediente(ArrayList<String> ingrediente) {
-        
-         ArrayList<Integer> idIng = new ArrayList<>();
+//accesos necesarios   
+    private ArrayList<String> obtenerNombreRecetaArray(ArrayList<String> idReceta) {
+        ArrayList<String> nombreReceta = new ArrayList<>();
+        for (int i = 0; i < idReceta.size(); i++) {
+            try {
+                String queryBBDD2 = "select nombre_receta from receta where id_receta = " + Integer.parseInt(idReceta.get(i)) + ";";
+                abrirConexion();
+                rS = createStatement.executeQuery(queryBBDD2);
+                if (rS.next()) {
+                    nombreReceta.add(rS.getString("nombre_receta"));
+                }
+                cerrarConexion();
+            } catch (SQLException ex) {
+                Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return nombreReceta;
+    }
+
+    private ArrayList<Integer> addIngrediente(ArrayList<String> ingrediente) {
+
+        ArrayList<Integer> idIng = new ArrayList<>();
         for (String ing : ingrediente) {
             ArrayList<String> queryBBDD = new ArrayList<>();
-            int id=obtenerIdIngredienteNueva();
-            queryBBDD.add("insert into ingrediente value(" + id +", '"+ ing+ "');");
+            int id = obtenerIdIngredienteNueva();
+            queryBBDD.add("insert into ingrediente value(" + id + ", '" + ing + "');");
             idIng.add(id);
-             conexionBBDD(queryBBDD);
+            conexionBBDD(queryBBDD);
         }
 
-       
         return idIng;
     }
 //addRelaciones
 
-    private void addRelacionRecetaIng(Integer idReceta,ArrayList<Integer>idIng) {
+    private void addRelacionRecetaIng(Integer idReceta, ArrayList<Integer> idIng) {
         //id receta y id ing
-        
-    
-        
+
         for (Integer ing : idIng) {
             ArrayList<String> queryBBDD = new ArrayList<>();
             queryBBDD.add("insert into receta_ingrediente value(" + idReceta + ", " + ing + ");");
-             conexionBBDD(queryBBDD);
+            conexionBBDD(queryBBDD);
         }
-
-       
 
     }
 
     private void addRelacionRecetarioReceta(String idReceta, String nombreRecetario) {
         ArrayList<String> queryBBDD = new ArrayList<>();
-        
+
         String idRecetario = obtenerIdRecetario(nombreRecetario);
-        
 
         queryBBDD.add("insert into recetario_receta value('" + idRecetario + "', '" + idReceta + "');");
 
         conexionBBDD(queryBBDD);
     }
 
-    private void addRelacionConjRecetarioRecetario(String userName, String obtenerIdRecetario) {
+    private void addRelacionConjRecetarioRecetario(int idUser, String nombreRecetario) {
         ArrayList<String> queryBBDD = new ArrayList<>();
-        int i = 0;
-        String idUser = obtenerIdUser(userName);
-        String nombreConj = "conj5";
+      
+        String idRecetario = obtenerIdRecetario(nombreRecetario);
 
-        queryBBDD.add("insert into conjunto_recetario value('" + nombreConj + "', '" + idUser + "', '" + obtenerIdRecetario + "');");
+        queryBBDD.add("insert into conjunto_recetario value(" + idUser + ", " + idRecetario + ");");
 
         conexionBBDD(queryBBDD);
 
     }
 
     //rmvRelaciones
+    private void rmvRelacionConjRecetario(Integer idUser, String recetarioNombre) {
+        ArrayList<String> queryBBDD = new ArrayList<>();
+      
+        String idRecetario = obtenerIdRecetario(recetarioNombre);
+        queryBBDD.add("select * from conjunto_recetario where usuario_id=" +idUser + " and recetario_id =" + Integer.parseInt(idRecetario) + ";");
+        conexionBBDD(queryBBDD);
+    }
 
     private void rmvRelacionRecetarioReceta(String recetaNombre, String recetarioNombre) {
         ArrayList<String> queryBBDD = new ArrayList<>();
         String idReceta = obtenerIdReceta(recetaNombre);
         String idRecetario = obtenerIdRecetario(recetarioNombre);
-        queryBBDD.add("select * from recetario_receta where recetario_id="+Integer.parseInt(idRecetario)+" and receta_id ="+Integer.parseInt(idReceta)+";");
+        queryBBDD.add("select * from recetario_receta where recetario_id=" + Integer.parseInt(idRecetario) + " and receta_id =" + Integer.parseInt(idReceta) + ";");
         conexionBBDD(queryBBDD);
     }
-      private void rmvRelacionRecetaIngrediente(String recetaNombre) {
-        String idReceta=obtenerIdReceta(recetaNombre);
-         
-              ArrayList<String> queryBBDD = new ArrayList<>();
-              queryBBDD.add("delete from receta_ingrediente where receta_id = " + Integer.parseInt(idReceta) + ";");
-             conexionBBDD(queryBBDD);
-          
-          
+
+    private void rmvRelacionRecetaIngrediente(String recetaNombre) {
+        String idReceta = obtenerIdReceta(recetaNombre);
+
+        ArrayList<String> queryBBDD = new ArrayList<>();
+        queryBBDD.add("delete from receta_ingrediente where receta_id = " + Integer.parseInt(idReceta) + ";");
+        conexionBBDD(queryBBDD);
+
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 //obtener id
@@ -420,10 +434,11 @@ public class AccesoBBDD {
         }
         return respuesta;
     }
-     private int obtenerIdRecetaNueva() {
+
+    private int obtenerIdRecetaNueva() {
 
         ArrayList<String> respuesta = new ArrayList();
-        int id=0;
+        int id = 0;
         try {
             String queryBBDD = "select receta_id from receta;";
             abrirConexion();
@@ -437,13 +452,14 @@ public class AccesoBBDD {
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        id=Integer.parseInt(respuesta.get(respuesta.size()-1))+1;
+        id = Integer.parseInt(respuesta.get(respuesta.size() - 1)) + 1;
         return id;
     }
-      private int obtenerIdIngredienteNueva() {
+
+    private int obtenerIdIngredienteNueva() {
 
         ArrayList<String> respuesta = new ArrayList();
-        int id=0;
+        int id = 0;
         try {
             String queryBBDD = "select ingrediente_id from ingrediente;";
             abrirConexion();
@@ -457,14 +473,34 @@ public class AccesoBBDD {
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        id=Integer.parseInt(respuesta.get(respuesta.size()-1))+1;
+        id = Integer.parseInt(respuesta.get(respuesta.size() - 1)) + 1;
         return id;
     }
 // ver si tiene elementos asociados
-       private ArrayList<Integer>  recetaTieneRecetario(String recetaNombre) {
-            ArrayList<Integer> respuesta = new ArrayList();
+
+    private ArrayList<Integer> recetarioTieneUser(String nombreRecetario) {
+        ArrayList<Integer> respuesta = new ArrayList();
         try {
-            String idReceta= obtenerIdReceta(recetaNombre);
+            String idRecetario = obtenerIdRecetario(nombreRecetario);
+            String queryBBDD = "select usuario_id from conjunto_recetario where recetario_id = " + idRecetario + ";";
+            abrirConexion();
+            rS = createStatement.executeQuery(queryBBDD);
+
+            while (rS.next()) {
+                respuesta.add(Integer.parseInt(rS.getString("usuario_id")));
+            }
+            cerrarConexion();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return respuesta;
+
+    }
+
+    private ArrayList<Integer> recetaTieneRecetario(String recetaNombre) {
+        ArrayList<Integer> respuesta = new ArrayList();
+        try {
+            String idReceta = obtenerIdReceta(recetaNombre);
             String queryBBDD = "select recetario_id from recetario_receta where receta_id = " + idReceta + ";";
             abrirConexion();
             rS = createStatement.executeQuery(queryBBDD);
@@ -476,15 +512,13 @@ public class AccesoBBDD {
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-          return respuesta;
+        return respuesta;
     }
 
-  
-
     private ArrayList<Integer> ingredienteTieneReceta(String idIng) {
-          ArrayList<Integer> respuesta = new ArrayList();
+        ArrayList<Integer> respuesta = new ArrayList();
         try {
-            
+
             String queryBBDD = "select receta_id from receta_ingrediente where ingrediente_id = " + Integer.parseInt(idIng) + ";";
             abrirConexion();
             rS = createStatement.executeQuery(queryBBDD);
@@ -496,11 +530,11 @@ public class AccesoBBDD {
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-          return respuesta;
+        return respuesta;
     }
 
 //Gestionar conexion
-     private void abrirConexion() {
+    private void abrirConexion() {
         try {
             initialContext = new InitialContext();
             datasource = (DataSource) initialContext.lookup("jdbc/myDatasource");
@@ -536,7 +570,6 @@ public class AccesoBBDD {
         }
     }
 
-   
-  
+
 
 }

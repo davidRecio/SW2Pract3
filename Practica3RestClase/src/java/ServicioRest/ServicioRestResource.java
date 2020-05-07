@@ -8,6 +8,7 @@ package ServicioRest;
 import Funcionalidad.AccesoBBDD;
 import Funcionalidad.Marsalling;
 import Funcionalidad.ValidarXSD;
+import Recursos.ConjuntoRecetario;
 
 import Recursos.Receta;
 import Recursos.RecetaRecetario;
@@ -99,8 +100,8 @@ private AccesoBBDD ABD = new AccesoBBDD();
     @POST
     @Path("crearRecetario")
     @Consumes("application/xml")
-    public void crearRecetario(Recetario e) {
-        recetario= e;
+    public void crearRecetario(ConjuntoRecetario cnj) {
+        ABD.crearRecetario(cnj.getArrayRecetarios().get(0), cnj.getIdUsuario());
 
     }
      @POST
@@ -116,6 +117,14 @@ private AccesoBBDD ABD = new AccesoBBDD();
        ABD.addReceta(recetaRecetario.getNombreRecetario(), recetaRecetario.getNombreReceta());
 
     }
+      //borrar
+      @DELETE
+    @Path("rmvRecetario")
+    @Consumes("application/xml")
+     public void rmvRecetario(@QueryParam("idUser")String idUser,@QueryParam("nombreRecetario")String nombreRecetario) {
+      ABD.borrarRecetario(Integer.parseInt(idUser), nombreRecetario);
+
+    }
     @DELETE
     @Path("rmvReceta")
     @Consumes("application/xml")
@@ -127,8 +136,8 @@ private AccesoBBDD ABD = new AccesoBBDD();
       @GET
     @Path("exportarRecetario")
     @Produces("application/xml")
-     public  byte[]  exportarRecetario(@QueryParam("nombreFichero")String nombreFichero) throws IOException {
-        mrs.crearXMLRecetario(nombreFichero+".xml", recetario, ruta);
+     public  byte[]  exportarRecetario(@QueryParam("nombreFichero")String nombreFichero,@QueryParam("nombreRecetario")String nombreRecetario) throws IOException {
+        mrs.crearXMLRecetario(nombreFichero+".xml", ABD.leerRecetario(nombreRecetario), ruta);
          File file = new File(ruta+"/files/xml/"+ nombreFichero+".xml");
          return converterByte(file);
     }
@@ -170,28 +179,22 @@ private AccesoBBDD ABD = new AccesoBBDD();
           return "¿Es valido el xml con su xsd? " + vXSD.validarXSD(ruta + "/files/xsd/recetario.xsd",file );
         }
         
-//    @POST
-//    @Path("crearUsuarios")
-//    @Consumes("application/xml")
-//    public void crearUsuarios(Usuario user) {
-//        ABD.conexionBBDDCrearUsuarios(user.getNombre(), user.getPassword());
-//
-//    }  
-//     @DELETE
-//    @Path("rmvUsuario")
-//    @Consumes("application/xml")
-//     public void rmvUsuario(@QueryParam("nombreUsuario")String nombreUsuario) {
-//      ABD.conexionBBDDBorrarUsuarios(nombreUsuario);
-//
-//    }    
-//    @GET
-//    @Path("obtenerUsuario")
-//    @Produces("application/xml")
-//    public Usuario obtenerUsuario() {
-//
-//       return ABD.conexionBBDDListarUsuarios().get(2);
-//    }    
-//        
+
+   
+    @GET
+    @Path("validarUsuario")//falta en el cliente
+    @Produces("application/xml")
+    public Integer validarUsuario(@QueryParam("usuario") Usuario usuario) {
+        return ABD.validarUSer(usuario);
+       
+    }    
+     @GET
+    @Path("obtenerRecetarios")//falta en el cliente
+    @Produces("application/xml")
+    public ArrayList<String> obtenerRecetarios(@QueryParam("idUser") Integer idUser) {
+       return ABD.ObtenerRecetarioConjRecetarios(idUser);
+       
+    }        
 
        //crea ficheros necesarios
 

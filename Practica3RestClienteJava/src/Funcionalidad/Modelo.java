@@ -28,32 +28,49 @@ import java.util.logging.Logger;
 public class Modelo {
     Cliente cli = new Cliente();
     
-    
+    //loguin
+     public Integer validarUsuario(Usuario usuario){
+     return cli.validarUsuario(usuario);
+     }
+     
+      public  ArrayList<String>  obtenerRecetarios(Integer idUser){  
+      return cli.obtenerRecetarios(idUser);   
+      }
+    //crear
     protected void crearRecetario(Recetario recetario){
     cli.crearRecetario(recetario);
     }
-    
+     protected void crearReceta(Receta receta){
+    cli.crearReceta(receta);
+    }
+     //obtener
     protected Recetario obtenerRecetario(String nombreRecetario){
        
     return cli.obtenerRecetario(nombreRecetario);
     }
-    protected void crearReceta(Receta receta){
-    cli.crearReceta(receta);
+     protected Receta obtenerReceta(String nombreReceta){
+       
+    return cli.obtenerReceta(nombreReceta);
     }
+     //borrar
+    protected void rmvReceta(String nombreReceta, String nombreRecetario){
+      cli.rmvReceta(nombreReceta, nombreRecetario);
+      
+      }
+    protected void rmvRecetario(int idUser, String nombreRecetario){
+       
+      cli.rmvRecetario(Integer.toString(idUser), nombreRecetario);
+      
+      }
+    //añadir
       protected  void addReceta(String nombreRecetario, String nombreReceta) {
           RecetaRecetario rR= new RecetaRecetario();
           rR.setNombreRecetario(nombreRecetario);
           rR.setNombreReceta(nombreReceta);
         cli.addReceta(rR);
     }
-      protected Receta obtenerReceta(String nombreReceta){
-       
-    return cli.obtenerReceta(nombreReceta);
-    }
-      protected void rmvReceta(String nombreReceta, String nombreRecetario){
-      cli.rmvReceta(nombreReceta, nombreRecetario);
-      
-      }
+     
+     //imports y exports
       protected byte[] exportarRecetario(String nombreFichero, String nombreRecetario)throws IOException{
         return  cli.exportarRecetario(nombreFichero, nombreRecetario);
       
@@ -94,17 +111,6 @@ public class Modelo {
         return receta;
 
     }
-    //ListarUsuario
-    public Usuario leerUsuarios(){
-    
-    
-    return cli.obtenerUsuario();
-    } 
-      public void crearUusario(Usuario user){
-    
-    
-    cli.crearUsuarios(user);
-    } 
     
     //creacion de fichero a byte y al reves
      private  byte[] converterByte( File file ) throws FileNotFoundException, IOException {
