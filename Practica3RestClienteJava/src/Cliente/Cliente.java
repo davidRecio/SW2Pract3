@@ -116,10 +116,11 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Recetario.class);
     }
 
-    public void rmvReceta(String requestEntity) throws ClientErrorException {
+    public void rmvReceta(String nombreReceta, String nombreRecetario) throws ClientErrorException {
           WebTarget resource = webTarget;
         resource = resource.path("rmvReceta");
-         resource = resource.queryParam("nombreReceta", requestEntity);
+         resource = resource.queryParam("nombreReceta", nombreReceta);
+         resource = resource.queryParam("nombreRecetario", nombreRecetario);
         resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).delete(String.class);
     }
 

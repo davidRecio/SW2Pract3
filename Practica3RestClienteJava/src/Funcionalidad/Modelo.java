@@ -50,8 +50,8 @@ public class Modelo {
        
     return cli.obtenerReceta(nombreReceta);
     }
-      protected void rmvReceta(String nombreReceta){
-      cli.rmvReceta(nombreReceta);
+      protected void rmvReceta(String nombreReceta, String nombreRecetario){
+      cli.rmvReceta(nombreReceta, nombreRecetario);
       
       }
       protected byte[] exportarRecetario(String nombreFichero)throws IOException{

@@ -119,8 +119,8 @@ private AccesoBBDD ABD = new AccesoBBDD();
     @DELETE
     @Path("rmvReceta")
     @Consumes("application/xml")
-     public void rmvReceta(@QueryParam("nombreReceta")String nombreReceta) {
-      recetario.getRecetas().remove(obtenerReceta(nombreReceta));
+     public void rmvReceta(@QueryParam("nombreReceta")String nombreReceta,@QueryParam("nombreRecetario")String nombreRecetario) {
+      ABD.borrarReceta(nombreReceta, nombreRecetario);
 
     }
      //exportar e importar
