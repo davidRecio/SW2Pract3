@@ -45,15 +45,10 @@ create table usuario(
 	password_usuario varchar (8)
 );
 
-create table conjunto_recetario(
-	conjunto_id integer primary key not null, 
-	nombre_conjunto varchar (20),
+create table conjunto_recetario( 
 	usuario_id integer not null,
 	recetario_id integer not null,
 	foreign key (usuario_id) references usuario (usuario_id),
-	foreign key (recetario_id) references recetario (recetario_id)
+	foreign key (recetario_id) references recetario (recetario_id),
+	primary key (usuario_id, recetario_id)
 );
-
-//añadir luego
-nombre_conjunto varchar (20),
-	foreign key (nombre_conjunto) references conjunto_recetario (nombre_conjunto)

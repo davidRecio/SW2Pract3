@@ -1,7 +1,5 @@
 create table recetario( 
 	recetario_id integer primary key auto_increment,
 	nombre_recetario varchar (20) ,
-	precio double,
-	nombre_conjunto varchar (20),
-	foreign key (nombre_conjunto) references conjunto_recetario (nombre_conjunto)
+	precio double
 );
