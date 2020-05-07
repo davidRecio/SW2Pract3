@@ -54,8 +54,8 @@ public class Modelo {
       cli.rmvReceta(nombreReceta, nombreRecetario);
       
       }
-      protected byte[] exportarRecetario(String nombreFichero)throws IOException{
-        return  cli.exportarRecetario(nombreFichero);
+      protected byte[] exportarRecetario(String nombreFichero, String nombreRecetario)throws IOException{
+        return  cli.exportarRecetario(nombreFichero, nombreRecetario);
       
       }
    

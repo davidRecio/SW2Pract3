@@ -90,10 +90,11 @@ public class Cliente {
         webTarget.path("importarReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(bytes, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
-    public byte[] exportarRecetario(String nombreFichero) throws ClientErrorException {
+    public byte[] exportarRecetario(String nombreFichero, String nombreRecetario) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("exportarRecetario");
           resource = resource.queryParam("nombreFichero", nombreFichero);
+          resource = resource.queryParam("nombreRecetario", nombreRecetario);
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(byte[].class);
     }
 
