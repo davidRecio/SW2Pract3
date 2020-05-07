@@ -90,10 +90,11 @@ public class Cliente {
         webTarget.path("importarReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(bytes, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
-    public byte[] exportarRecetario(String nombreFichero) throws ClientErrorException {
+    public byte[] exportarRecetario(String nombreFichero, String nombreRecetario) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("exportarRecetario");
           resource = resource.queryParam("nombreFichero", nombreFichero);
+          resource = resource.queryParam("nombreRecetario", nombreRecetario);
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(byte[].class);
     }
 
@@ -116,10 +117,11 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Recetario.class);
     }
 
-    public void rmvReceta(String requestEntity) throws ClientErrorException {
+    public void rmvReceta(String nombreReceta, String nombreRecetario) throws ClientErrorException {
           WebTarget resource = webTarget;
         resource = resource.path("rmvReceta");
-         resource = resource.queryParam("nombreReceta", requestEntity);
+         resource = resource.queryParam("nombreReceta", nombreReceta);
+         resource = resource.queryParam("nombreRecetario", nombreRecetario);
         resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).delete(String.class);
     }
 

@@ -91,9 +91,11 @@ public class Menu {
                                     break;
                                 case 5:
                                     //Exportar recetario
+                                     System.out.println("Introduce el nombre del recetario");
+                                    respuesta2 = scanner.nextLine();
                                     System.out.println("Introduce el nombre del fichero sin la extensión del recetario");
                                     respuesta = scanner.nextLine();
-                                    modelo.leerBytes(modelo.exportarRecetario(respuesta), respuesta);
+                                    modelo.leerBytes(modelo.exportarRecetario(respuesta, respuesta2), respuesta);
                                     break;
 
                                 default:
@@ -148,7 +150,9 @@ public class Menu {
                                     // Borra la receta escogida
                                     System.out.println("Introduce el nombre de la receta");
                                     respuesta = scanner.nextLine();
-                                    modelo.rmvReceta(respuesta);
+                                    System.out.println("Introduce el nombre del recetario");
+                                    respuesta2 = scanner.nextLine();
+                                    modelo.rmvReceta(respuesta,respuesta2);
                                     limpiarTerminal(10);
                                     break;
                                 case 4:
