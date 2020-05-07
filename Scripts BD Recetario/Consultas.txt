@@ -48,8 +48,12 @@ select * from conjunto_recetario where usuario_id = 3;
 obtener los ids de recetas a partir de un id recetario
 select receta_id from recetario_receta where recetario_id = 3;
 
+Obtener los id ingredientes de la receta bocadillo
+select ingrediente_id from receta_ingrediente where receta_id = 5;
+
 consultas de prueba:
 
 select nombre_receta from receta where receta_id = 3; 
 
 select recetario_id from recetario where precio <= 10.0; 
+
