@@ -14,12 +14,6 @@ insert into receta value(3, 'Huevo frito', 'Facil', 3.75);
 insert into receta value(4, 'Ensaladilla rusa', 'Media', 6.0);
 insert into receta value(5, 'Macarrones con tomate', 'Facil', 4.38);
 
-INTRODUCIR RECETARIOS bueno pero meto el otro de momento
-insert into recetario value(1, 'Recetario 1', 15.0,'Conjunto 1');
-insert into recetario value(2, 'Recetario 2', 12.18,'Conjunto 2');
-insert into recetario value(3, 'Recetario 3', 8.50, 'Conjunto 3');
-insert into recetario value(4, 'Recetario 4', 17.42, 'Conjunto 4');
-insert into recetario value(5, 'Recetario Master Chef', 40.0, 'Conjunto 5');
 
 INTRODUCIR RECETARIOS
 insert into recetario value(1, 'Recetario 1', 15.0);

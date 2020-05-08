@@ -139,7 +139,7 @@ public class AccesoBBDD {
             ArrayList<Receta> receta = new ArrayList<>();
             for (String id : idReceta) {
 
-                queryBBDD = "select nombre_receta from receta where receta_id = '" + id + "';";
+                queryBBDD = "select nombre_receta from receta where receta_id = " + Integer.parseInt(id) + ";";
                 abrirConexion();
                 rS = createStatement.executeQuery(queryBBDD);
                 if (rS.next()) {
@@ -276,7 +276,7 @@ public class AccesoBBDD {
         ArrayList<String> nombreReceta = new ArrayList<>();
         for (int i = 0; i < idReceta.size(); i++) {
             try {
-                String queryBBDD2 = "select nombre_receta from receta where id_receta = " + Integer.parseInt(idReceta.get(i)) + ";";
+                String queryBBDD2 = "select nombre_receta from receta where receta_id = " + Integer.parseInt(idReceta.get(i)) + ";";
                 abrirConexion();
                 rS = createStatement.executeQuery(queryBBDD2);
                 if (rS.next()) {
