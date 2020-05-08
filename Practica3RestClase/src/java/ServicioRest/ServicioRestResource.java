@@ -146,7 +146,7 @@ private AccesoBBDD ABD = new AccesoBBDD();
       public void importarRecetario( byte[] bytes) {
        File file= new File( leerBytes(bytes).getPath());
         recetario = mrs.importarRecetario(file);
-        recetas=recetario.getRecetas();
+        ABD.crearRecetario(recetario, 2);
         file.delete();
 
     }
@@ -165,7 +165,7 @@ private AccesoBBDD ABD = new AccesoBBDD();
         public void importarReceta(byte[] bytes) {
          File file= new File( leerBytes(bytes).getPath());
          Receta receta=mrs.importarReceta(file);
-       // addReceta(receta);
+         ABD.crearReceta(receta);
          file.delete();
         }
         

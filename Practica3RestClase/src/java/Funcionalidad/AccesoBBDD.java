@@ -47,7 +47,13 @@ public class AccesoBBDD {
         queryBBDD.add("insert into recetario value(" +idRecetario+", '"+ recetario.getNombre() + "', " + recetario.getPrecio() + ");");
         conexionBBDD(queryBBDD);
         addRelacionConjRecetarioRecetario(idUser, idRecetario);
-
+        if (recetario.getRecetas().isEmpty() == false) {
+            for (Receta rece : recetario.getRecetas()) {
+                crearReceta(rece);
+                addReceta(recetario.getNombre(), rece.getNombre());
+            }
+            
+        }
     }
 
     public void crearReceta(Receta receta) {
