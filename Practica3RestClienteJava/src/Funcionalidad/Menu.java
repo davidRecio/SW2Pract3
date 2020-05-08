@@ -133,7 +133,7 @@ public class Menu {
                                     // Importar recetario
                                     System.out.println("Introduce el nombre del fichero sin la extensión del recetario");
                                     respuesta = scanner.nextLine();
-                                    modelo.importarRecetario(new File(ruta + "/files/xml/" + respuesta + ".xml"));
+                                    modelo.importarRecetario(new File(ruta + "/files/xml/" + respuesta + ".xml"),idUser);
                                     break;
                                 case 6:
                                     //Exportar recetario

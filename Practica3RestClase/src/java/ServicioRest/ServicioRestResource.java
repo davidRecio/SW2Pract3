@@ -9,6 +9,7 @@ import Funcionalidad.AccesoBBDD;
 import Funcionalidad.Marsalling;
 import Funcionalidad.ValidarXSD;
 import Recursos.ConjuntoRecetario;
+import Recursos.FileUser;
 
 import Recursos.Receta;
 import Recursos.RecetaRecetario;
@@ -144,10 +145,10 @@ private AccesoBBDD ABD = new AccesoBBDD();
      @PUT
     @Path("importarRecetario")
     @Consumes("application/xml")
-      public void importarRecetario( byte[] bytes) {
-       File file= new File( leerBytes(bytes).getPath());
+      public void importarRecetario(FileUser fU) {
+       File file= new File( leerBytes(fU.getBytes()).getPath());
         recetario = mrs.importarRecetario(file);
-        ABD.crearRecetario(recetario, 2);
+        ABD.crearRecetario(recetario, fU.getIdUser());
         file.delete();
 
     }

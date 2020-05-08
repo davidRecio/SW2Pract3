@@ -8,6 +8,7 @@ package Funcionalidad;
 
 import Cliente.Cliente;
 import Recursos.ConjuntoRecetario;
+import Recursos.FileUser;
 import Recursos.Receta;
 import Recursos.RecetaRecetario;
 import Recursos.Recetario;
@@ -88,8 +89,11 @@ public class Modelo {
       
       }
    
-       protected  void  importarRecetario(File fichero) throws IOException {
-           cli.importarRecetario(converterByte(fichero));
+       protected  void  importarRecetario(File fichero, int idUser) throws IOException {
+           FileUser fU = new FileUser();
+           fU.setBytes(converterByte(fichero));
+           fU.setIdUser(idUser);
+           cli.importarRecetario(fU);
    
     }
       protected   byte[] exportarReceta(String nombreFichero, String nombreReceta)throws IOException {

@@ -6,6 +6,7 @@
 package Cliente;
 
 import Recursos.ConjuntoRecetario;
+import Recursos.FileUser;
 import Recursos.Receta;
 import Recursos.Recetario;
 import Recursos.Usuario;
@@ -36,15 +37,7 @@ public class Cliente {
         webTarget = client.target(BASE_URI).path("servicioRest");
     }
 
-    public Usuario validarUsuario( String usuarioNombre, String usuarioPass) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        
-            resource = resource.queryParam("usuarioNombre", usuarioNombre);
-            resource = resource.queryParam("usuarioPass", usuarioPass);
-        resource = resource.path("validarUsuario");
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Usuario.class);
-    }
-
+  
   //validar fichero
 
     public String validarFichero(Object requestEntity) throws ClientErrorException {
@@ -81,19 +74,21 @@ public class Cliente {
 
 
 
-    public void importarRecetario(byte[] bytes) throws ClientErrorException {
-        webTarget.path("importarRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(bytes, javax.ws.rs.core.MediaType.APPLICATION_XML));
+    public void importarRecetario(FileUser fU) throws ClientErrorException {
+        webTarget.path("importarRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(fU, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
     
     
     //usuario login
-//     public Usuario validarUsuario(Usuario usuario) throws ClientErrorException {
-//        WebTarget resource = webTarget;
-//        resource = resource.path("validarUsuario");
-//        resource = resource.queryParam("usuario", usuario);
-//        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Usuario.class);
-//    }
-//     
+  public Usuario validarUsuario( String usuarioNombre, String usuarioPass) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        
+            resource = resource.queryParam("usuarioNombre", usuarioNombre);
+            resource = resource.queryParam("usuarioPass", usuarioPass);
+        resource = resource.path("validarUsuario");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Usuario.class);
+    }
+
     public  ConjuntoRecetario obtenerRecetarios(Integer idUser) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("obtenerRecetarios");
