@@ -3,16 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servicio;
+package Cliente;
 
+
+import beans.ConjuntoRecetario;
+import beans.FileUser;
 import beans.Receta;
 import beans.Recetario;
 import beans.Usuario;
-import java.util.ArrayList;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 
 /**
  * Jersey REST client generated for REST resource:ServicioRestResource
@@ -37,12 +38,7 @@ public class Cliente {
         webTarget = client.target(BASE_URI).path("servicioRest");
     }
 
-   
-
   
-   
-
-
   //validar fichero
 
     public String validarFichero(Object requestEntity) throws ClientErrorException {
@@ -79,23 +75,26 @@ public class Cliente {
 
 
 
-    public void importarRecetario(byte[] bytes) throws ClientErrorException {
-        webTarget.path("importarRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(bytes, javax.ws.rs.core.MediaType.APPLICATION_XML));
+    public void importarRecetario(FileUser fU) throws ClientErrorException {
+        webTarget.path("importarRecetario").request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(fU, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
     
     
     //usuario login
-     public Integer validarUsuario(Usuario usuario) throws ClientErrorException {
+  public Usuario validarUsuario( String usuarioNombre, String usuarioPass) throws ClientErrorException {
         WebTarget resource = webTarget;
+        
+            resource = resource.queryParam("usuarioNombre", usuarioNombre);
+            resource = resource.queryParam("usuarioPass", usuarioPass);
         resource = resource.path("validarUsuario");
-        resource = resource.queryParam("usuario", usuario);
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Integer.class);
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Usuario.class);
     }
-    public  ArrayList<String>  obtenerRecetarios(Integer idUser) throws ClientErrorException {
+
+    public  ConjuntoRecetario obtenerRecetarios(Integer idUser) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("obtenerRecetarios");
         resource = resource.queryParam("idUser", idUser);
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get( ArrayList.class);
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(ConjuntoRecetario.class);
     }
   //obtener  
 public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
@@ -141,6 +140,7 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         webTarget.path("addReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
  
+    
     public void close() {
         client.close();
     }

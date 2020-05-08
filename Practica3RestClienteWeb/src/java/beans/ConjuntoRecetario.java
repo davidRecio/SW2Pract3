@@ -18,10 +18,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "ConjuntoRecetario")
-public class ConjuntoRecetario implements Serializable {
+public class ConjuntoRecetario implements Serializable{
       @XmlElement
    private int idUsuario;
-  @XmlElement
+        @XmlElement
    private ArrayList <Recetario> arrayRecetarios= new ArrayList();
 
     public int getIdUsuario() {
@@ -39,7 +39,6 @@ public class ConjuntoRecetario implements Serializable {
     public void setArrayRecetarios(ArrayList <Recetario> arrayRecetarios) {
         this.arrayRecetarios = arrayRecetarios;
     }
-
     
     
 }

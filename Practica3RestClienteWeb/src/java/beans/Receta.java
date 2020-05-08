@@ -14,8 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-//import servlets.Modelo;
- 
+
 /**
  *
  * @author darth
@@ -67,5 +66,6 @@ public class Receta implements Serializable {
     public void setDificultad(String dificultad) {
         this.dificultad = dificultad;
     }
+
  
 }

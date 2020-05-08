@@ -5,9 +5,10 @@
  */
 package servlet;
 
+import Funcionalidad.Modelo;
+import beans.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,7 +29,49 @@ public class LoginServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
+        String nombre = request.getParameter("nombre");
+        String password = request.getParameter("password");
+        String respuesta = "";
+        
+        Modelo modelo = new Modelo();
+        Usuario user = new Usuario();
+        
+            user.setNombre(nombre);
+            user.setPassword(password);
+            modelo.setIdUsuario(modelo.validarUsuario(user));
+            if(modelo.getIdUsuario() <0){
+                respuesta = "Usuario invalido";
+            
+            }else{
+ 
+               respuesta = "USuario valido";
+               
+            }
+//        if(Validar.ValidarUsuario(nombre, password)){
+//            RequestDispatcher validacion = request.getRequestDispatcher("Bienvenido"); //Ir al menu o algo asi
+//            validacion.forward(request, response);
+//        } else{
+//                out.println("Nombre de usuario o password incorrecto");
+//                RequestDispatcher error = request.getRequestDispatcher("index.html"); //o el index o error sql
+//                error.forward(request, response);
+//        }
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet LoginServlet</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>" + respuesta + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -42,7 +85,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
@@ -56,21 +99,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        
-        String nombre = request.getParameter("nombre");
-        String password = request.getParameter("password");
-        
-        if(Validar.ValidarUsuario(nombre, password)){
-            RequestDispatcher validacion = request.getRequestDispatcher("Bienvenido"); //Ir al menu o algo asi
-            validacion.forward(request, response);
-        } else{
-                out.println("Nombre de usuario o password incorrecto");
-                RequestDispatcher error = request.getRequestDispatcher("index.html"); //o el index o error sql
-                error.forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
