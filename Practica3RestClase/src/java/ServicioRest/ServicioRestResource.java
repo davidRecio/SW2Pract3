@@ -65,7 +65,6 @@ private AccesoBBDD ABD = new AccesoBBDD();
     public ServicioRestResource() {
         System.err.println(ruta);
         crearEntorno();
-     System.out.println("hhhhhh");
         ABD.init();
         
     }
@@ -182,16 +181,17 @@ private AccesoBBDD ABD = new AccesoBBDD();
 
    
     @GET
-    @Path("validarUsuario")//falta en el cliente
+    @Path("validarUsuario")
     @Produces("application/xml")
     public Integer validarUsuario(@QueryParam("usuario") Usuario usuario) {
         return ABD.validarUSer(usuario);
        
     }    
      @GET
-    @Path("obtenerRecetarios")//falta en el cliente
+    @Path("obtenerRecetarios")
     @Produces("application/xml")
-    public ArrayList<String> obtenerRecetarios(@QueryParam("idUser") Integer idUser) {
+    public ConjuntoRecetario obtenerRecetarios(@QueryParam("idUser") Integer idUser) {
+         System.out.println(ABD.ObtenerRecetarioConjRecetarios(idUser).getArrayRecetarios().get(0).getNombre());
        return ABD.ObtenerRecetarioConjRecetarios(idUser);
        
     }        

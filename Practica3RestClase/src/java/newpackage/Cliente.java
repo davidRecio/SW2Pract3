@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Cliente;
+package newpackage;
 
-import Recursos.ConjuntoRecetario;
 import Recursos.Receta;
 import Recursos.RecetaRecetario;
 import Recursos.Recetario;
@@ -93,12 +92,11 @@ public class Cliente {
         resource = resource.queryParam("usuario", usuario);
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Integer.class);
     }
-     
-    public  ConjuntoRecetario obtenerRecetarios(Integer idUser) throws ClientErrorException {
+    public  ArrayList<String>  obtenerRecetarios(Integer idUser) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("obtenerRecetarios");
         resource = resource.queryParam("idUser", idUser);
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(ConjuntoRecetario.class);
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get( ArrayList.class);
     }
   //obtener  
 public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {

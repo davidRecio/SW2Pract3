@@ -34,7 +34,12 @@ public class Modelo {
      }
      
       public  ArrayList<String>  obtenerRecetarios(Integer idUser){  
-      return cli.obtenerRecetarios(idUser);   
+        ArrayList <Recetario> recetarios=  cli.obtenerRecetarios(idUser).getArrayRecetarios();
+        ArrayList <String> nombre = new ArrayList<>();
+          for (Recetario col : recetarios) {
+              nombre.add(col.getNombre());
+          }
+      return nombre;   
       }
     //crear
     protected void crearRecetario(Recetario recetario){

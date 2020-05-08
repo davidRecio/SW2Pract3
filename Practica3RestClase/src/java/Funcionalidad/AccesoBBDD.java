@@ -5,6 +5,7 @@
  */
 package Funcionalidad;
 
+import Recursos.ConjuntoRecetario;
 import Recursos.Receta;
 import Recursos.Recetario;
 import Recursos.Usuario;
@@ -42,7 +43,8 @@ public class AccesoBBDD {
 
     public void crearRecetario(Recetario recetario, int idUser) {//añadir a conjRece
         ArrayList<String> queryBBDD = new ArrayList<>();
-        queryBBDD.add("insert into recetario value('" + recetario.getNombre() + "', '" + recetario.getPrecio() + "');");
+        int idRecetario = obtenerIdRecetarioNuevo();
+        queryBBDD.add("insert into recetario value(" +idRecetario+", '"+ recetario.getNombre() + "', '" + recetario.getPrecio() + "');");
         conexionBBDD(queryBBDD);
         addRelacionConjRecetarioRecetario(idUser, obtenerIdRecetario(recetario.getNombre()));
 
@@ -69,10 +71,12 @@ public class AccesoBBDD {
     //borrar
     public void borrarRecetario(Integer idUser, String nombreRecetario) {//falta revisarlo
         ArrayList<String> queryBBDD = new ArrayList<>();
+        ArrayList <String> nombreReceta= new ArrayList<>();
+        nombreReceta=obtenerNombreRecetaArray(obtenerIdRecetaArray(obtenerIdRecetario(nombreRecetario)));
         rmvRelacionConjRecetario(idUser, nombreRecetario);
         if (recetarioTieneUser(nombreRecetario).isEmpty()) {
 
-            for (String nombre : obtenerNombreRecetaArray(obtenerIdRecetaArray(obtenerIdRecetario(nombreRecetario)))) {
+            for (String nombre : nombreReceta) {
 
                 borrarReceta(nombre, nombreRecetario);
             }
@@ -191,8 +195,9 @@ public class AccesoBBDD {
             }
             return result;
     }
-    public ArrayList<String> ObtenerRecetarioConjRecetarios(Integer idUsuario) {
+    public ConjuntoRecetario ObtenerRecetarioConjRecetarios(Integer idUsuario) {
         ArrayList<String> recetarios = new ArrayList();
+        ArrayList<Recetario> recetario = new ArrayList();
         ArrayList<String> idRecetario = new ArrayList();
         try {
             String queryBBDD = "";
@@ -201,12 +206,12 @@ public class AccesoBBDD {
             abrirConexion();
             rS = createStatement.executeQuery(queryBBDD);
             while (rS.next()) {
-                idRecetario.add(rS.getString("id_recetario"));
+                idRecetario.add(rS.getString("recetario_id"));
 
             }
             cerrarConexion();
             for (int i = 0; i < idRecetario.size(); i++) {
-                queryBBDD = "select nombre_recetario from recetario where id_recetario = '" + idRecetario.get(i) + "';";
+                queryBBDD = "select nombre_recetario from recetario where recetario_id = '" + idRecetario.get(i) + "';";
                 abrirConexion();
                 rS = createStatement.executeQuery(queryBBDD);
                 if (rS.next()) {
@@ -218,7 +223,15 @@ public class AccesoBBDD {
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return recetarios;
+        for (String rece : recetarios) {
+            Recetario ret = new Recetario();
+            ret.setNombre(rece);
+                recetario.add(ret);
+            
+        }
+        ConjuntoRecetario conjuntoRecetario = new ConjuntoRecetario();
+        conjuntoRecetario.setArrayRecetarios(recetario);
+        return conjuntoRecetario;
     }
 
     private ArrayList<Usuario> leerUsuarios() {
@@ -313,7 +326,7 @@ public class AccesoBBDD {
         ArrayList<String> queryBBDD = new ArrayList<>();
       
         String idRecetario = obtenerIdRecetario(recetarioNombre);
-        queryBBDD.add("select * from conjunto_recetario where usuario_id=" +idUser + " and recetario_id =" + Integer.parseInt(idRecetario) + ";");
+        queryBBDD.add("delete from conjunto_recetario where usuario_id=" +idUser + " and recetario_id =" + Integer.parseInt(idRecetario) + ";");
         conexionBBDD(queryBBDD);
     }
 
@@ -321,7 +334,7 @@ public class AccesoBBDD {
         ArrayList<String> queryBBDD = new ArrayList<>();
         String idReceta = obtenerIdReceta(recetaNombre);
         String idRecetario = obtenerIdRecetario(recetarioNombre);
-        queryBBDD.add("select * from recetario_receta where recetario_id=" + Integer.parseInt(idRecetario) + " and receta_id =" + Integer.parseInt(idReceta) + ";");
+        queryBBDD.add("delete from recetario_receta where recetario_id=" + Integer.parseInt(idRecetario) + " and receta_id =" + Integer.parseInt(idReceta) + ";");
         conexionBBDD(queryBBDD);
     }
 
@@ -332,7 +345,7 @@ public class AccesoBBDD {
         queryBBDD.add("delete from receta_ingrediente where receta_id = " + Integer.parseInt(idReceta) + ";");
         conexionBBDD(queryBBDD);
 
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 //obtener id
 
@@ -434,7 +447,26 @@ public class AccesoBBDD {
         }
         return respuesta;
     }
+private int obtenerIdRecetarioNuevo() {
 
+        ArrayList<String> respuesta = new ArrayList();
+        int id = 0;
+        try {
+            String queryBBDD = "select recetario_id from recetario;";
+            abrirConexion();
+            rS = createStatement.executeQuery(queryBBDD);
+
+            while (rS.next()) {
+                respuesta.add(rS.getString("recetario_id"));
+            }
+            cerrarConexion();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        id = Integer.parseInt(respuesta.get(respuesta.size() - 1)) + 1;
+        return id;
+    }
     private int obtenerIdRecetaNueva() {
 
         ArrayList<String> respuesta = new ArrayList();
@@ -506,7 +538,7 @@ public class AccesoBBDD {
             rS = createStatement.executeQuery(queryBBDD);
 
             while (rS.next()) {
-                respuesta.add(Integer.parseInt(rS.getString("receta_id")));
+                respuesta.add(Integer.parseInt(rS.getString("recetario_id")));
             }
             cerrarConexion();
         } catch (SQLException ex) {

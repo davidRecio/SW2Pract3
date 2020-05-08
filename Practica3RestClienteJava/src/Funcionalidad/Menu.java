@@ -23,29 +23,29 @@ public class Menu {
     private String sCarpAct = System.getProperty("user.dir");
     private File carpeta = new File(sCarpAct);
     private String ruta = carpeta.getPath();
-    private int idUser=-1;//-1 si no tiene y -21 si no existe
+    private int idUser=2;//-1 si no tiene y -21 si no existe
     
     
     public void menu(){
-      System.out.println("---------------------------Login------------------------------------");
-           
-            System.out.println("Usuario:");
-            respuesta = scanner.nextLine();
-            System.out.println("Contraseña:");
-            respuesta2 = scanner.nextLine();
-            Usuario user = new Usuario();
-            user.setNombre(respuesta);
-            user.setPassword(respuesta2);
-            idUser=modelo.validarUsuario(user);
-            if(idUser<0){
-                System.err.println("Usuario invalido");
-            
-            }else{
-            menuInterno();
-            
-            }
+//      System.out.println("---------------------------Login------------------------------------");
+//           
+//            System.out.println("Usuario:");
+//            respuesta = scanner.nextLine();
+//            System.out.println("Contraseña:");
+//            respuesta2 = scanner.nextLine();
+//            Usuario user = new Usuario();
+//            user.setNombre(respuesta);
+//            user.setPassword(respuesta2);
+//            idUser=modelo.validarUsuario(user);
+//            if(idUser<0){
+//                System.err.println("Usuario invalido");
+//            
+//            }else{
+//            menuInterno();
+//            
+//            }
 
-    
+    menuInterno();
    
     }
     

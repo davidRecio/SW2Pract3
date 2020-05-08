@@ -5,6 +5,7 @@
  */
 package Recursos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -17,7 +18,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "ConjuntoRecetario")
-public class ConjuntoRecetario {
+public class ConjuntoRecetario implements Serializable {
       @XmlElement
    private int idUsuario;
   @XmlElement
