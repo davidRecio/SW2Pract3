@@ -5,10 +5,6 @@
  */
 package servicio;
 
-//import Recursos.Receta;
-//import Recursos.RecetaRecetario;
-//import Recursos.Recetario;
-//import Recursos.Usuario;
 import beans.Receta;
 import beans.Recetario;
 import beans.Usuario;
