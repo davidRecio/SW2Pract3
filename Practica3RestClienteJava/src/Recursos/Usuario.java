@@ -23,6 +23,8 @@ public class Usuario implements Serializable {
     private String nombre;
     @XmlElement()
     private String password;
+     @XmlElement()
+    private int id;
     
     public Usuario(){
         
@@ -54,6 +56,14 @@ public class Usuario implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
 

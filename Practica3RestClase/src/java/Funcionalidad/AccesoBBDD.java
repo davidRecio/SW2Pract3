@@ -191,15 +191,19 @@ public class AccesoBBDD {
     }
 
     //para autentificacion
-        public Integer validarUSer(Usuario usuario) {
+        public Usuario validarUSer(Usuario usuario) {
          int result=-21;
-            for (Usuario user : leerUsuarios()) {
+         ArrayList<Usuario> users = new ArrayList<>();
+         users= leerUsuarios();
+            for (Usuario user :users ) {
+              
                 if((user.getNombre().equals(usuario.getNombre()))&&(user.getPassword().equals(usuario.getPassword()))){
                 
                     result=Integer.parseInt(obtenerIdUser(user.getNombre()));
                 }
             }
-            return result;
+            usuario.setId(result);
+            return usuario;
     }
     public ConjuntoRecetario ObtenerRecetarioConjRecetarios(Integer idUsuario) {
         ArrayList<String> recetarios = new ArrayList();
@@ -244,7 +248,7 @@ public class AccesoBBDD {
         return conjuntoRecetario;
     }
 
-    private ArrayList<Usuario> leerUsuarios() {
+    public ArrayList<Usuario> leerUsuarios() {
         ArrayList<Usuario> usuario = new ArrayList();
         Usuario user = new Usuario();
         try {
@@ -256,12 +260,14 @@ public class AccesoBBDD {
             while (rS.next()) {
                 user.setNombre(rS.getString("nombre_usuario"));
                 user.setPassword(rS.getString("password_usuario"));
+                   usuario.add(user);
             }
             cerrarConexion();
 
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
+     
         return usuario;
     }
 
@@ -443,7 +449,7 @@ public class AccesoBBDD {
     private String obtenerIdUser(String userName) {
         String respuesta = "";
         try {
-            String queryBBDD = "select usuario_id from usuario where usuario_nombre = '" + userName + "';";
+            String queryBBDD = "select usuario_id from usuario where nombre_usuario = '" + userName + "';";
             abrirConexion();
             rS = createStatement.executeQuery(queryBBDD);
 
