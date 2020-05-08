@@ -1,1 +1,0 @@
-Crear conjunto recetario y le paso una receta y le asocio una receta al recetario y despues borrar el recetario
