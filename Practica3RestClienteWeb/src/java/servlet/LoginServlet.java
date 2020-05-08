@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
             
             }else{
  
-               respuesta = "USuario valido";
+               respuesta = "Usuario valido";
                
             }
 //        if(Validar.ValidarUsuario(nombre, password)){
@@ -67,7 +67,7 @@ public class LoginServlet extends HttpServlet {
             out.println("<title>Servlet LoginServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>" + respuesta + "</h1>");
+            out.println("<h1>" + modelo.validarUsuario(user) + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
