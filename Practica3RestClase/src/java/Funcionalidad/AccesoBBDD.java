@@ -44,9 +44,9 @@ public class AccesoBBDD {
     public void crearRecetario(Recetario recetario, int idUser) {//añadir a conjRece
         ArrayList<String> queryBBDD = new ArrayList<>();
         int idRecetario = obtenerIdRecetarioNuevo();
-        queryBBDD.add("insert into recetario value(" +idRecetario+", '"+ recetario.getNombre() + "', '" + recetario.getPrecio() + "');");
+        queryBBDD.add("insert into recetario value(" +idRecetario+", '"+ recetario.getNombre() + "', " + recetario.getPrecio() + ");");
         conexionBBDD(queryBBDD);
-        addRelacionConjRecetarioRecetario(idUser, obtenerIdRecetario(recetario.getNombre()));
+        addRelacionConjRecetarioRecetario(idUser, idRecetario);
 
     }
 
@@ -314,10 +314,10 @@ public class AccesoBBDD {
         conexionBBDD(queryBBDD);
     }
 
-    private void addRelacionConjRecetarioRecetario(int idUser, String nombreRecetario) {
+    private void addRelacionConjRecetarioRecetario(int idUser, int idRecetario) {
         ArrayList<String> queryBBDD = new ArrayList<>();
       
-        String idRecetario = obtenerIdRecetario(nombreRecetario);
+      
 
         queryBBDD.add("insert into conjunto_recetario value(" + idUser + ", " + idRecetario + ");");
 

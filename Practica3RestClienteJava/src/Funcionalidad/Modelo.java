@@ -7,6 +7,7 @@ package Funcionalidad;
 
 
 import Cliente.Cliente;
+import Recursos.ConjuntoRecetario;
 import Recursos.Receta;
 import Recursos.RecetaRecetario;
 import Recursos.Recetario;
@@ -42,8 +43,14 @@ public class Modelo {
       return nombre;   
       }
     //crear
-    protected void crearRecetario(Recetario recetario){
-    cli.crearRecetario(recetario);
+    protected void crearRecetario(Recetario rece, Integer idUser){
+       
+        ArrayList<Recetario> arrayRecetario = new ArrayList<>();
+        arrayRecetario.add(rece);
+        ConjuntoRecetario conjuntoRecetario = new ConjuntoRecetario();
+        conjuntoRecetario.setArrayRecetarios(arrayRecetario);
+        conjuntoRecetario.setIdUsuario(idUser);
+    cli.crearRecetario(conjuntoRecetario);
     }
      protected void crearReceta(Receta receta){
     cli.crearReceta(receta);

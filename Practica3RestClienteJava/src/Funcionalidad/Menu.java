@@ -102,7 +102,7 @@ public class Menu {
                                     respuesta = scanner.nextLine();
                                     System.out.println("Introduce el precio del recetario");
                                     respuesta2 = scanner.nextLine();
-                                    modelo.crearRecetario(modelo.crearRecetarioEsructura(respuesta, Double.parseDouble(respuesta2)));
+                                    modelo.crearRecetario(modelo.crearRecetarioEsructura(respuesta, Double.parseDouble(respuesta2)),idUser);
 
                                     break;
 
