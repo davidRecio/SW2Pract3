@@ -223,6 +223,10 @@ public class AccesoBBDD {
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
+        if(recetarios.isEmpty()){
+            recetarios.add("vacio");
+        
+        }
         for (String rece : recetarios) {
             Recetario ret = new Recetario();
             ret.setNombre(rece);

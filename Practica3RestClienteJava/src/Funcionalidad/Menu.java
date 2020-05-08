@@ -69,8 +69,13 @@ public class Menu {
                     break;
                 case 1:
                     System.out.println("Estos son los recetarios disponibles");
-                    for (String recetarios :  modelo.obtenerRecetarios(idUser)) {
+                    ArrayList <String> nombres=modelo.obtenerRecetarios(idUser);
+                    if(nombres.get(0).equals("vacio")){
+                        System.out.println("Este usuario no tiene recetarios");
+                    }else{
+                    for (String recetarios : nombres) {
                         System.out.println(recetarios);
+                    }
                     }
                     break;
                 case 2:

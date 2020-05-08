@@ -191,7 +191,7 @@ private AccesoBBDD ABD = new AccesoBBDD();
     @Path("obtenerRecetarios")
     @Produces("application/xml")
     public ConjuntoRecetario obtenerRecetarios(@QueryParam("idUser") Integer idUser) {
-         System.out.println(ABD.ObtenerRecetarioConjRecetarios(idUser).getArrayRecetarios().get(0).getNombre());
+        
        return ABD.ObtenerRecetarioConjRecetarios(idUser);
        
     }        
