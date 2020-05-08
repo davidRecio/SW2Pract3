@@ -73,6 +73,7 @@ private AccesoBBDD ABD = new AccesoBBDD();
      * Retrieves representation of an instance of ServicioRest.ServicioRestResource
      * @return an instance of java.lang.String
      */
+    //obtener
     @GET
     @Path("obtenerRecetario")
     @Produces("application/xml")
@@ -94,7 +95,7 @@ private AccesoBBDD ABD = new AccesoBBDD();
         return resultado;
 
     }
-
+//crear
 
     @POST
     @Path("crearRecetario")
@@ -178,13 +179,19 @@ private AccesoBBDD ABD = new AccesoBBDD();
           return "¿Es valido el xml con su xsd? " + vXSD.validarXSD(ruta + "/files/xsd/recetario.xsd",file );
         }
         
-
-   
-    @GET
+//login
+  
+   @GET
     @Path("validarUsuario")
     @Produces("application/xml")
-    public Integer validarUsuario(@QueryParam("usuario") Usuario usuario) {
-        return ABD.validarUSer(usuario);
+    public Usuario validarUsuario(@QueryParam("usuarioNombre") String usuarioNombre, @QueryParam("usuarioPass") String usuarioPass) {
+    
+      
+         Usuario user = new Usuario();
+         user.setNombre(usuarioNombre);
+         user.setPassword(usuarioPass);
+         
+       return  ABD.validarUSer(user);
        
     }    
      @GET

@@ -27,26 +27,27 @@ public class Menu {
     
     
     public void menu(){
-//      System.out.println("---------------------------Login------------------------------------");
-//           
-//            System.out.println("Usuario:");
-//            respuesta = scanner.nextLine();
-//            System.out.println("Contraseña:");
-//            respuesta2 = scanner.nextLine();
-//            Usuario user = new Usuario();
-//            user.setNombre(respuesta);
-//            user.setPassword(respuesta2);
-//            idUser=modelo.validarUsuario(user);
-//            if(idUser<0){
-//                System.err.println("Usuario invalido");
-//            
-//            }else{
-//            menuInterno();
-//            
-//            }
-
-    menuInterno();
-   
+      System.out.println("---------------------------Login------------------------------------");
+           
+            System.out.println("Usuario:");
+            respuesta = scanner.nextLine();
+            System.out.println("Contraseña:");
+            respuesta2 = scanner.nextLine();
+            Usuario user = new Usuario();
+            user.setNombre(respuesta);
+            user.setPassword(respuesta2);
+            idUser=modelo.validarUsuario(user);
+            if(idUser<0){
+                System.err.println("Usuario invalido");
+            
+            }else{
+ 
+            menuInterno();
+               
+            }
+//
+//    menuInterno();
+//   
     }
     
     private void menuInterno() {

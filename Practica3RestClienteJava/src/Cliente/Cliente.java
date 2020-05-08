@@ -7,14 +7,11 @@ package Cliente;
 
 import Recursos.ConjuntoRecetario;
 import Recursos.Receta;
-import Recursos.RecetaRecetario;
 import Recursos.Recetario;
 import Recursos.Usuario;
-import java.util.ArrayList;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 
 /**
  * Jersey REST client generated for REST resource:ServicioRestResource
@@ -39,11 +36,14 @@ public class Cliente {
         webTarget = client.target(BASE_URI).path("servicioRest");
     }
 
-   
-
-  
-   
-
+    public Usuario validarUsuario( String usuarioNombre, String usuarioPass) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        
+            resource = resource.queryParam("usuarioNombre", usuarioNombre);
+            resource = resource.queryParam("usuarioPass", usuarioPass);
+        resource = resource.path("validarUsuario");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Usuario.class);
+    }
 
   //validar fichero
 
@@ -87,13 +87,13 @@ public class Cliente {
     
     
     //usuario login
-     public Integer validarUsuario(Usuario usuario) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path("validarUsuario");
-        resource = resource.queryParam("usuario", usuario);
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Integer.class);
-    }
-     
+//     public Usuario validarUsuario(Usuario usuario) throws ClientErrorException {
+//        WebTarget resource = webTarget;
+//        resource = resource.path("validarUsuario");
+//        resource = resource.queryParam("usuario", usuario);
+//        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(Usuario.class);
+//    }
+//     
     public  ConjuntoRecetario obtenerRecetarios(Integer idUser) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("obtenerRecetarios");
@@ -144,6 +144,7 @@ public Receta  obtenerReceta(String nombreReceta) throws ClientErrorException {
         webTarget.path("addReceta").request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
  
+    
     public void close() {
         client.close();
     }

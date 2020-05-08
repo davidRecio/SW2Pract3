@@ -31,7 +31,7 @@ public class Modelo {
     
     //loguin
      public Integer validarUsuario(Usuario usuario){
-     return cli.validarUsuario(usuario);
+     return cli.validarUsuario(usuario.getNombre(), usuario.getPassword()).getId();
      }
      
       public  ArrayList<String>  obtenerRecetarios(Integer idUser){  
