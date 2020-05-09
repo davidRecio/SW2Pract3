@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Funcionalidad;
+package servlet;
 
 
 
@@ -57,7 +57,7 @@ public class Modelo {
         conjuntoRecetario.setIdUsuario(idUser);
     cli.crearRecetario(conjuntoRecetario);
     }
-     protected void crearReceta(Receta receta){
+     public void crearReceta(Receta receta){
     cli.crearReceta(receta);
     }
      //obtener
@@ -65,7 +65,7 @@ public class Modelo {
        
     return cli.obtenerRecetario(nombreRecetario);
     }
-     protected Receta obtenerReceta(String nombreReceta){
+     public Receta obtenerReceta(String nombreReceta){
        
     return cli.obtenerReceta(nombreReceta);
     }

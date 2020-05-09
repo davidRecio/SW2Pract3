@@ -5,7 +5,8 @@
  */
 package servlet;
 
-import beans.Usuario;
+
+import beans.Receta;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author darth
  */
-public class LoginServlet extends HttpServlet {
+public class LeerRecetaServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,41 +33,28 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        String nombre = request.getParameter("nombre");
-        String password = request.getParameter("password");
-        String respuesta = "";
-        
+        String nombre = request.getParameter("nombre"); 
+          
+          
         Modelo modelo = new Modelo();
-        Usuario user = new Usuario();
-        
-            user.setNombre(nombre);
-            user.setPassword(password);
-            modelo.setIdUsuario(modelo.validarUsuario(user));
-            if(modelo.getIdUsuario() <0){
-                respuesta = "Usuario invalido";
-            
-            }else{
- 
-               respuesta = "Usuario valido";
-               
-            }
-//        if(Validar.ValidarUsuario(nombre, password)){
-//            RequestDispatcher validacion = request.getRequestDispatcher("Bienvenido"); //Ir al menu o algo asi
-//            validacion.forward(request, response);
-//        } else{
-//                out.println("Nombre de usuario o password incorrecto");
-//                RequestDispatcher error = request.getRequestDispatcher("index.html"); //o el index o error sql
-//                error.forward(request, response);
-//        }
+           
+        Receta receta =  modelo.obtenerReceta(nombre);
+         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
+            out.println("<title>Servlet listarReceta</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>" + modelo.validarUsuario(user) + "</h1>");
+            out.println("<li>La receta es: " + receta.getNombre()+ "</li>");
+            out.println("<li>Su dificultad es:  " + receta.getDificultad()+ "</li>");
+            out.println("<li>Su precio es:  " + receta.getPrecio()+ "</li>");
+            out.println("<li>Sus ingredientes son :</li>");
+            for (String ele : receta.getIngrediente()) {
+                out.println("<li>" + ele+ "</li>");
+            }
             out.println("</body>");
             out.println("</html>");
         }
