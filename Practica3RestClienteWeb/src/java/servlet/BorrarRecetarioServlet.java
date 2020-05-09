@@ -45,7 +45,7 @@ public class BorrarRecetarioServlet extends HttpServlet {
             out.println("<title>Servlet BorrarRecetarioServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>El recetario con id de usuario:" + idUser+ "y nombre" + nombre + " fue borrada </h1>");
+            out.println("<h1>El recetario con id de usuario:" + idUser + "y nombre" + nombre + " fue borrada </h1>");
             out.println("</body>");
             out.println("</html>");
         }
