@@ -33,8 +33,8 @@ public class ValidarXSD extends HttpServlet {
              
         response.setContentType("text/html;charset=UTF-8");
           String rutaFichero = request.getParameter("fichero"); 
-        Modelo mod = new Modelo();
-        String valor=mod.validarXSD(new File(rutaFichero));
+        Modelo modelo = new Modelo();
+        String valor=modelo.validarXSD(new File(rutaFichero));
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");

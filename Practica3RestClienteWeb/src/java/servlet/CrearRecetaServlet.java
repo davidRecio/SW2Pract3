@@ -38,7 +38,7 @@ public class CrearRecetaServlet extends HttpServlet {
         String dificultad = request.getParameter("dificultad");
         String ingrediente =request.getParameter("ingrediente");
         Double precio = Double.parseDouble(request.getParameter("precio"));
-         
+        
         Modelo modelo = new Modelo();
         Receta receta = new Receta();
         
@@ -47,9 +47,10 @@ public class CrearRecetaServlet extends HttpServlet {
         String[] arrayIngrediente = ingrediente.split(delimitador);
         ArrayList<String> arrayListIngrediente = new ArrayList<>();
                
-        for (String elemento : arrayIngrediente) {
+        for (String elemento : arrayListIngrediente) {
             arrayListIngrediente.add(elemento);
         }
+        
         receta.setNombre(nombre);
         receta.setDificultad(dificultad);
         receta.setIngrediente(arrayListIngrediente);
@@ -57,7 +58,6 @@ public class CrearRecetaServlet extends HttpServlet {
         receta.setPrecio(precio);
          
          modelo.crearReceta(receta);
-         
                  
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
