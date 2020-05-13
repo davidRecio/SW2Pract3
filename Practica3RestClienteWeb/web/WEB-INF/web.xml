@@ -40,6 +40,10 @@
         <servlet-name>ValidarXSD</servlet-name>
         <servlet-class>servlet.ValidarXSD</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CrearRecetario</servlet-name>
+        <servlet-class>servlet.CrearRecetario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ValidarXSD</servlet-name>
         <url-pattern>/ValidarXSD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearRecetario</servlet-name>
+        <url-pattern>/CrearRecetario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

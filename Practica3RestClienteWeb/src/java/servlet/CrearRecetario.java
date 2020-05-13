@@ -5,7 +5,6 @@
  */
 package servlet;
 
-import beans.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author david
  */
-public class Login extends HttpServlet {
+public class CrearRecetario extends HttpServlet  {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,42 +27,19 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-         String nombre = request.getParameter("nombre");
-        String password = request.getParameter("password");
-        String respuesta = "";
-        Integer id;
-        Modelo modelo = new Modelo();
-        Usuario user = new Usuario();
-        
-            user.setNombre(nombre);
-            user.setPassword(password);
-           id=modelo.validarUsuario(user);
-           
-            if(id <0){
-                respuesta = "Usuario invalido";
-                
-            }else{
- 
-               respuesta = "Usuario valido";
-               modelo.crearCredenciales(id);
-               
-            }
+        Modelo mod= new Modelo();
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Login</title>");            
+            out.println("<title>Servlet CrearRecetario</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>" + respuesta + "</h1>");
-            out.println("<a href='ValidarXSD.html'>Valida los recetarios</font></a>");
-            out.println(" <h3><a href=\"crearRecetario.html\">Crear Recetario</font></a></h3>");
+            out.println("<h1>Servlet CrearRecetario at " + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
