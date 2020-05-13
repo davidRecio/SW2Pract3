@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>servlet.LoginServlet</servlet-class>
+        <servlet-class>servlet.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CrearRecataServlet</servlet-name>
@@ -29,16 +29,16 @@
         <servlet-class>servlet.BorrarRecetarioServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ValidarXSDServlet</servlet-name>
-        <servlet-class>servlet.ValidarXSDServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>servlet.LoginServlet</servlet-class>
+        <servlet-class>servlet.Login</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ValidarXSD</servlet-name>
         <servlet-class>servlet.ValidarXSD</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CrearRecetario</servlet-name>
+        <servlet-class>servlet.CrearRecetario</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -69,16 +69,16 @@
         <url-pattern>/BorrarRecetarioServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ValidarXSDServlet</servlet-name>
-        <url-pattern>/ValidarXSDServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ValidarXSD</servlet-name>
         <url-pattern>/ValidarXSD</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CrearRecetario</servlet-name>
+        <url-pattern>/CrearRecetario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

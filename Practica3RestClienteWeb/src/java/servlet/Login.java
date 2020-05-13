@@ -5,7 +5,7 @@
  */
 package servlet;
 
-import java.io.File;
+import beans.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author darth
+ * @author david
  */
-public class ValidarXSDServlet extends HttpServlet {
+public class Login extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,23 +28,42 @@ public class ValidarXSDServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         
-         String rutaFichero = request.getParameter("fichero"); 
+         String nombre = request.getParameter("nombre");
+        String password = request.getParameter("password");
+        String respuesta = "";
+        Integer id;
         Modelo modelo = new Modelo();
-        String validacion = modelo.validarXSD(new File(rutaFichero));
+        Usuario user = new Usuario();
         
+            user.setNombre(nombre);
+            user.setPassword(password);
+           id=modelo.validarUsuario(user);
+           
+            if(id <0){
+                respuesta = "Usuario invalido";
+                
+            }else{
+ 
+               respuesta = "Usuario valido";
+               modelo.crearCredenciales(id);
+               
+            }
+        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ValidarXSDServlet</title>");            
+            out.println("<title>Servlet Login</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>" + validacion + "</h1>");
+            out.println("<h1>" + respuesta + "</h1>");
+            out.println("<a href='ValidarXSD.html'>Valida los recetarios</font></a>");
+            out.println(" <h3><a href=\"crearRecetario.html\">Crear Recetario</font></a></h3>");
             out.println("</body>");
             out.println("</html>");
         }
