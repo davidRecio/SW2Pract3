@@ -49,7 +49,7 @@ public class Login extends HttpServlet {
             }else{
  
                respuesta = "Usuario valido";
-               modelo.crearCredenciales(id);
+              
                
             }
         response.setContentType("text/html;charset=UTF-8");
@@ -81,7 +81,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+              
     }
 
     /**
@@ -95,7 +95,12 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+         String parametro = request.getParameter("nombre");
+		if (parametro == null) {
+                         getServletContext().getRequestDispatcher("/login.html").forward(request, response);
+		}else{
+			getServletContext().getRequestDispatcher("/login.html").forward(request, response);
+		}
     }
 
     /**

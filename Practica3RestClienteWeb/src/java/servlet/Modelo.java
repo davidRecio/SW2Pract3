@@ -14,6 +14,7 @@ import beans.Receta;
 import beans.RecetaRecetario;
 import beans.Recetario;
 import beans.Usuario;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 
 import java.io.ByteArrayOutputStream;
@@ -21,6 +22,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class Modelo {
 private File carpeta = new File(sCarpAct);
 private String ruta = carpeta.getPath();
     
-   private  Integer idUsuario;
+
     //loguin
      public Integer validarUsuario(Usuario usuario){
      return cli.validarUsuario(usuario.getNombre(), usuario.getPassword()).getId();
@@ -183,71 +185,9 @@ private String ruta = carpeta.getPath();
         }
     }
 
-  
-    void crearCredenciales(Integer id) {
-      
-    }
+  //necesarios
 
- private void crearRecetario1() {
 
-        File archivo = new File(ruta + "/files/xml/recetario1.xml");
-        BufferedWriter bw = null;
-        if (archivo.exists() != true) {
-
-            try {
-                bw = new BufferedWriter(new FileWriter(archivo));
-            } catch (IOException ex) {
-                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            try {
-                bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-                        + "<Recetario>\n"
-                        + "    <nombre>Recetario1</nombre>\n"
-                        + "    <recetas>\n"
-                        + "        <recetas dificultad=\"Dificil\">\n"
-                        + "            <nombre>Lasanna</nombre>\n"
-                        + "            <ingrediente>\n"
-                        + "                <ingrediente>Tomate</ingrediente>\n"
-                        + "                <ingrediente>Carne</ingrediente>\n"
-                        + "                <ingrediente>Pasta</ingrediente>\n"
-                        + "                <ingrediente>Queso</ingrediente>\n"
-                        + "                <ingrediente>Aceite</ingrediente>\n"
-                        + "                <ingrediente>Sal</ingrediente>\n"
-                        + "                <ingrediente>Bechamel</ingrediente>\n"
-                        + "            </ingrediente>\n"
-                        + "            <precio>12.0</precio>\n"
-                        + "        </recetas>\n"
-                        + "        <recetas dificultad=\"Facil\">\n"
-                        + "            <nombre>Sandwich de pavo</nombre>\n"
-                        + "            <ingrediente>\n"
-                        + "                <ingrediente>Pavo</ingrediente>\n"
-                        + "                <ingrediente>Pan</ingrediente>\n"
-                        + "            </ingrediente>\n"
-                        + "            <precio>1.5</precio>\n"
-                        + "        </recetas>\n"
-                        + "        <recetas dificultad=\"Facil\">\n"
-                        + "            <nombre>Filete de ternera</nombre>\n"
-                        + "            <ingrediente>\n"
-                        + "                <ingrediente>Carne de ternera</ingrediente>\n"
-                        + "                <ingrediente>Aceite</ingrediente>\n"
-                        + "                <ingrediente>Sal</ingrediente>\n"
-                        + "            </ingrediente>\n"
-                        + "            <precio>1.0</precio>\n"
-                        + "        </recetas>\n"
-                        + "    </recetas>\n"
-                        + "    <precio>20.0</precio>\n"
-                        + "</Recetario>");
-            } catch (IOException ex) {
-                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-            try {
-                bw.close();
-            } catch (IOException ex) {
-                Logger.getLogger(Modelo.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
 
   
 

@@ -8,6 +8,7 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author david
  */
 public class CrearRecetario extends HttpServlet  {
-
+String user;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,6 +31,7 @@ public class CrearRecetario extends HttpServlet  {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Modelo mod= new Modelo();
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -39,7 +41,7 @@ public class CrearRecetario extends HttpServlet  {
             out.println("<title>Servlet CrearRecetario</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CrearRecetario at " + "</h1>");
+            out.println("<h1>Servlet CrearRecetario at " +request.getParameter("nombre")+ "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,7 +59,12 @@ public class CrearRecetario extends HttpServlet  {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       		String parametro = request.getParameter("nombre");
+		if (parametro == null) {
+                         getServletContext().getRequestDispatcher("/login.html").forward(request, response);
+		}else{
+			getServletContext().getRequestDispatcher("/login.html").forward(request, response);
+		}
     }
 
     /**
