@@ -35,16 +35,16 @@ public class Login extends HttpServlet {
          String nombre = request.getParameter("nombre");
         String password = request.getParameter("password");
         String respuesta = "";
-        
+        Integer id;
         Modelo modelo = new Modelo();
         Usuario user = new Usuario();
         
             user.setNombre(nombre);
             user.setPassword(password);
-            modelo.setIdUsuario(modelo.validarUsuario(user));
-            if(modelo.getIdUsuario() <0){
+           id=modelo.validarUsuario(user);
+            if(id <0){
                 respuesta = "Usuario invalido";
-            
+                
             }else{
  
                respuesta = "Usuario valido";
@@ -60,6 +60,7 @@ public class Login extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>" + respuesta + "</h1>");
+            out.println("<a href='ValidarXSD.html'>Valida los recetarios</font></a>");
             out.println("</body>");
             out.println("</html>");
         }
