@@ -36,7 +36,7 @@ public class BorrarRecetaServlet extends HttpServlet {
         
         Modelo modelo = new Modelo();
           
-        modelo.rmvReceta(nombreReceta, nombreRecetario);
+        //modelo.rmvReceta(nombreReceta, nombreRecetario); //mirar esto aqui falla
           
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -46,7 +46,7 @@ public class BorrarRecetaServlet extends HttpServlet {
             out.println("<title>Servlet BorrarRecetaServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>La receta con el nombre: " + nombreReceta + " fue borrada del recetario:" + nombreRecetario + "</h1>");
+            out.println("<h1> La receta con el nombre: " + nombreReceta + " fue borrada del recetario:" + nombreRecetario + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
