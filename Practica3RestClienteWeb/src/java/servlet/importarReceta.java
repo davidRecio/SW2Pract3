@@ -30,14 +30,16 @@ public class importarReceta extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         
         String rutaFichero = request.getParameter("fichero"); 
         
         
-        Modelo modelo = new Modelo();
-        
-        //modelo.importarReceta(new File(rutaFichero)); //AQUI FALLA
+    
+         
+        Modelo mod = new Modelo();
+       mod.importarReceta(new File(rutaFichero)); 
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
