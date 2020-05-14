@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author darth
  */
-public class LeerRecetarioServlet extends HttpServlet {
+public class LeerRecetario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

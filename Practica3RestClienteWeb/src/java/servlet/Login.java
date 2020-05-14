@@ -56,7 +56,25 @@ public class Login extends HttpServlet {
               
                
             }
-        response.setContentType("text/html;charset=UTF-8");
+            if(respuesta.equals("Usuario valido")){
+                 response.setContentType("text/html;charset=UTF-8");
+                    try (PrintWriter out = response.getWriter()) {
+                        /* TODO output your page here. You may use following sample code. */
+                        out.println("<!DOCTYPE html>");
+                        out.println("<html>");
+                        out.println("<head>");
+                        out.println("<title>Servlet Login</title>");            
+                        out.println("</head>");
+                        out.println("<body>");
+                        out.println("<h1>" + respuesta + "</h1>");
+                        out.println("<a href='ValidarXSD.html'>Valida los recetarios</font></a>");
+                        out.println("<a href=\"menuReceta.html\">Menú Receta</font></a>");
+                        out.println("<a href=\"menuRecetario.html\">Menú Recetario</font></a>");
+                        out.println("</body>");
+                        out.println("</html>");
+                    }
+            }else{
+             response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -66,12 +84,12 @@ public class Login extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>" + respuesta + "</h1>");
-            out.println("<a href='ValidarXSD.html'>Valida los recetarios</font></a>");
-            out.println("<a href=\"menuReceta.html\">Menú Receta</font></a>");
-            out.println("<a href=\"menuRecetario.html\">Menú Recetario</font></a>");
             out.println("</body>");
             out.println("</html>");
         }
+            
+            }
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

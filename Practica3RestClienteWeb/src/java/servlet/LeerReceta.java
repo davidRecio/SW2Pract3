@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -9,7 +9,6 @@ package servlet;
 import beans.Receta;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author darth
  */
-public class CrearRecetaServlet extends HttpServlet {
+public class LeerReceta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,39 +34,27 @@ public class CrearRecetaServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String nombre = request.getParameter("nombre"); 
-        String dificultad = request.getParameter("dificultad");
-        String ingrediente =request.getParameter("ingrediente");
-        Double precio = Double.parseDouble(request.getParameter("precio"));
-        
+          
+          
         Modelo modelo = new Modelo();
-        Receta receta = new Receta();
-        
-        
-        String delimitador= "[ .,;?!¡¿\'\"\\[\\]]+";
-        String[] arrayIngrediente = ingrediente.split(delimitador);
-        ArrayList<String> arrayListIngrediente = new ArrayList<>();
-               
-        for (String elemento : arrayListIngrediente) {
-            arrayListIngrediente.add(elemento);
-        }
-        
-        receta.setNombre(nombre);
-        receta.setDificultad(dificultad);
-        receta.setIngrediente(arrayListIngrediente);
-        
-        receta.setPrecio(precio);
+           
+        Receta receta =  modelo.obtenerReceta(nombre);
          
-         modelo.crearReceta(receta);
-                 
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CrearRecataServlet</title>");            
+            out.println("<title>Servlet listarReceta</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>La receta  " +modelo.obtenerReceta(nombre).getNombre()+" fue creada </h1>");
+            out.println("<li>La receta es: " + receta.getNombre()+ "</li>");
+            out.println("<li>Su dificultad es:  " + receta.getDificultad()+ "</li>");
+            out.println("<li>Su precio es:  " + receta.getPrecio()+ "</li>");
+            out.println("<li>Sus ingredientes son :</li>");
+            for (String ele : receta.getIngrediente()) {
+                out.println("<li>" + ele+ "</li>");
+            }
             out.println("</body>");
             out.println("</html>");
         }

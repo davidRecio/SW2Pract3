@@ -5,6 +5,7 @@
  */
 package servlet;
 
+
 import beans.Receta;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,15 +34,40 @@ public class CrearReceta extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
+        String nombre = request.getParameter("nombre"); 
+        String dificultad = request.getParameter("dificultad");
+        String ingrediente =request.getParameter("ingrediente");
+        Double precio = Double.parseDouble(request.getParameter("precio"));
+        
+        Modelo modelo = new Modelo();
+        Receta receta = new Receta();
+        
+        
+        String delimitador= "[ .,;?!¡¿\'\"\\[\\]]+";
+        String[] arrayIngrediente = ingrediente.split(delimitador);
+        ArrayList<String> arrayListIngrediente = new ArrayList<>();
+               
+        for (String elemento : arrayListIngrediente) {
+            arrayListIngrediente.add(elemento);
+        }
+        
+        receta.setNombre(nombre);
+        receta.setDificultad(dificultad);
+        receta.setIngrediente(arrayListIngrediente);
+        
+        receta.setPrecio(precio);
+         
+         //modelo.crearReceta(receta);
+                 
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CrearReceta</title>");            
+            out.println("<title>Servlet CrearRecataServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CrearReceta at " + request.getContextPath() + "</h1>");
+            out.println("<h1>La receta  " +receta.getNombre()+" fue creada </h1>");
             out.println("</body>");
             out.println("</html>");
         }

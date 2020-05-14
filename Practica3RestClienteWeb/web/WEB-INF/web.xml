@@ -5,20 +5,16 @@
         <servlet-class>servlet.Login</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CrearRecataServlet</servlet-name>
-        <servlet-class>servlet.CrearRecetaServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LeerRecetaServlet</servlet-name>
-        <servlet-class>servlet.LeerRecetaServlet</servlet-class>
+        <servlet-name>LeerReceta</servlet-name>
+        <servlet-class>servlet.LeerReceta</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BorrarRecetaServlet</servlet-name>
         <servlet-class>servlet.BorrarRecetaServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LeerRecetarioServlet</servlet-name>
-        <servlet-class>servlet.LeerRecetarioServlet</servlet-class>
+        <servlet-name>LeerRecetario</servlet-name>
+        <servlet-class>servlet.LeerRecetario</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>BorrarRecetarioServlet</servlet-name>
@@ -36,37 +32,29 @@
         <servlet-name>CrearRecetario</servlet-name>
         <servlet-class>servlet.CrearRecetario</servlet-class>
     </servlet>
-    <servlet>
+      <servlet>
         <servlet-name>CrearReceta</servlet-name>
         <servlet-class>servlet.CrearReceta</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CrearRecataServlet</servlet-name>
-        <url-pattern>/CrearRecataServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LeerRecetaServlet</servlet-name>
-        <url-pattern>/LeerRecetaServlet</url-pattern>
+        <servlet-name>LeerReceta</servlet-name>
+        <url-pattern>/LeerReceta</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BorrarRecetaServlet</servlet-name>
         <url-pattern>/BorrarRecetaServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LeerRecetarioServlet</servlet-name>
-        <url-pattern>/LeerRecetarioServlet</url-pattern>
+        <servlet-name>LeerRecetario</servlet-name>
+        <url-pattern>/LeerRecetario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BorrarRecetarioServlet</servlet-name>
         <url-pattern>/BorrarRecetarioServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/Login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ValidarXSD</servlet-name>
@@ -76,7 +64,7 @@
         <servlet-name>CrearRecetario</servlet-name>
         <url-pattern>/CrearRecetario</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+        <servlet-mapping>
         <servlet-name>CrearReceta</servlet-name>
         <url-pattern>/CrearReceta</url-pattern>
     </servlet-mapping>
