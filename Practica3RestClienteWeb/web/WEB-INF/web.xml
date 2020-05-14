@@ -21,10 +21,6 @@
         <servlet-class>servlet.LeerRecetarioServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CrearREcetarioServlet</servlet-name>
-        <servlet-class>servlet.CrearRecetarioServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>BorrarRecetarioServlet</servlet-name>
         <servlet-class>servlet.BorrarRecetarioServlet</servlet-class>
     </servlet>
@@ -63,10 +59,6 @@
     <servlet-mapping>
         <servlet-name>LeerRecetarioServlet</servlet-name>
         <url-pattern>/LeerRecetarioServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CrearREcetarioServlet</servlet-name>
-        <url-pattern>/CrearREcetarioServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BorrarRecetarioServlet</servlet-name>

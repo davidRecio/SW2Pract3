@@ -7,13 +7,20 @@ and open the template in the editor.
 <html>
     <head>
         <title>Listar Recetarios</title>
-        <meta charset="ISO-8859-1">
+    
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <h1>Listado de recetarios</h1>
         <form method="get" action="/Practica3RestClienteWeb/LeerRecetarioServlet" name="LeerRecetario">
-            <h2>Aqui se muestran las recetas del recetario</h2>        
+           <table border = "0">
+                <tr>
+                    <td> Nombre:</td>
+                    <td><input name="nombre" type ="text"/></td>
+                </tr>
+                
+               
+                </table>       
             <button>Listar</button>
         </form>
     </body>

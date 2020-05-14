@@ -7,6 +7,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author david
  */
 public class CrearRecetario extends HttpServlet  {
-String user;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -30,8 +31,18 @@ String user;
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Modelo mod= new Modelo();
         
+        Modelo modelo= new Modelo();
+         String nombre = request.getParameter("nombre2"); 
+        Double precio = Double.parseDouble(request.getParameter("precio"));
+          ServletContext contexto=request.getServletContext();
+          Integer id =Integer.parseInt(contexto.getInitParameter("id"));
+          
+          
+       
+          
+         modelo.crearRecetario(modelo.crearRecetarioEsructura(nombre,precio),id);
+           
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -41,7 +52,7 @@ String user;
             out.println("<title>Servlet CrearRecetario</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CrearRecetario at " +request.getParameter("nombre")+ "</h1>");
+             out.println("<h1>El recetario  " + nombre + " está creado </h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,12 +70,7 @@ String user;
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       		String parametro = request.getParameter("nombre");
-		if (parametro == null) {
-                         getServletContext().getRequestDispatcher("/login.html").forward(request, response);
-		}else{
-			getServletContext().getRequestDispatcher("/login.html").forward(request, response);
-		}
+       		 processRequest(request, response);
     }
 
     /**

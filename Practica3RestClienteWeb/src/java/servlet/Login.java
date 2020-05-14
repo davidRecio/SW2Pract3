@@ -6,8 +6,11 @@
 package servlet;
 
 import beans.Usuario;
+import static com.sun.faces.facelets.util.Path.context;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +34,7 @@ public class Login extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+//        ServletContext context = null ;
          String nombre = request.getParameter("nombre");
         String password = request.getParameter("password");
         String respuesta = "";
@@ -47,7 +50,8 @@ public class Login extends HttpServlet {
                 respuesta = "Usuario invalido";
                 
             }else{
- 
+               ServletContext contexto=request.getServletContext();
+               contexto.setInitParameter("id", id.toString());
                respuesta = "Usuario valido";
               
                
@@ -63,7 +67,8 @@ public class Login extends HttpServlet {
             out.println("<body>");
             out.println("<h1>" + respuesta + "</h1>");
             out.println("<a href='ValidarXSD.html'>Valida los recetarios</font></a>");
-            out.println(" <h3><a href=\"crearRecetario.html\">Crear Recetario</font></a></h3>");
+            out.println("<a href=\"menuReceta.html\">Menú Receta</font></a>");
+            out.println("<a href=\"menuRecetario.html\">Menú Recetario</font></a>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -81,7 +86,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-              
+        processRequest(request, response);
     }
 
     /**
@@ -95,12 +100,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String parametro = request.getParameter("nombre");
-		if (parametro == null) {
-                         getServletContext().getRequestDispatcher("/login.html").forward(request, response);
-		}else{
-			getServletContext().getRequestDispatcher("/login.html").forward(request, response);
-		}
+        processRequest(request, response);
     }
 
     /**
