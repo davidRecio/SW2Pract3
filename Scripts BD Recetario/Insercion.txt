@@ -1,9 +1,9 @@
 INTRODUCIR USUARIOS
-insert into usuario value(1, 'Carlos Ambrosio', '1542396a');
-insert into usuario value(2, 'David Recio', '4239874z');
-insert into usuario value(3, 'Selena Gomez', '6497221v');
-insert into usuario value(4, 'Pablo Andrade', '5438511y');
-insert into usuario value(5, 'Victor Valdes', '9247239u');
+insert into usuario value(1, 'Carlos', 'c');
+insert into usuario value(2, 'David', 'd');
+insert into usuario value(3, 'prueba1', 'prueba');
+insert into usuario value(4, 'prueba2', 'prueba');
+insert into usuario value(5, 'prueba3', 'prueba');
 
 delete from ususario where usuario = 'Victor Valdes';
 
