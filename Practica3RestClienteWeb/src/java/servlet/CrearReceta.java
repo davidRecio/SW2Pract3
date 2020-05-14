@@ -43,12 +43,13 @@ public class CrearReceta extends HttpServlet {
         Receta receta = new Receta();
         
         
-        String delimitador= "[ .,;?!¡¿\'\"\\[\\]]+";
+        String delimitador= ",";
         String[] arrayIngrediente = ingrediente.split(delimitador);
         ArrayList<String> arrayListIngrediente = new ArrayList<>();
                
-        for (String elemento : arrayListIngrediente) {
+        for (String elemento : arrayIngrediente) {
             arrayListIngrediente.add(elemento);
+            System.out.println("elemento");
         }
         
         receta.setNombre(nombre);
@@ -57,7 +58,7 @@ public class CrearReceta extends HttpServlet {
         
         receta.setPrecio(precio);
          
-         //modelo.crearReceta(receta);
+        modelo.crearReceta(receta);
                  
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
