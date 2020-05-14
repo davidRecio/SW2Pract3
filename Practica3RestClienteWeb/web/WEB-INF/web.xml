@@ -32,9 +32,21 @@
         <servlet-name>CrearRecetario</servlet-name>
         <servlet-class>servlet.CrearRecetario</servlet-class>
     </servlet>
-      <servlet>
+    <servlet>
         <servlet-name>CrearReceta</servlet-name>
         <servlet-class>servlet.CrearReceta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>importarReceta</servlet-name>
+        <servlet-class>servlet.importarReceta</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>importarRecetario</servlet-name>
+        <servlet-class>servlet.importarRecetario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>annadirReceta</servlet-name>
+        <servlet-class>servlet.annadirReceta</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -64,9 +76,21 @@
         <servlet-name>CrearRecetario</servlet-name>
         <url-pattern>/CrearRecetario</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>CrearReceta</servlet-name>
         <url-pattern>/CrearReceta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>importarReceta</servlet-name>
+        <url-pattern>/importarReceta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>importarRecetario</servlet-name>
+        <url-pattern>/importarRecetario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>annadirReceta</servlet-name>
+        <url-pattern>/annadirReceta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
