@@ -9,6 +9,7 @@ package servlet;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +35,13 @@ public class importarRecetario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         String rutaFichero = request.getParameter("fichero"); 
-        Integer idUser = Integer.parseInt(request.getParameter("idUsuario"));
+        ServletContext contexto=request.getServletContext();
+          Integer id =Integer.parseInt(contexto.getInitParameter("id"));
         
-        // ¿Hay que usar el fileUser? falta añadir file new file???
-        //Modelo modelo = new Modelo();
+       
+        Modelo modelo = new Modelo();
         
-        //modelo.importarRecetario(new File(rutaFichero), idUser); // aqui falla tambien hay que mirar
+        modelo.importarRecetario(new File(rutaFichero), id); 
        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */

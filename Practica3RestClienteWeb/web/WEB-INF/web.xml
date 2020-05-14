@@ -53,6 +53,10 @@
         <servlet-name>exportReceta</servlet-name>
         <servlet-class>servlet.exportReceta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>exportRecetario</servlet-name>
+        <servlet-class>servlet.exportRecetario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -102,10 +106,14 @@
         <servlet-name>exportReceta</servlet-name>
         <url-pattern>/exportReceta</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exportRecetario</servlet-name>
+        <url-pattern>/exportRecetario</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
+
     </web-app>
