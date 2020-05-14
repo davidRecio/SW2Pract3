@@ -49,6 +49,10 @@
         <servlet-name>annadirReceta</servlet-name>
         <servlet-class>servlet.annadirReceta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>exportReceta</servlet-name>
+        <servlet-class>servlet.exportReceta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -94,11 +98,14 @@
         <servlet-name>annadirReceta</servlet-name>
         <url-pattern>/annadirReceta</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>exportReceta</servlet-name>
+        <url-pattern>/exportReceta</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
     
     </web-app>
