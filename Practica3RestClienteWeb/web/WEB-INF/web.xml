@@ -13,8 +13,8 @@
         <servlet-class>servlet.LeerRecetario</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>BorrarRecetaServlet</servlet-name>
-        <servlet-class>servlet.BorrarRecetaServlet</servlet-class>
+        <servlet-name>BorrarReceta</servlet-name>
+        <servlet-class>servlet.BorrarReceta</servlet-class>
     </servlet>
     
     <servlet>
@@ -62,8 +62,8 @@
         <url-pattern>/LeerRecetario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>BorrarRecetaServlet</servlet-name>
-        <url-pattern>/BorrarRecetaServlet</url-pattern>
+        <servlet-name>BorrarReceta</servlet-name>
+        <url-pattern>/BorrarReceta</url-pattern>
     </servlet-mapping>
    
     <servlet-mapping>

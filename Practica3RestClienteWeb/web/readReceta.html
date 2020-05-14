@@ -6,15 +6,14 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Borrar Receta</title>
-        <meta charset="ISO-8859-1">
+        <title>Listar Recetas</title>
+    
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Borrado de recetas</h1>
-        <form method="post" action="/Practica3RestClienteWeb/BorrarRecetaServlet" name="BorrarReceta">
-                Nombre Receta: <input name="nombre"><br>
-                Nombre Recetario: <input name="nombre"><br>
+        <h1>Listado de recetas</h1>
+        <form method="get" action="/Practica3RestClienteWeb/LeerReceta" name="LeerReceta">
+                Nombre: <input name="nombre"><br>          
             <button>Enviar</button>
         </form>
     </body>
