@@ -67,7 +67,7 @@ public class Login extends HttpServlet {
                         out.println("</head>");
                         out.println("<body>");
                         out.println("<h1>" + respuesta + "</h1>");
-                        out.println("<a href='ValidarXSD.html'>Valida los recetarios</font></a>");
+                        out.println("<a href=\"validarXSD.html\">Valida los recetarios</font></a>");
                         out.println("<a href=\"menuReceta.html\">Menú Receta</font></a>");
                         out.println("<a href=\"menuRecetario.html\">Menú Recetario</font></a>");
                         out.println("</body>");
