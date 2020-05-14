@@ -196,9 +196,9 @@ public class AccesoBBDD {
          ArrayList<Usuario> users = new ArrayList<>();
          users= leerUsuarios();
             for (Usuario user :users ) {
-              
+                //System.err.println(user.getNombre());
                 if((user.getNombre().equals(usuario.getNombre()))&&(user.getPassword().equals(usuario.getPassword()))){
-                
+                  
                     result=Integer.parseInt(obtenerIdUser(user.getNombre()));
                 }
             }
@@ -250,24 +250,43 @@ public class AccesoBBDD {
 
     public ArrayList<Usuario> leerUsuarios() {
         ArrayList<Usuario> usuario = new ArrayList();
-        Usuario user = new Usuario();
+//        String[] arrayNames = new String[1000];
+//        String[] arrayPass = new String[1000];
         try {
             String queryBBDD = "";
-
+            int i=0;
             queryBBDD = "select * from usuario;";
             abrirConexion();
             rS = createStatement.executeQuery(queryBBDD);
+            
             while (rS.next()) {
-                user.setNombre(rS.getString("nombre_usuario"));
-                user.setPassword(rS.getString("password_usuario"));
-                   usuario.add(user);
+                i++;
             }
+            
+            cerrarConexion();
+            for (int j = 0; j < i; j++) {
+                usuario.add(new Usuario());
+            }
+            i=0;
+            abrirConexion();
+            rS = createStatement.executeQuery(queryBBDD);
+            
+            while (rS.next()) {
+               
+                usuario.get(i).setNombre(rS.getString("nombre_usuario"));
+                usuario.get(i).setPassword(rS.getString("password_usuario"));
+                   
+        
+                   i++;
+            }
+            
             cerrarConexion();
 
         } catch (SQLException ex) {
             Logger.getLogger(AccesoBBDD.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
+         
+                   
         return usuario;
     }
 
