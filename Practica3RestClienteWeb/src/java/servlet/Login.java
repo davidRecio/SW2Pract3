@@ -53,7 +53,8 @@ public class Login extends HttpServlet {
                ServletContext contexto=request.getServletContext();
                contexto.setInitParameter("id", id.toString());
                respuesta = "Usuario valido";
-              
+             
+               
                
             }
             if(respuesta.equals("Usuario valido")){
@@ -70,6 +71,10 @@ public class Login extends HttpServlet {
                         out.println("<a href=\"validarXSD.html\">Valida los recetarios</font></a>");
                         out.println("<a href=\"menuReceta.html\">Menú Receta</font></a>");
                         out.println("<a href=\"menuRecetario.html\">Menú Recetario</font></a>");
+                        out.println("<h1> Recetarios disponibles</h1>"); 
+                         for (String name :  modelo.obtenerRecetarios(id)) {
+                            out.println("<h3>"+name+"</h3>"); 
+                          }
                         out.println("</body>");
                         out.println("</html>");
                     }
