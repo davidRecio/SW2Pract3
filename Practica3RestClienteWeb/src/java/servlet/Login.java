@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
             }else{
                ServletContext contexto=request.getServletContext();
                contexto.setInitParameter("id", id.toString());
-               respuesta = "Usuario valido";
+               respuesta = "Bienvenido " + nombre;
              
                
                
@@ -68,9 +68,9 @@ public class Login extends HttpServlet {
                         out.println("</head>");
                         out.println("<body>");
                         out.println("<h1>" + respuesta + "</h1>");
-                        out.println("<a href=\"validarXSD.html\">Valida los recetarios</font></a>");
-                        out.println("<a href=\"menuReceta.html\">Menú Receta</font></a>");
-                        out.println("<a href=\"menuRecetario.html\">Menú Recetario</font></a>");
+                        out.println("<a href=\"validarXSD.html\">Valida los recetarios\t</font></a>");
+                        out.println("<a href=\"menuReceta.html\">Menú Receta\t</font></a>");
+                        out.println("<a href=\"menuRecetario.html\">Menú Recetario\t</font></a>");
                         out.println("<h1> Recetarios disponibles</h1>"); 
                          for (String name :  modelo.obtenerRecetarios(id)) {
                             out.println("<h3>"+name+"</h3>"); 
