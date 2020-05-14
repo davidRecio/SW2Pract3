@@ -7,6 +7,7 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author darth
  */
-public class BorrarRecetarioServlet extends HttpServlet {
+public class BorrarRecetario extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -27,16 +28,19 @@ public class BorrarRecetarioServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    //  ServletContext child servlet implents  ServletContext
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        Integer idUser = Integer.parseInt(request.getParameter("idUser"));
+       
         String nombre = request.getParameter("nombre");
-         
+         ServletContext contexto=request.getServletContext();
+          Integer id =Integer.parseInt(contexto.getInitParameter("id")); 
         Modelo modelo = new Modelo();
           
-          modelo.rmvRecetario(idUser, nombre);
+          modelo.rmvRecetario(id, nombre);
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -45,7 +49,7 @@ public class BorrarRecetarioServlet extends HttpServlet {
             out.println("<title>Servlet BorrarRecetarioServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>El recetario con id de usuario:" + idUser + "y nombre" + nombre + " fue borrada </h1>");
+            out.println("<h1>El recetario " + nombre + " fue borrado </h1>");
             out.println("</body>");
             out.println("</html>");
         }
