@@ -46,7 +46,7 @@ public class annadirReceta extends HttpServlet {
             out.println("<title>Servlet añadirReceta</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Se ha añadido con exito del receta con nombre" + nombreReceta + " del recetario " +nombreRecetario + "</h1>");
+            out.println("<h1>Se ha añadido con exito del receta con nombre" + nombreReceta + " del recetario " + nombreRecetario + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }

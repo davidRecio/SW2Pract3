@@ -5,6 +5,7 @@
  */
 package servlet;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,9 +36,10 @@ public class importarRecetario extends HttpServlet {
         String rutaFichero = request.getParameter("fichero"); 
         Integer idUser = Integer.parseInt(request.getParameter("idUsuario"));
         
-        Modelo modelo = new Modelo();
+        // ¿Hay que usar el fileUser? falta añadir file new file???
+        //Modelo modelo = new Modelo();
         
-        modelo.importarRecetario(new File(rutaFichero), idUser); // aqui falla tambien hay que mirar
+        //modelo.importarRecetario(new File(rutaFichero), idUser); // aqui falla tambien hay que mirar
        
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
