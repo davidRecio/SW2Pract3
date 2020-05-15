@@ -5,7 +5,6 @@
  */
 package servlet;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -33,39 +32,39 @@ public class importarRecetario extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        String rutaFichero = request.getParameter("fichero");
         
-        String rutaFichero = request.getParameter("fichero"); 
-        ServletContext contexto=request.getServletContext();
-          Integer id =Integer.parseInt(contexto.getInitParameter("id"));
-        
-       
+        ServletContext contexto = request.getServletContext();
+        Integer id = Integer.parseInt(contexto.getInitParameter("id"));
+
         Modelo modelo = new Modelo();
-        
-        modelo.importarRecetario(new File(rutaFichero), id); 
-  
-         response.setContentType("text/html;charset=UTF-8");
-                    try (PrintWriter out = response.getWriter()) {
-                        /* TODO output your page here. You may use following sample code. */
-                        out.println("<!DOCTYPE html>");
-                        out.println("<html>");
-                        out.println("<head>");
-                        out.println("<h3>El recetario se ha importado</h3>");
-                                   
-                        out.println("</head>");
-                        out.println("<body>");
-                        out.println("<h1>Menú</h1>"); 
-                        out.println("<a href=\"validarXSD.html\">Valida los recetarios<br/></font></a>");
-                        out.println("<a href=\"menuReceta.html\">Menú Receta<br/></font></a>");
-                        out.println("<a href=\"menuRecetario.html\">Menú Recetario<br/></font></a>");
-                        out.println("<h1> Recetarios disponibles</h1>"); 
-                         for (String name :  modelo.obtenerRecetarios(id)) {
-                            out.println("<h3>"+name+"</h3>"); 
-                            
-                          }
-                        out.println("</body>");
-                        out.println("</html>");  
-       
-    }
+
+        modelo.importarRecetario(new File(rutaFichero), id);
+
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<h3>El recetario se ha importado</h3>");
+
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Menú</h1>");
+            out.println("<a href=\"validarXSD.html\">Valida los recetarios<br/></font></a>");
+            out.println("<a href=\"menuReceta.html\">Menú Receta<br/></font></a>");
+            out.println("<a href=\"menuRecetario.html\">Menú Recetario<br/></font></a>");
+            out.println("<h1> Recetarios disponibles</h1>");
+            for (String name : modelo.obtenerRecetarios(id)) {
+                out.println("<h3>" + name + "</h3>");
+
+            }
+            out.println("</body>");
+            out.println("</html>");
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -28,41 +28,43 @@ public class BorrarRecetario extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     //  ServletContext child servlet implents  ServletContext
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-       
+
         String nombre = request.getParameter("nombre");
-         ServletContext contexto=request.getServletContext();
-          Integer id =Integer.parseInt(contexto.getInitParameter("id")); 
+
+        ServletContext contexto = request.getServletContext();
+        Integer id = Integer.parseInt(contexto.getInitParameter("id"));
+
         Modelo modelo = new Modelo();
-          
-          modelo.rmvRecetario(id, nombre);
-          response.setContentType("text/html;charset=UTF-8");
-                try (PrintWriter out = response.getWriter()) {
-                        /* TODO output your page here. You may use following sample code. */
-                        out.println("<!DOCTYPE html>");
-                        out.println("<html>");
-                        out.println("<head>");
-                        out.println("<title>Servlet Borrar Recetario</title>");            
-                        out.println("</head>");
-                        out.println("<body>");
-                        out.println("<h1>El recetario " + nombre + " fue borrado </h1>");
-                        out.println("<a href=\"validarXSD.html\">Valida los recetarios<br/></font></a>");
-                        out.println("<a href=\"menuReceta.html\">Menú Receta<br/></font></a>");
-                        out.println("<a href=\"menuRecetario.html\">Menú Recetario<br/></font></a>");
-                        out.println("<h1> Recetarios disponibles</h1>"); 
-                         for (String name :  modelo.obtenerRecetarios(id)) {
-                            out.println("<h3>"+name+"</h3>"); 
-                            
-                          }
-                        out.println("</body>");
-                        out.println("</html>");  
-                    }
-        
+
+        modelo.rmvRecetario(id, nombre);
+
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Borrar Recetario</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>El recetario " + nombre + " fue borrado </h1>");
+            out.println("<a href=\"validarXSD.html\">Valida los recetarios<br/></font></a>");
+            out.println("<a href=\"menuReceta.html\">Menú Receta<br/></font></a>");
+            out.println("<a href=\"menuRecetario.html\">Menú Recetario<br/></font></a>");
+            out.println("<h1> Recetarios disponibles</h1>");
+
+            for (String name : modelo.obtenerRecetarios(id)) {
+                out.println("<h3>" + name + "</h3>");
+
+            }
+            out.println("</body>");
+            out.println("</html>");
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

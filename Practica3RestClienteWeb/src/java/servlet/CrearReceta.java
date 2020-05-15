@@ -5,7 +5,6 @@
  */
 package servlet;
 
-
 import beans.Receta;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,56 +33,59 @@ public class CrearReceta extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        String nombre = request.getParameter("nombre"); 
+
+        String nombre = request.getParameter("nombre");
         String dificultad = request.getParameter("dificultad");
-        String ingrediente =request.getParameter("ingrediente");
+        String ingrediente = request.getParameter("ingrediente");
         Double precio = Double.parseDouble(request.getParameter("precio"));
-        
+
         Modelo modelo = new Modelo();
         Receta receta = new Receta();
-        ServletContext contexto=request.getServletContext();
-          Integer id =Integer.parseInt(contexto.getInitParameter("id"));
-        
-        String delimitador= ",";
+
+        ServletContext contexto = request.getServletContext();
+        Integer id = Integer.parseInt(contexto.getInitParameter("id"));
+
+        String delimitador = ",";
         String[] arrayIngrediente = ingrediente.split(delimitador);
         ArrayList<String> arrayListIngrediente = new ArrayList<>();
-               
+
         for (String elemento : arrayIngrediente) {
             arrayListIngrediente.add(elemento);
             System.out.println("elemento");
         }
-        
+
         receta.setNombre(nombre);
         receta.setDificultad(dificultad);
         receta.setIngrediente(arrayListIngrediente);
-        
+
         receta.setPrecio(precio);
-         
+
         modelo.crearReceta(receta);
+
         response.setContentType("text/html;charset=UTF-8");
-         try (PrintWriter out = response.getWriter()) {
-                        /* TODO output your page here. You may use following sample code. */
-                        out.println("<!DOCTYPE html>");
-                        out.println("<html>");
-                        out.println("<head>");
-                        out.println("<title>Servlet Crear Receta</title>");            
-                        out.println("</head>");
-                        out.println("<body>");
-                        out.println("<h3>La receta  " +receta.getNombre()+" fue creada </h3>");
-                        out.println("<h1>Menú</h1>"); 
-                        out.println("<a href=\"validarXSD.html\">Valida los recetarios<br/></font></a>");
-                        out.println("<a href=\"menuReceta.html\">Menú Receta<br/></font></a>");
-                        out.println("<a href=\"menuRecetario.html\">Menú Recetario<br/></font></a>");
-                        out.println("<h1> Recetarios disponibles</h1>"); 
-                         for (String name :  modelo.obtenerRecetarios(id)) {
-                            out.println("<h3>"+name+"</h3>"); 
-                            
-                          }
-                        out.println("</body>");
-                        out.println("</html>");  
-                    }
-                 
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet Crear Receta</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h3>La receta  " + receta.getNombre() + " fue creada </h3>");
+            out.println("<h1>Menú</h1>");
+            out.println("<a href=\"validarXSD.html\">Valida los recetarios<br/></font></a>");
+            out.println("<a href=\"menuReceta.html\">Menú Receta<br/></font></a>");
+            out.println("<a href=\"menuRecetario.html\">Menú Recetario<br/></font></a>");
+            out.println("<h1> Recetarios disponibles</h1>");
+
+            for (String name : modelo.obtenerRecetarios(id)) {
+                out.println("<h3>" + name + "</h3>");
+
+            }
+            out.println("</body>");
+            out.println("</html>");
+        }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
