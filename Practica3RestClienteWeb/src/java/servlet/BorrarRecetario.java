@@ -50,6 +50,8 @@ public class BorrarRecetario extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>El recetario " + nombre + " fue borrado </h1>");
+            out.println("<a href=/Practica3RestClienteWeb/menuRecetario.html>"
+                    + "Volver a la pagina anterior</a><br/>");
             out.println("</body>");
             out.println("</html>");
         }

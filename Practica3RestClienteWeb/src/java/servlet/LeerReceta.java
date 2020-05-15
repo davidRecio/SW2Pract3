@@ -55,6 +55,8 @@ public class LeerReceta extends HttpServlet {
             for (String ele : receta.getIngrediente()) {
                 out.println("<li>" + ele+ "</li>");
             }
+            out.println("<a href=/Practica3RestClienteWeb/menuReceta.html>"
+                    + "Volver a la pagina anterior</a><br/>");
             out.println("</body>");
             out.println("</html>");
         }

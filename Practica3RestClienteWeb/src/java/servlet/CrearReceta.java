@@ -69,6 +69,8 @@ public class CrearReceta extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>La receta  " +receta.getNombre()+" fue creada </h1>");
+            out.println("<a href=/Practica3RestClienteWeb/menuReceta.html>"
+                    + "Volver a la pagina anterior</a><br/>");
             out.println("</body>");
             out.println("</html>");
         }

@@ -53,6 +53,8 @@ public class LeerRecetario extends HttpServlet {
            for (Receta receta : recetario.getRecetas()) {
                 out.println("<li>" + receta.getNombre()+ "</li>");
             }
+           out.println("<a href=/Practica3RestClienteWeb/menuRecetario.html>"
+                    + "Volver a la pagina anterior</a><br/>");
             out.println("</body>");
             out.println("</html>");
         }
