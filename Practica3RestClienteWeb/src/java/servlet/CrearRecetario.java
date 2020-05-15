@@ -44,20 +44,28 @@ public class CrearRecetario extends HttpServlet  {
          modelo.crearRecetario(modelo.crearRecetarioEsructura(nombre,precio),id);
            
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CrearRecetario</title>");            
-            out.println("</head>");
-            out.println("<body>");
-             out.println("<h1>El recetario  " + nombre + " está creado </h1>");
-             out.println("<a href=/Practica3RestClienteWeb/menuRecetario.html>"
-                    + "Volver a la pagina anterior</a><br/>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+          try (PrintWriter out = response.getWriter()) {
+                        /* TODO output your page here. You may use following sample code. */
+                        out.println("<!DOCTYPE html>");
+                        out.println("<html>");
+                        out.println("<head>");
+                        out.println("<title>Servlet creear Recetario</title>");            
+                        out.println("</head>");
+                        out.println("<body>");
+                         out.println("<h3>El recetario  " + nombre + " está creado </h3>");
+                         out.println("<h1>Menú</h1>"); 
+                        out.println("<a href=\"validarXSD.html\">Valida los recetarios<br/></font></a>");
+                        out.println("<a href=\"menuReceta.html\">Menú Receta<br/></font></a>");
+                        out.println("<a href=\"menuRecetario.html\">Menú Recetario<br/></font></a>");
+                        out.println("<h1> Recetarios disponibles</h1>"); 
+                         for (String name :  modelo.obtenerRecetarios(id)) {
+                            out.println("<h3>"+name+"</h3>"); 
+                            
+                          }
+                        out.println("</body>");
+                        out.println("</html>");  
+                    }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

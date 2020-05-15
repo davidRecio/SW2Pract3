@@ -53,11 +53,11 @@ public class Login extends HttpServlet {
                ServletContext contexto=request.getServletContext();
                contexto.setInitParameter("id", id.toString());
                respuesta = "Bienvenido " + nombre;
-             
+               
                
                
             }
-            if(respuesta.equals("Usuario valido")){
+            if(respuesta.equals( "Bienvenido " + nombre)){
                  response.setContentType("text/html;charset=UTF-8");
                     try (PrintWriter out = response.getWriter()) {
                         /* TODO output your page here. You may use following sample code. */
@@ -74,6 +74,7 @@ public class Login extends HttpServlet {
                         out.println("<h1> Recetarios disponibles</h1>"); 
                          for (String name :  modelo.obtenerRecetarios(id)) {
                             out.println("<h3>"+name+"</h3>"); 
+                            
                           }
                         out.println("</body>");
                         out.println("</html>");
