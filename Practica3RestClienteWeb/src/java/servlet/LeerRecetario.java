@@ -52,6 +52,7 @@ public class LeerRecetario extends HttpServlet {
             out.println("<title>Servlet Leer Recetario</title>");
             out.println("</head>");
             out.println("<body>");
+            out.println("<h1>El resultado de tu consulta es:</h1>");
             out.println("<li>El recetario es: " + recetario.getNombre() + "</li>");
             out.println("<li>Su precio es:  " + recetario.getPrecio() + "</li>");
             out.println("<li>Sus recetas son :</li>");
