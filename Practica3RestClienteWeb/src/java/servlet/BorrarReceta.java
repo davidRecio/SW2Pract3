@@ -47,6 +47,8 @@ public class BorrarReceta extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1> La receta con el nombre: " + nombreReceta + " fue borrada del recetario:" + nombreRecetario + "</h1>");
+//            out.println("<a href=/Practica3RestClienteWeb/borrarReceta.html>"
+//                    + "Volver a la pagina anterior</a><br/>");
             out.println("</body>");
             out.println("</html>");
         }

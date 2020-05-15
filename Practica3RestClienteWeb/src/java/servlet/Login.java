@@ -68,9 +68,9 @@ public class Login extends HttpServlet {
                         out.println("</head>");
                         out.println("<body>");
                         out.println("<h1>" + respuesta + "</h1>");
-                        out.println("<a href=\"validarXSD.html\">Valida los recetarios\t</font></a>");
-                        out.println("<a href=\"menuReceta.html\">Menú Receta\t</font></a>");
-                        out.println("<a href=\"menuRecetario.html\">Menú Recetario\t</font></a>");
+                        out.println("<a href=\"validarXSD.html\">Valida los recetarios<br/></font></a>");
+                        out.println("<a href=\"menuReceta.html\">Menú Receta<br/></font></a>");
+                        out.println("<a href=\"menuRecetario.html\">Menú Recetario<br/></font></a>");
                         out.println("<h1> Recetarios disponibles</h1>"); 
                          for (String name :  modelo.obtenerRecetarios(id)) {
                             out.println("<h3>"+name+"</h3>"); 
